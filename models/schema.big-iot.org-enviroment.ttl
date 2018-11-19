@@ -1,0 +1,554 @@
+@prefix dc: <http://purl.org/dc/terms/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix qu: <http://purl.org/NET/ssnx/qu/qu#> .
+@prefix qudt: <http://data.qudt.org/qudt/owl/1.0.0/unit.owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix core: <http://schema.big-iot.org/core/> .
+@prefix environment: <http://schema.big-iot.org/environment/> .
+@prefix common: <http://schema.big-iot.org/common/> .
+@prefix schema: <http://schema.org/> .
+@prefix sosa: <http://www.w3.org/ns/sosa/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#>.
+@prefix ns: <http://creativecommons.org/ns#>.
+@prefix ssn: <http://purl.oclc.org/NET/ssnx/ssn#>.
+@prefix geo: <http://www.w3.org/2003/01/geo/wgs84_pos#>.
+@prefix qudt: <http://data.qudt.org/qudt/owl/1.0.0/unit.owl#>.
+@prefix dul: <http://www.loa.istc.cnr.it/ontologies/DUL.owl#>.
+@prefix time: <http://www.w3.org/2006/time#>.
+@prefix vann: <http://purl.org/vocab/vann/>.
+
+
+
+environment: dc:contributor "Achille Zappa, NUIG, Galway"@en,
+                           "Hoan Quoc, NUIG, Galway"@en,
+                           "Victor Charpenay, Siemens AG, Munich"@en,
+                           "Aparna Saisree, Siemens AG, Munich"@en,
+                           "Darko Anicic, Siemens AG, Munich"@en,
+                           "Yulia Svetashova, Bosch CR, Stutgard"@en;
+                           
+            dc:description " Environment Model for Environment Domain terminology annotations. We further acknowledge, Pilot providers and other open call projects for their valuable comments. Please report any errors to achille.zappa@insight-centre.org. "@en;
+            dc:rights "Copyright EU H2020 BIG IoT";
+            dc:title "BIG IoT Environment Model"@en;
+            dcterms:issued "2016-09-28"^^xsd:date;
+            dcterms:modified "2018-10-27"^^xsd:date;
+            vann:preferredNamespacePrefix "environment";
+            vann:preferredNamespaceUri "http://schema.big-iot.org/environment/#";
+            a owl:Ontology;
+            rdfs:comment " Environment Model for Environment Domain terminology annotations.  We further acknowledge, Pilot providers and other open call projects for their valuable comments. Please report any errors to achille.zappa@insight-centre.org. "@en;
+            rdfs:label "BIG IoT"^^xsd:string;
+            owl:versionInfo "3.0".
+          
+
+
+
+
+
+
+
+
+
+
+
+
+environment:EnvironmentalIndicator
+  a rdfs:Class ;
+  rdfs:label "Environment" ;
+  rdfs:comment "Any environment-related feature of interest (e.g. air pollution, humidity)" ;
+  rdfs:subClassOf sosa:FeatureOfInterest ;
+.
+
+environment:WeatherIndicator
+  a rdfs:Class ;
+  rdfs:label "Weather" ;
+  rdfs:comment "Any weather-related and weather forecast related feature of interest (e.g. temperature, humidity)" ;
+  rdfs:subClassOf sosa:FeatureOfInterest ;
+.
+environment:PollutionIndicator
+  rdf:type rdfs:Class ;
+  dcterms:source <http://ontology.eil.utoronto.ca/GCI/Environment/Pollution.owl#Pollution> ;
+  rdfs:comment "The different types of pollutions that are represented in the ISO37120 Environment indicators" ;
+  rdfs:label "Pollution" ;
+  rdfs:subClassOf environment:EnvironmentalIndicator;
+.
+
+environment:AirPollutionIndicator
+  rdf:type rdfs:Class ;
+  dcterms:source <http://ontology.eil.utoronto.ca/GCI/Environment/Pollution.owl#Air_pollution> ;
+  rdfs:comment "The different types of air pollution that are represented in the ISO37120 Environment Indicators." ;
+  rdfs:label "Air pollution" ;
+  rdfs:subClassOf environment:PollutionIndicator ;
+.
+
+environment:NoisePollutionIndicator
+  rdf:type rdfs:Class ;
+  dcterms:source <http://ontology.eil.utoronto.ca/GCI/Environment/Pollution.owl#Noise_pollution> ;
+  rdfs:comment "Noise pollution indicator (e.g. traffic)" ;
+  rdfs:label "Noise pollution" ;
+  rdfs:subClassOf environment:PollutionIndicator ;
+.
+
+environment:WaterPollutionIndicator
+  rdf:type rdfs:Class ;
+  dcterms:source <http://ontology.eil.utoronto.ca/GCI/Environment/Pollution.owl#Water_pollution> ;
+  rdfs:label "Water pollution" ;
+  rdfs:comment "Water Pollution indicator (e.g. nitrates or phosphates)" ;
+  rdfs:subClassOf environment:PollutionIndicator ;
+.
+
+environment:CO
+  rdf:type rdfs:Class ;
+  rdfs:subClassOf environment:AirPollutionIndicator ;
+  rdfs:comment "Carbon monoxide (CO)"^^xsd:string ;
+  rdfs:label "Carbon Monoxide"^^xsd:string ;
+.
+environment:CH4
+  rdf:type rdfs:Class ;
+  rdfs:subClassOf environment:GHG;
+  rdfs:comment "Methane (CH4)"^^xsd:string ;
+  rdfs:label "Methane (CH4)"^^xsd:string ;
+.
+environment:CO2
+  rdf:type rdfs:Class ;
+  rdfs:subClassOf environment:GHG;
+  rdfs:comment "Carbon dioxide (CO2)"^^xsd:string ;
+  rdfs:label "Carbon Dioxide (CO2)"^^xsd:string ;
+.
+environment:GHG
+  rdf:type rdfs:Class ;
+  rdfs:subClassOf environment:AirPollutionIndicator;
+  rdfs:comment "Chemical compound responsible for greenhouse effect in gas form (greenhous gas)."^^xsd:string ;
+  rdfs:label "Green House Gases (GHG)"^^xsd:string ;
+.
+environment:N2O
+  rdf:type rdfs:Class ;
+  rdfs:subClassOf environment:GHG;
+  rdfs:comment "Nitrous oxide (N2O)"^^xsd:string ;
+  rdfs:label "Nitrous Oxide (N2O)"^^xsd:string ;
+  .
+environment:NO2
+  rdf:type rdfs:Class ;
+  rdfs:subClassOf environment:AirPollutionIndicator ;
+  rdfs:comment "Nitrogen dioxide (NO2)"^^xsd:string ;
+  rdfs:label "Nitrogen Dioxide (NO2)"^^xsd:string ;
+.
+environment:O3
+  rdf:type rdfs:Class ;
+  rdfs:subClassOf environment:AirPollutionIndicator ;
+  rdfs:comment "Ozone (O3)"^^xsd:string ;
+  rdfs:label "Ozone (O3)"^^xsd:string ;
+.
+environment:SO2
+  rdf:type rdfs:Class ;
+  rdfs:subClassOf environment:AirPollutionIndicator ;
+  rdfs:comment "A category for SO2."^^xsd:string ;
+  rdfs:label "SO2"^^xsd:string ;
+  .
+environment:PM
+  rdf:type rdfs:Class ;
+  rdfs:subClassOf environment:AirPollutionIndicator ;
+  rdfs:comment "Particulate Matter (PM) pollution indicator."^^xsd:string ;
+  rdfs:label "Particulate Matter (PM)"^^xsd:string ;
+.
+environment:PM10
+  rdf:type rdfs:Class ;
+  rdfs:subClassOf environment:PM;
+  dcterms:source <http://ontology.eil.utoronto.ca/GCI/Environment/Pollution.owl#PM10> ;
+  rdfs:comment "Particulate matter with particles that are 10 microns or less in diameter."^^xsd:string ;
+  rdfs:label "PM10"^^xsd:string ;
+.
+environment:PM25
+  rdf:type rdfs:Class ;
+  rdfs:subClassOf environment:PM;
+  dcterms:source <http://ontology.eil.utoronto.ca/GCI/Environment/Pollution.owl#PM2.5> ;
+  rdfs:comment "Particulate matter with particles that are 2.5 microns or less in diameter."^^xsd:string ;
+  rdfs:label "PM25"^^xsd:string ;
+.
+
+environment:hasAirPollutionConcentration
+  rdf:type rdf:Property ;
+  schema:domainIncludes environment:AirPollutionIndicator ;
+#  schema:rangeIncludes common:Concentration ;
+    schema:rangeIncludes schema:Text ;
+  schema:rangeIncludes schema:Number ;
+  rdfs:label "Air pollution concentration" ;
+  rdfs:comment "Air pollution concentration measurement"^^xsd:string ;
+.
+environment:hasCH4Concentration
+  rdf:type rdf:Property ;
+  dcterms:source <http://ontology.eil.utoronto.ca/GCI/Environment/Pollution.owl#CH4_concentration> ;
+  schema:domainIncludes environment:CH4 ;
+#  schema:rangeIncludes common:Concentration ;
+    schema:rangeIncludes schema:Text ;
+  schema:rangeIncludes schema:Number ;
+  rdfs:subPropertyOf environment:hasGHGConcentration ;
+  rdfs:label "CH4 concentration" ;
+  rdfs:comment "CH4 concentration measurement"^^xsd:string ;
+.
+environment:hasCO2Concentration
+  rdf:type rdf:Property ;
+  dcterms:source <http://ontology.eil.utoronto.ca/GCI/Environment/Pollution.owl#CO2_concentration> ;
+  schema:domainIncludes environment:CO2 ;
+#  schema:rangeIncludes common:Concentration ;
+    schema:rangeIncludes schema:Text ;
+  schema:rangeIncludes schema:Number ;
+  rdfs:subPropertyOf environment:hasGHGConcentration ;
+  rdfs:label "CO2 concentration"^^xsd:string ;
+  rdfs:comment "CO2 concentration measurement"^^xsd:string ;
+.
+environment:hasCOConcentration
+  rdf:type rdf:Property ;
+  dcterms:source <http://ontology.eil.utoronto.ca/GCI/Environment/Pollution.owl#CO_concentration> ;
+  schema:domainIncludes environment:CO ;
+#  schema:rangeIncludes common:Concentration ;
+    schema:rangeIncludes schema:Text ;
+  schema:rangeIncludes schema:Number ;
+  rdfs:label "CO concentration"^^xsd:string ;
+  rdfs:comment "CO concentration measurement"^^xsd:string ;
+.
+environment:hasGHGConcentration
+  rdf:type rdf:Property ;
+  schema:domainIncludes environment:GHG ;
+#  schema:rangeIncludes common:Concentration ;
+    schema:rangeIncludes schema:Text ;
+  schema:rangeIncludes schema:Number ;
+  rdfs:label "GHG concentration"^^xsd:string ;
+  rdfs:comment "GHG concentration measurement"^^xsd:string ;
+.
+environment:hasN2OConcentration
+  rdf:type rdf:Property ;
+  dcterms:source <http://ontology.eil.utoronto.ca/GCI/Environment/Pollution.owl#N2O_concentration> ;
+  schema:domainIncludes environment:N2O ;
+#  schema:rangeIncludes common:Concentration ;
+    schema:rangeIncludes schema:Text ;
+  schema:rangeIncludes schema:Number ;
+  rdfs:subPropertyOf environment:hasGHGConcentration ;
+  rdfs:label "N2O concentration"^^xsd:string ;
+  rdfs:comment "N2O concentration measurement"^^xsd:string ;
+.
+environment:hasNO2Concentration
+  rdf:type rdf:Property ;
+  dcterms:source <http://ontology.eil.utoronto.ca/GCI/Environment/Pollution.owl#NO2_concentration> ;
+  schema:domainIncludes environment:NO2 ;
+#  schema:rangeIncludes common:Concentration ;
+    schema:rangeIncludes schema:Text ;
+  schema:rangeIncludes schema:Number ;
+  rdfs:label "NO2 concentration"^^xsd:string ;
+  rdfs:comment "NO2 concentration measurement"^^xsd:string ;
+.
+environment:hasO3Concentration
+  rdf:type rdf:Property ;
+  dcterms:source <http://ontology.eil.utoronto.ca/GCI/Environment/Pollution.owl#O3_concentration> ;
+  schema:domainIncludes environment:O3 ;
+#  schema:rangeIncludes common:Concentration ;
+    schema:rangeIncludes schema:Text ;
+  schema:rangeIncludes schema:Number ;
+  rdfs:label "O3 concentration"^^xsd:string ;
+  rdfs:comment "O3 concentration measurement"^^xsd:string ;
+.
+environment:hasPM10Concentration
+  rdf:type rdf:Property ;
+  dcterms:source <http://ontology.eil.utoronto.ca/GCI/Environment/Pollution.owl#PM10_concentration> ;
+  schema:domainIncludes environment:PM10 ;
+#  schema:rangeIncludes common:Concentration ;
+    schema:rangeIncludes schema:Text ;
+  schema:rangeIncludes schema:Number ;
+  rdfs:subPropertyOf environment:hasPMConcentration ;
+  rdfs:label "PM10 concentration" ;
+  rdfs:comment "PM10 concentration measurement"^^xsd:string ;
+.
+environment:hasPM25Concentration
+  rdf:type rdf:Property ;
+  dcterms:source <http://ontology.eil.utoronto.ca/GCI/Environment/Pollution.owl#PM2.5_concentration> ;
+  schema:domainIncludes environment:PM25 ;
+#  schema:rangeIncludes common:Concentration ;
+    schema:rangeIncludes schema:Text ;
+  schema:rangeIncludes schema:Number ;
+  rdfs:subPropertyOf environment:hasPMConcentration ;
+  rdfs:label "PM25 concentration" ;
+  rdfs:comment "PM25 concentration measurement"^^xsd:string ;
+.
+environment:hasPMConcentration
+  rdf:type rdf:Property ;
+  schema:domainIncludes environment:PM ;
+#  schema:rangeIncludes common:Concentration ;
+    schema:rangeIncludes schema:Text ;
+  schema:rangeIncludes schema:Number ;
+  rdfs:label "PM concentration"^^xsd:string ;
+  rdfs:comment "PM concentration measurement"^^xsd:string ;
+.
+environment:hasSO2Concentration
+  rdf:type rdf:Property ;
+  dcterms:source <http://ontology.eil.utoronto.ca/GCI/Environment/Pollution.owl#SO2_concentration> ;
+  schema:domainIncludes environment:SO2 ;
+#  schema:rangeIncludes common:Concentration ;
+    schema:rangeIncludes schema:Text ;
+  schema:rangeIncludes schema:Number ;
+  rdfs:label "SO2 concentration" ;
+  rdfs:comment "SO2 concentration measurement"^^xsd:string ;
+.
+
+environment:airQualitySystemId
+  rdf:type rdf:Property ;
+    schema:domainIncludes environment:AirQualityIndicator ;
+  schema:rangeIncludes schema:Text ;
+  schema:rangeIncludes schema:Number ;
+  rdfs:label "Air quality system ID" ;
+  rdfs:comment "ID of an air quality system"^^xsd:string ;
+.
+
+environment:distanceFromNoiseSource
+  rdf:type rdf:Property ;
+    schema:domainIncludes environment:NoisePollutionIndicator ;
+  schema:rangeIncludes schema:Number ;
+  rdfs:label "Distance from noise source" ;
+  rdfs:comment "Gives the distance from a noise source"^^xsd:string ;
+.
+environment:hasNoiseLevel
+  rdf:type rdf:Property ;
+  schema:domainIncludes environment:NoisePollutionIndicator ;
+  schema:rangeIncludes schema:Number ;
+  rdfs:label "Noise level" ;
+  rdfs:comment "noise level measurement"^^xsd:string ;
+.
+
+environment:hasAirTemperature
+  rdf:type rdf:Property ;
+  schema:domainIncludes environment:WeatherIndicator ;
+#  schema:rangeIncludes environment:AirTemperature ;
+    schema:rangeIncludes schema:Text ;
+  schema:rangeIncludes schema:Number ;
+  rdfs:label "Air temperature" ;
+  rdfs:comment "Air temperature measurement"^^xsd:string ;
+.
+
+environment:hasPressure
+  rdf:type rdf:Property ;
+  schema:domainIncludes environment:WeatherIndicator ;
+#  schema:rangeIncludes environment:Pressure ;
+    schema:rangeIncludes schema:Text ;
+  schema:rangeIncludes schema:Number ;
+  rdfs:label "Air pressure" ;
+  rdfs:comment "Air pressure measurement"^^xsd:string ;
+.
+
+environment:hasHumidity
+  rdf:type rdf:Property ;
+  schema:domainIncludes environment:WeatherIndicator ;
+#  schema:rangeIncludes environment:Humidity ;
+    schema:rangeIncludes schema:Text ;
+  schema:rangeIncludes schema:Number ;
+  rdfs:label "Air humidity" ;
+  rdfs:comment "Humidity measurement"^^xsd:string ;
+.
+
+environment:hasVisibility
+  rdf:type rdf:Property ;
+  schema:domainIncludes environment:WeatherIndicator ;
+#  schema:rangeIncludes environment:Visibility ;
+    schema:rangeIncludes schema:Text ;
+  schema:rangeIncludes schema:Number ;
+  rdfs:label "Visibility" ;
+  rdfs:comment "Visibility measurement"^^xsd:string ;
+.
+
+environment:hasCloudCover
+  rdf:type rdf:Property ;
+  schema:domainIncludes environment:WeatherIndicator ;
+#  schema:rangeIncludes environment:CloudCover ;
+    schema:rangeIncludes schema:Text ;
+  schema:rangeIncludes schema:Number ;
+  rdfs:label "cloud cover" ;
+  rdfs:comment "Cloud cover measurement"^^xsd:string ;
+.
+
+environment:hasWindSpeed
+  rdf:type rdf:Property ;
+  schema:domainIncludes environment:WeatherIndicator ;
+#  schema:rangeIncludes environment:WindSpeed ;
+    schema:rangeIncludes schema:Text ;
+  schema:rangeIncludes schema:Number ;
+  rdfs:label "Wind speed" ;
+  rdfs:comment "Wind speed measurement"^^xsd:string ;
+.
+
+environment:hasRainFall
+  rdf:type rdf:Property ;
+  schema:domainIncludes environment:WeatherIndicator ;
+#  schema:rangeIncludes environment:RainFall ;
+    schema:rangeIncludes schema:Text ;
+  schema:rangeIncludes schema:Number ;
+  rdfs:label "Rain fall" ;
+  rdfs:comment "Rain fall measurement"^^xsd:string ;
+.
+
+environment:hasGroundLevel
+  rdf:type rdf:Property ;
+  schema:domainIncludes environment:WeatherIndicator ;
+#  schema:rangeIncludes environment:GroundLevel ;
+    schema:rangeIncludes schema:Text ;
+  schema:rangeIncludes schema:Number ;
+  rdfs:label "Ground level" ;
+  rdfs:comment "Ground level"^^xsd:string ;
+.
+
+environment:hasSeaLevel
+  rdf:type rdf:Property ;
+  schema:domainIncludes environment:WeatherIndicator ;
+#  schema:rangeIncludes environment:SeaLevel ;
+    schema:rangeIncludes schema:Text ;
+  schema:rangeIncludes schema:Number ;
+  rdfs:label "Sea level" ;
+  rdfs:comment "Sea level"^^xsd:string ;
+.
+
+# environment:AirTemperature
+#  rdf:type rdfs:Class ;
+#  dcterms:source <http://purl.org/iot/vocab/m3-lite#AirTemperature> ;
+#  rdfs:comment "Air Temperature." ;
+#  rdfs:label "Air temperature" ;
+#  rdfs:subClassOf common:Measurement .
+
+# environment:WindSpeed rdf:type rdfs:Class ;
+#  rdfs:label "Wind speed" ;
+#  rdfs:comment "Speed of wind" ;
+#  rdfs:subClassOf common:Measurement .
+
+# environment:Visibility rdf:type rdfs:Class ;
+#  rdfs:label "Visibility" ;
+#  rdfs:comment "Visibility is a measure of the distance at which an object or light can be clearly discerned. It is reported within surface weather observations and METAR code either in meters or statute miles, depending upon the country. Visibility affects all forms of traffic: roads, sailing and aviation." ;
+#  rdfs:subClassOf common:Measurement .
+
+# environment:CloudCover rdf:type rdfs:Class ;
+#  rdfs:label "Cloud cover" ;
+#  rdfs:comment "Cloud cover (also known as cloudiness, cloudage, or cloud amount) refers to the fraction of the sky obscured by clouds when observed from a particular location." ;
+#  rdfs:subClassOf common:Measurement .
+
+# environment:RainFall rdf:type rdfs:Class ;
+#  rdfs:label "Rain fall" ;
+#  rdfs:comment "The amount of rain, sleet, snow or hail which falls in a specified time is expressed as the depth of water it would produce on a large, level impermeable surface." ;
+#  rdfs:subClassOf common:Measurement .
+
+# environment:GroundLevel rdf:type rdfs:Class ;
+#  rdfs:label "Ground level" ;
+#  rdfs:comment "Ground level during weather measurements." ;
+#  rdfs:subClassOf common:Measurement .
+
+# environment:SeaLevel rdf:type rdfs:Class ;
+#  rdfs:label "Sea level" ;
+#  rdfs:comment "Sea Level measurements reflect changes in shoreline and usually relate to the degree of ice coverage in high latitudes and elevations." ;
+#  rdfs:subClassOf common:Measurement .
+
+# environment:Humidity rdf:type rdfs:Class ;
+#  rdfs:label "Humidity" ;
+#  rdfs:comment "Amount of water vapour in the air (defined either as a concentration or a percentage)" ;
+#  dcterms:source <http://www.wurvoc.org/vocabularies/om-1.8/Humidity> ;
+#  dcterms:source <https://w3id.org/saref#Humidity> ;
+#  rdfs:subClassOf common:Measurement .
+
+# environment:Pressure rdf:type rdfs:Class ;
+#  rdfs:label "Pressure" ;
+#  rdfs:comment "Pressure is the force applied to or distributed over a surface. It is a derived quantity in the International System of Units. Pressure is force divided by area." ;
+#  dcterms:source <http://www.wurvoc.org/vocabularies/om-1.8/Pressure> ;
+#  dcterms:source <https://w3id.org/saref#Pressure> ;
+#  rdfs:subClassOf common:Measurement .
+
+environment:minimumTemperature rdf:type rdf:Property ;
+  rdfs:label "Minimum temperature" ;
+  rdfs:comment "Minimum Temperature." ;
+  dcterms:source <http://www.wurvoc.org/vocabularies/om-1.8/unit_of_measure_or_measurement_scale> ;
+  schema:domainIncludes common:Temperature ;
+    schema:domainIncludes environment:WeatherIndicator ;
+  schema:rangeIncludes schema:Number ;
+.
+
+environment:maximumTemperature rdf:type rdf:Property ;
+  rdfs:label "Maximum temperature" ;
+  rdfs:comment "Maximum Temperature." ;
+  schema:domainIncludes common:Temperature ;
+    schema:domainIncludes environment:WeatherIndicator ;
+  schema:rangeIncludes schema:Number ;
+.
+
+# Terms required for modeling an air quality station
+
+environment:AirQualityStation
+  rdf:type rdfs:Class ;
+  rdfs:subClassOf environment:AirPollutionIndicator ;
+  rdfs:comment "An air quality station"^^xsd:string ;
+  schema:isPartOf <http://schema.big-iot.org/environment> ;
+  rdfs:label "Air quality station"^^xsd:string ;
+.
+
+environment:airQualityStationCoordinates a rdf:Property ;
+    rdfs:label "air quality station coordinates" ;
+    rdfs:comment "List of coordinates of an air quality station: longitude and latitude." ;
+    schema:isPartOf <http://schema.big-iot.org/environment> ;
+    schema:domainIncludes environment:AirQualityStation ;
+    schema:rangeIncludes schema:GeoCoordinates .
+
+environment:airQualityStationLatitude a rdf:Property ;
+    rdfs:label "air quality station latitude" ;
+    rdfs:comment "Latitude of an air quality station." ;
+	rdfs:subPropertyOf schema:latitude ;
+    schema:isPartOf <http://schema.big-iot.org/environment> ;
+    schema:domainIncludes environment:AirQualityStation ;
+    schema:rangeIncludes  schema:Number,
+	                      schema:Text  .	
+						  
+environment:airQualityStationLongitude a rdf:Property ;
+    rdfs:label "air quality station longitude" ;
+    rdfs:comment "Longitude of an air quality station." ;
+	rdfs:subPropertyOf schema:longitude ;
+    schema:isPartOf <http://schema.big-iot.org/environment> ;
+    schema:domainIncludes environment:AirQualityStation ;
+    schema:rangeIncludes  schema:Number,
+	                      schema:Text  .		
+
+environment:airQualityStationElevation a rdf:Property ;
+    rdfs:label "air quality station elevation" ;
+    rdfs:comment "Elevation of an air quality station." ;
+	rdfs:subPropertyOf schema:elevation ;
+    schema:isPartOf <http://schema.big-iot.org/environment> ;
+    schema:domainIncludes environment:AirQualityStation ;
+    schema:rangeIncludes  schema:Number,
+	                      schema:Text  .	
+
+environment:airQualityMeasurementTimeStamp a rdf:Property ;
+    rdfs:label "air quality measurement timestamp" ;
+    rdfs:comment "Time stamp when the air quality measurement is given by an air quality station." ;
+	rdfs:subPropertyOf common:measurementTime ;
+    schema:isPartOf <http://schema.big-iot.org/environment> ;	
+    schema:domainIncludes environment:AirQualityStation ;
+    schema:rangeIncludes schema:DateTime .
+
+environment:airQualityStationId a rdf:Property ;
+    rdfs:label "air quality station identifier" ;
+    rdfs:comment "Identifier of an air quality station." ;
+	rdfs:subPropertyOf schema:identifier ;
+    schema:isPartOf <http://schema.big-iot.org/environment> ;	
+    schema:domainIncludes environment:AirQualityStation ;
+    schema:rangeIncludes schema:Text .	
+
+environment:airParameterMeasurement a rdf:Property ;
+    rdfs:label "air parameter measurement" ;
+    rdfs:comment "Air parameter measurement value given by an air quality station." ;
+	rdfs:subClassOf common:Measurement ;
+    schema:isPartOf <http://schema.big-iot.org/environment> ;	
+    schema:domainIncludes environment:AirQualityStation ;
+    schema:rangeIncludes  environment:CO ;
+    schema:rangeIncludes  environment:CO2 ;
+    schema:rangeIncludes  environment:O3 ;
+    schema:rangeIncludes  environment:PM25 ;
+    schema:rangeIncludes  environment:PM10 ;
+    schema:rangeIncludes  environment:CH4 ;
+    schema:rangeIncludes  environment:SO2 ;
+    schema:rangeIncludes  environment:NO2 ;
+	schema:rangeIncludes  environment:AirTemperature ;
+	schema:rangeIncludes  environment:Humidity ;
+    schema:rangeIncludes  environment:N2O .		
+    
+    
