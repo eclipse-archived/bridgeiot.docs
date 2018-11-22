@@ -43,38 +43,47 @@ core:AccessInterfaceType	rdf:type	rdfs:Class ;
 	rdfs:label	"AccessInterfaceType" ;
 	rdfs:comment	"Access can be either through the BIG-IoT API or via an external endpoint." .
 core:AccessInterfaceType	rdfs:subClassOf	schema:Enumeration .
+
 core:DataSchema	rdf:type	rdfs:Class ;
 	rdfs:label	"DataSchema" ;
 	rdfs:comment	"Gives a detail description of the transported payload data between consumer and provider based on this offering" ;
 	rdfs:subClassOf	schema:Thing .
+
 core:Categorization	rdf:type	rdfs:Class ;
 	rdfs:subClassOf	schema:Thing ;
 	rdf:comment	"An Hierarchy of offering categories" ;
 	rdf:label	"Categorization" .
+
 core:Consumer	rdf:type	rdfs:Class ;
 	rdfs:label	"Consumer" ;
 	rdfs:comment	"Consumers discover and subscribe to offerings of interest via a marketplace in order to access the resources. A consumer can be either an application or service instance that requires access to IoT resources in order to implement an intended service or function (e.g., a smart parking service provided by the city)" ;
 	rdfs:subClassOf	schema:Thing .
+
 core:DataTypeAnnotation	rdf:type	rdfs:Class ;
 	rdfs:label	"DataTypeAnnotation" ;
 	rdfs:comment	"Anything about which information is provided via an offering." ;
 	rdfs:subClassOf	schema:Thing .
+
 core:Endpoint	rdf:type	rdfs:Class ;
 	rdfs:label	"Endpoint" ;
 	rdfs:comment	"The endpoint includes all relevant information which is required to setup right communication to the provider's offering." ;
 	rdfs:subClassOf	schema:Thing .
+
 core:EndpointType	rdf:type	rdfs:Class ;
 	rdfs:label	"EndpointType" ;
 	rdfs:comment	"Method/protocol to use to access the endpoint." ;
 	rdfs:subClassOf	schema:Enumeration .
+
 core:ExternalEndpoint	rdf:type	rdfs:Class ;
 	rdfs:label	"External endpoint" ;
 	rdfs:comment	"See Endpoint class." ;
 	rdfs:subClassOf	core:Endpoint .
+
 core:LibEndpoint	rdf:type	rdfs:Class ;
 	rdfs:label	"Lib endpoint" ;
 	rdfs:comment	"See Endpoint class." ;
 	rdfs:subClassOf	core:Endpoint .
+
 core:License	rdf:type	rdfs:Class ;
 	rdfs:label	"License" ;
 	rdfs:comment	"License under which the the offering is provided." ;
