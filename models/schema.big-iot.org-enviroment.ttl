@@ -25,13 +25,12 @@
 
 environment: dc:contributor "Achille Zappa, NUIG, Galway"@en,
                            "Hoan Quoc, NUIG, Galway"@en,
-                           "Victor Charpenay, Siemens AG, Munich"@en,
                            "Aparna Saisree, Siemens AG, Munich"@en,
                            "Darko Anicic, Siemens AG, Munich"@en,
                            "Yulia Svetashova, Bosch CR, Stutgard"@en;
                            
             dc:description " Environment Model for Environment Domain terminology annotations. We further acknowledge, Pilot providers and other open call projects for their valuable comments. Please report any errors to achille.zappa@insight-centre.org. "@en;
-            dc:rights "Copyright EU H2020 BIG IoT";
+            dc:rights "Copyright (c) 2016-2018 by NUIGalway  (Insight Centre), Siemens, Bosch";
             dc:title "BIG IoT Environment Model"@en;
             dcterms:issued "2016-09-28"^^xsd:date;
             dcterms:modified "2018-10-27"^^xsd:date;
