@@ -1,0 +1,2392 @@
+@prefix dc: <http://purl.org/dc/terms/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix schema: <http://schema.org/> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix core: <http://schema.big-iot.org/core/> .
+@prefix common: <http://schema.big-iot.org/common/> .
+@prefix mobility: <http://schema.big-iot.org/mobility/> .
+@prefix sosa: <http://www.w3.org/ns/sosa/> .
+@prefix environment: <http://schema.big-iot.org/environment/> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix sosa: <http://www.w3.org/ns/sosa/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#>.
+@prefix ns: <http://creativecommons.org/ns#>.
+@prefix ssn: <http://purl.oclc.org/NET/ssnx/ssn#>.
+@prefix geo: <http://www.w3.org/2003/01/geo/wgs84_pos#>.
+@prefix qudt: <http://data.qudt.org/qudt/owl/1.0.0/unit.owl#>.
+@prefix dul: <http://www.loa.istc.cnr.it/ontologies/DUL.owl#>.
+@prefix time: <http://www.w3.org/2006/time#>.
+@prefix vann: <http://purl.org/vocab/vann/>.
+
+
+
+mobility: dc:contributor "Achille Zappa, NUIG, Galway"@en,
+                           "Hoan Quoc, NUIG, Galway"@en,
+                           "Aparna Saisree, Siemens AG, Munich"@en,
+                           "Darko Anicic, Siemens AG, Munich"@en,
+                           "Yulia Svetashova, Bosch CR, Stutgard"@en;
+                           
+            dc:description " Mobility Model for Mobility Domain terminology annotations. We further acknowledge, Pilot providers and other open call projects for their valuable comments. Please report any errors to achille.zappa@insight-centre.org. "@en;
+            dc:rights "Copyright (c) 2016-2018 by NUIGalway  (Insight Centre), Siemens, Bosch";
+            dc:title "BIG IoT Mobility Model"@en;
+            dcterms:issued "2016-09-28"^^xsd:date;
+            dcterms:modified "2018-10-27"^^xsd:date;
+            vann:preferredNamespacePrefix "mobility";
+            vann:preferredNamespaceUri "http://schema.big-iot.org/mobility/#";
+            a owl:Ontology;
+            rdfs:comment " Mobility Model for Mobility Domain terminology annotations.  We further acknowledge, Pilot providers and other open call projects for their valuable comments. Please report any errors to achille.zappa@insight-centre.org. "@en;
+            rdfs:label "BIG IoT"^^xsd:string;
+            owl:versionInfo "3.0".
+          
+
+
+
+
+
+
+
+
+
+
+mobility:MobilityFeature a rdfs:Class ;
+  rdfs:label "Mobility"^^xsd:string ;
+  skos:prefLabel "Mobility"^^xsd:string ;
+  rdfs:comment "Any mobility-related feature of interest (road, bus, parking site, etc.)"^^xsd:string ;
+  schema:isPartOf <http://schema.big-iot.org/mobility> ;
+  rdfs:subClassOf sosa:FeatureOfInterest .
+
+mobility:Bus a rdfs:Class ;
+  rdfs:label "Bus"^^xsd:string ;
+  rdfs:comment "Any bus-related feature of interest."^^xsd:string ;
+  schema:isPartOf <http://schema.big-iot.org/mobility> ;
+  rdfs:subClassOf schema:BusOrCoach ;
+  rdfs:subClassOf mobility:Transportation .
+  
+mobility:BusStop a rdfs:Class ;
+  rdfs:label "Bus Stop"^^xsd:string ;
+  rdfs:comment "A bus stop."^^xsd:string ;
+  schema:isPartOf <http://schema.big-iot.org/mobility> ;
+  rdfs:subClassOf schema:BusStop .
+
+mobility:liveBusPosition a rdf:Property ;
+  rdfs:label "live bus position"^^xsd:string ;
+  rdfs:comment "Live position of a bus or a coach."^^xsd:string ;
+  schema:isPartOf <http://schema.big-iot.org/mobility> ;
+  schema:domainIncludes mobility:Bus ;
+  schema:rangeIncludes mobility:LiveBusPosition .
+
+mobility:LiveBusPosition a rdfs:Class ;
+  rdfs:label "Live Bus Position"^^xsd:string ;
+  rdfs:comment "Live Position of a Bus class"^^xsd:string ;
+  schema:isPartOf <http://schema.big-iot.org/mobility> .
+
+mobility:Parking a rdfs:Class ;
+  rdfs:label "Parking"^^xsd:string ;
+  rdfs:comment "E.g. parking site or parking space."^^xsd:string ;
+  schema:isPartOf <http://schema.big-iot.org/mobility> ;
+  rdfs:subClassOf mobility:MobilityFeature .
+
+mobility:ParkingSite a rdfs:Class ;
+  rdfs:label "Parking Site"^^xsd:string ;
+  rdfs:comment "A parking site."^^xsd:string ;
+  dc:source <http://vocab.datex.org/terms#ParkingSite> ;
+  schema:isPartOf <http://schema.big-iot.org/mobility> ;
+  rdfs:subClassOf schema:ParkingFacility ;
+  rdfs:subClassOf mobility:Parking .
+
+mobility:ParkingSpace a rdfs:Class ;
+  rdfs:label "Parking Space"^^xsd:string ;
+  rdfs:comment "A single parking space. It is possible to define the same parking space more than once with different properties, e.g. when there is a different parking assignment for different times."^^xsd:string ;
+  dc:source <http://vocab.datex.org/terms#ParkingSpace> ;
+  schema:isPartOf <http://schema.big-iot.org/mobility> ;
+  rdfs:subClassOf schema:ParkingFacility ;
+  rdfs:subClassOf mobility:Parking .
+
+mobility:ParkingSpaceStatus a rdfs:Class ;
+  rdfs:label "Parking Space Status"^^xsd:string ;
+  rdfs:comment "Current status of a parking space."^^xsd:string ;
+  dc:source <http://vocab.datex.org/terms#ParkingSpaceStatus> ;
+  schema:isPartOf <http://schema.big-iot.org/mobility> ;
+  rdfs:subClassOf common:Measurement ;
+  rdfs:subClassOf schema:Enumeration .
+
+mobility:parkingSpaceLocationMidpoint a rdf:Property ;
+  rdfs:subPropertyOf common:geoJSONLocation;
+  rdfs:label "parking space location midpoint"^^xsd:string ;
+  rdfs:comment "The midpoint of a parking space location: the GeoJSON geometry object of type Point with an array of coordinates will be returned."^^xsd:string ;
+  schema:domainIncludes mobility:ParkingSpace ;
+  schema:rangeIncludes common:GeoJSONGeometryObject .
+  
+mobility:parkingSpaceLocationBoundingBox a rdf:Property ;
+  rdfs:subPropertyOf common:geoJSONLocation;
+  rdfs:label "parking space location bounding box"^^xsd:string ;
+  rdfs:comment "The bounding box of a parking space location: the GeoJSON geometry object of type Polygon with an array of coordinates will be returned."^^xsd:string ;
+  schema:domainIncludes mobility:ParkingSpace ;
+  schema:rangeIncludes common:GeoJSONGeometryObject .
+
+mobility:PeopleDensityEstimation a rdfs:Class ;
+  rdfs:label "People Density Estimation"^^xsd:string ;
+  rdfs:comment "Estimation of people density."^^xsd:string ;
+  schema:isPartOf <http://schema.big-iot.org/mobility> ;
+  rdfs:subClassOf common:Concentration ;
+  rdfs:subClassOf mobility:MobilityFeature .
+
+mobility:PeopleDensityInArea a rdfs:Class ;
+  rdfs:label "People Density In Area"^^xsd:string ;
+  rdfs:comment "People density in a given area."^^xsd:string ;
+  schema:isPartOf <http://schema.big-iot.org/mobility> ;
+  rdfs:subClassOf mobility:PeopleDensityEstimation .
+
+mobility:PeopleMobilityWithinArea a rdfs:Class ;
+  rdfs:label "People Mobility Within Area"^^xsd:string ;
+  rdfs:comment "People mobility within a given area."^^xsd:string ;
+  schema:isPartOf <http://schema.big-iot.org/mobility> ;
+  rdfs:subClassOf mobility:PeopleDensityEstimation .
+
+mobility:PeopleDensityOnBus a rdfs:Class ;
+  rdfs:label "People Density On Bus"^^xsd:string ;
+  rdfs:comment "People density on a bus"^^xsd:string ;
+  schema:isPartOf <http://schema.big-iot.org/mobility> ;
+  rdfs:subClassOf mobility:PeopleDensityEstimation .
+
+mobility:tpegAreaLocation a rdf:Property ;
+  rdfs:label "TPEG area location"^^xsd:string ;
+  rdfs:comment "A geographic or geometric area defined by a TPEG-Loc structure which may include height information for additional geospatial discrimination."^^xsd:string ;
+  dc:source <http://vocab.datex.org/terms#tpegAreaLocation> ;
+  schema:isPartOf <http://schema.big-iot.org/mobility> ;
+  schema:domainIncludes mobility:MobilityFeature ;
+  schema:rangeIncludes mobility:TpegAreaLocation .
+
+mobility:tpegLinearLocation a rdf:Property ;
+  rdfs:label "TPEG linear location"^^xsd:string ;
+  rdfs:comment "A linear section along a single road defined between two points on the same road by a TPEG-Loc structure."^^xsd:string ;
+  dc:source <http://vocab.datex.org/terms#tpegLinearLocation> ;
+  schema:isPartOf <http://schema.big-iot.org/mobility> ;
+  schema:domainIncludes mobility:MobilityFeature ;
+  schema:rangeIncludes mobility:TpegLinearLocation .
+
+mobility:tpegGeometricArea a rdf:Property ;
+  rdfs:label "TPEG geometric area"^^xsd:string ;
+  rdfs:comment "A geometric area defined by a centre point and a radius."^^xsd:string ;
+  schema:isPartOf <http://schema.big-iot.org/mobility> ;
+  schema:domainIncludes mobility:MobilityFeature ;
+  schema:rangeIncludes mobility:TpegGeometricArea .
+
+mobility:TpegAreaLocation a rdfs:Class ;
+  rdfs:label "TPEG Area Location"^^xsd:string ;
+  rdfs:comment "A geographic or geometric area defined by a TPEG-Loc structure which may include height information for additional geospatial discrimination."^^xsd:string ;
+  dc:source <http://vocab.datex.org/terms#TpegAreaLocation> ;
+  schema:isPartOf <http://schema.big-iot.org/mobility> ;
+  rdfs:subClassOf schema:GeospatialGeometry .
+
+mobility:TpegGeometricArea a rdfs:Class ;
+  rdfs:label "TPEG Geometric Area"^^xsd:string ;
+  rdfs:comment "A geometric area defined by a centre point and a radius."^^xsd:string ;
+  dc:source <http://vocab.datex.org/terms#TpegGeometricArea> ;
+  schema:isPartOf <http://schema.big-iot.org/mobility> ;
+  rdfs:subClassOf mobility:TpegAreaLocation .
+
+mobility:TpegLinearLocation a rdfs:Class ;
+  rdfs:label "TPEG Linear Location"^^xsd:string ;
+  rdfs:comment "A linear section along a single road defined between two points on the same road by a TPEG-Loc structure."^^xsd:string ;
+  dc:source <http://vocab.datex.org/terms#TpegLinearLocation> ;
+  schema:isPartOf <http://schema.big-iot.org/mobility> ;
+  rdfs:subClassOf schema:GeospatialGeometry .
+
+mobility:Traffic a rdfs:Class ;
+  rdfs:label "Traffic"^^xsd:string ;
+  rdfs:comment "Any traffic-related feature of interest."^^xsd:string ;
+  schema:isPartOf <http://schema.big-iot.org/mobility> ;
+  rdfs:subClassOf mobility:MobilityFeature .
+    
+mobility:hasTrafficData a rdf:Property ;
+  rdfs:label "has traffic data"^^xsd:string ;
+  rdfs:comment "Data that characterizes traffic."^^xsd:string ;
+  schema:isPartOf <http://schema.big-iot.org/mobility> ;
+  schema:domainIncludes mobility:Traffic ;
+  schema:rangeIncludes mobility:TrafficData .
+
+mobility:TrafficData a rdfs:Class ;
+  rdfs:label "Traffic Data"^^xsd:string ;
+  rdfs:comment "Measured or derived values relating to traffic or individual vehicle movements on a specific section or at a specific point on the road network."^^xsd:string ;
+  dc:source <http://vocab.datex.org/terms#TrafficData> ;
+  schema:isPartOf <http://schema.big-iot.org/mobility> ;
+  rdfs:subClassOf mobility:Traffic .
+
+mobility:Transportation a rdfs:Class ;
+  rdfs:label "Transportation"^^xsd:string ;
+  rdfs:comment "A transportation category class."^^xsd:string ;
+  schema:isPartOf <http://schema.big-iot.org/mobility> ;
+  rdfs:subClassOf mobility:MobilityFeature .
+
+mobility:TravelTime a rdfs:Class ;
+  rdfs:label "Travel Time"^^xsd:string ;
+  rdfs:comment "Derived/computed travel time information relating to a linear section of the road network; forecast = true means a forecast for a vehicle at the start of the specified location, forecast = false means calculation/measurement at the end."^^xsd:string ;
+  dc:source <http://vocab.datex.org/terms#TravelTimeData> ;
+  schema:isPartOf <http://schema.big-iot.org/mobility> ;
+  rdfs:subClassOf mobility:MobilityFeature .
+
+mobility:atBusLocation a rdf:Property ;
+  rdfs:label "at bus location"^^xsd:string ;
+  rdfs:comment "People density estimation at bus location."^^xsd:string ;
+  schema:isPartOf <http://mobility.schema.org> ;
+  schema:domainIncludes mobility:PeopleDensityOnBus ;
+  schema:rangeIncludes schema:GeoCoordinates .
+
+mobility:startTime a rdf:Property ;
+  rdfs:label "start time"^^xsd:string ;
+  rdfs:comment "Start timestamp."^^xsd:string ;
+  schema:domainIncludes mobility:PeopleDensityEstimation ;
+  schema:domainIncludes mobility:TrafficObstacle ;
+  schema:rangeIncludes schema:DateTime .
+
+mobility:endTime a rdf:Property ;
+  rdfs:label "end time"^^xsd:string ;
+  rdfs:comment "End timestamp."^^xsd:string ;
+  schema:domainIncludes mobility:PeopleDensityEstimation ;
+  schema:domainIncludes mobility:TrafficObstacle ;
+  schema:rangeIncludes schema:DateTime .
+  
+mobility:startDate a rdf:Property ;
+  rdfs:label "start date"^^xsd:string ;
+  rdfs:comment "Start date."^^xsd:string ;
+  schema:domainIncludes mobility:CarDiagnostics ;
+  schema:rangeIncludes schema:Date .
+
+mobility:endDate a rdf:Property ;
+  rdfs:label "end date"^^xsd:string ;
+  rdfs:comment "End date."^^xsd:string ;
+  schema:domainIncludes mobility:CarDiagnostics ;
+  schema:rangeIncludes schema:Date .
+
+mobility:hasAreaOfInterest
+  rdf:type rdf:Property ;
+  schema:domainIncludes mobility:PeopleDensityInArea ;
+  schema:rangeIncludes common:Polygon ;
+  rdfs:label "has area of interest" ;
+  rdfs:comment "Has area of interest."^^xsd:string ;
+.
+mobility:hasBusId
+  rdf:type rdf:Property ;
+  schema:domainIncludes mobility:Bus ;
+  schema:rangeIncludes schema:Text ;
+  schema:rangeIncludes schema:Number ;
+  rdfs:label "has bus id" ;
+  rdfs:comment "Bus id."^^xsd:string ;
+.
+mobility:hasBusLineNumber
+  rdf:type rdf:Property ;
+  schema:domainIncludes mobility:Bus ;
+  schema:rangeIncludes schema:Integer ;
+  rdfs:label "has bus line number" ;
+  rdfs:comment "Bus line number."^^xsd:string .
+  
+mobility:hasBusStopName
+  rdf:type rdf:Property ;
+  schema:domainIncludes mobility:BusStop ;
+  schema:rangeIncludes schema:Text ;
+  rdfs:label "bus stop name" ;
+  rdfs:comment "Bus stop name."^^xsd:string ;
+  rdfs:subPropertyOf schema:name .
+  
+mobility:hasBusStopIdentifier
+  rdf:type rdf:Property ;
+  schema:domainIncludes mobility:BusStop ;
+  schema:rangeIncludes schema:Text ;
+  rdfs:label "bus stop identifier" ;
+  rdfs:comment "Identifier of a bus stop."^^xsd:string ;
+  rdfs:subPropertyOf schema:identifier .
+  
+mobility:hasBusStopLocation
+  rdf:type rdf:Property ;
+  schema:domainIncludes mobility:BusStop ;
+  schema:rangeIncludes schema:GeoCoordinates ;
+  rdfs:label "has bus stop location" ;
+  rdfs:comment "Bus stop location"^^xsd:string ;
+.
+mobility:hasBusSchedule
+  rdf:type rdf:Property ;
+  schema:domainIncludes mobility:Bus ;
+  schema:rangeIncludes mobility:BusSchedule ;
+  rdfs:label "has bus schedule" ;
+  rdfs:comment "Bus schedule."^^xsd:string ;
+.
+mobility:BusSchedule
+  rdf:type rdfs:Class ;
+  dcterms:source <http://vocab.datex.org/terms#BusSchedule> ;
+  schema:isPartOf <http://mobility.schema.org> ;
+  rdfs:comment "Schedule of a bus."^^xsd:string ;
+  rdfs:label "Bus Schedule" .
+
+mobility:hasBusStop
+  rdf:type rdf:Property ;
+  schema:domainIncludes mobility:BusSchedule ;
+  schema:rangeIncludes mobility:BusStop ;
+  rdfs:label "has bus stop" ;
+  schema:inverseOf mobility:hasBusSchedule ;
+  rdfs:comment "Inverse property of hasBusSchedule"^^xsd:string ;
+.
+mobility:scheduledTime
+  rdf:type rdf:Property ;
+  schema:domainIncludes mobility:BusSchedule ;
+  schema:rangeIncludes schema:DateTime;
+  rdfs:label "scheduled time" ;
+  rdfs:comment "Timestamp relating to a bus schedule."^^xsd:string ;
+.
+mobility:livePositionOfBus
+  rdf:type rdf:Property ;
+  schema:domainIncludes mobility:LiveBusPosition ;
+  schema:rangeIncludes mobility:Bus;
+  rdfs:label "live position of bus" ;
+  rdfs:comment "Live position of a bus."^^xsd:string ;
+.
+mobility:livePositionOfBusAtTime
+  rdf:type rdf:Property ;
+  schema:domainIncludes mobility:LiveBusPosition ;
+  schema:rangeIncludes schema:DateTime;
+  rdfs:label "live position of bus at time" ;
+  rdfs:comment "Live position of a bus at give time point."^^xsd:string ;
+.
+
+mobility:onBus
+  rdf:type rdf:Property ;
+  schema:domainIncludes mobility:PeopleDensityOnBus ;
+  schema:rangeIncludes mobility:Bus ;
+  rdfs:comment "People density on bus."^^xsd:string ;
+  rdfs:label "on Bus" ;
+.
+
+mobility:resolution
+  rdf:type rdf:Property ;
+  schema:domainIncludes mobility:PeopleDensityInArea ;
+  schema:domainIncludes mobility:PeopleMobilityWithinArea ;
+  schema:rangeIncludes schema:Text ;
+  rdfs:label "resolution"^^xsd:string ;
+  rdfs:comment "Resolution is defined as 'days/hours', and it determines whether results will be given for every day or hour of the requested time span."^^xsd:string ;
+.
+
+mobility:peopleCount
+  rdf:type rdf:Property ;
+  schema:domainIncludes mobility:PeopleDensityInArea ;
+  schema:rangeIncludes schema:Integer ;
+  rdfs:comment "People count."^^xsd:string ;
+  rdfs:label "people count" ;
+.
+
+mobility:returningVisitorsCount
+  rdf:type rdf:Property ;
+  rdfs:subPropertyOf mobility:peopleCount ;
+  schema:domainIncludes mobility:VisitorsStatistics ;
+  schema:rangeIncludes schema:Integer ;
+  rdfs:comment "The number of returning visitors."^^xsd:string ;
+  rdfs:label "returning visitors count"^^xsd:string ;
+.
+
+mobility:uniqueVisitorsCount
+rdf:type rdf:Property ;
+  rdfs:subPropertyOf mobility:peopleCount ;
+  schema:domainIncludes mobility:VisitorsStatistics ;
+  schema:rangeIncludes schema:Integer ;
+  rdfs:comment "The number of unique visitors."^^xsd:string ;
+  rdfs:label "unique visitors count"^^xsd:string ;
+.
+
+mobility:visitorsCount
+  rdf:type rdf:Property ;
+  rdfs:subPropertyOf mobility:peopleCount ;
+  schema:domainIncludes mobility:VisitorsStatistics ;
+  schema:domainIncludes	mobility:VisitorsAudience ;
+  schema:domainIncludes mobility:VisitDurationCount ;
+  schema:rangeIncludes schema:Integer ;
+  rdfs:comment "The number of visitors."^^xsd:string ;
+  rdfs:label "visitors count"^^xsd:string ;
+.
+
+mobility:totalVisitorsCount
+  rdf:type rdf:Property ;
+  rdfs:subPropertyOf mobility:peopleCount ;
+  schema:domainIncludes mobility:VisitorsStatistics ;
+  schema:domainIncludes	mobility:VisitorsAudience ;
+  schema:domainIncludes mobility:VisitDurationCount ;
+  schema:rangeIncludes schema:Integer ;
+  rdfs:comment "Total number of visitors (used in conjunction with the property visitorsCount)."^^xsd:string ;
+  rdfs:label "total visitors count"^^xsd:string ;
+.
+
+mobility:POI
+  rdf:type rdfs:Class ;
+  dcterms:source <http://ns.inria.fr/prissma/v2/prissma_v2.html#POI> ;
+  schema:isPartOf <http://schema.big-iot.org/mobility> ;
+  rdfs:comment "Point of Interest (POI)."^^xsd:string ;
+  rdfs:label "Point Of Interest (POI)"^^xsd:string .
+  
+mobility:hasPOI
+  rdf:type rdf:Property ;
+  schema:isPartOf <http://schema.big-iot.org/mobility> ;
+  schema:domainIncludes mobility:PeopleDensityInArea ;
+  schema:rangeIncludes mobility:POI ;
+  rdfs:label "has POI"^^xsd:string ;
+  rdfs:comment "People count / density at a particular point of interest (POI)."^^xsd:string ;
+.
+
+mobility:inPOI
+  rdf:type rdf:Property ;
+  schema:isPartOf <http://schema.big-iot.org/mobility> ;
+  schema:domainIncludes mobility:PeopleMobilityWithinArea ;
+  schema:rangeIncludes mobility:POI ;
+  rdfs:label "in POI"^^xsd:string ;
+  rdfs:comment "Point of interest (POI) at the beginning of the tracked path."^^xsd:string ;
+.
+
+mobility:outPOI
+  rdf:type rdf:Property ;
+  schema:isPartOf <http://schema.big-iot.org/mobility> ;
+  schema:domainIncludes mobility:PeopleMobilityWithinArea ;
+  schema:rangeIncludes mobility:POI ;
+  rdfs:label "out POI"^^xsd:string ;
+  rdfs:comment "Point of interest (POI) at the end of the tracked path."^^xsd:string ;
+.
+
+mobility:poiLabel
+  rdf:type rdf:Property ;
+  dcterms:source <http://ns.inria.fr/prissma/v2/prissma_v2.html#poiLabel> ;
+  schema:domainIncludes mobility:POI ;
+  schema:rangeIncludes schema:Text ;
+  rdfs:label "poi label"^^xsd:string ;
+  rdfs:comment "Name of POI (SagradaFamilia, CataloniaSquare, LaRambla)"^^xsd:string ;
+.
+
+mobility:VisitorsStatistics
+  rdf:type rdfs:Class ;
+  schema:isPartOf <http://schema.big-iot.org/mobility> ;
+  rdfs:comment "Visitors statistics for a particular point of interest (POI)."^^xsd:string ;
+  rdfs:label "Visitors Statistics" .
+  
+mobility:VisitDurationStatistics
+  rdf:type rdfs:Class ;
+  schema:isPartOf <http://schema.big-iot.org/mobility> ;
+  rdfs:comment "Visit duration statistics for a particular point of interest (POI)."^^xsd:string ;
+  rdfs:label "Visit Duration Statistics" .
+
+mobility:visitorsStatistics
+  rdf:type rdf:Property ;
+  schema:domainIncludes mobility:POI ;
+  schema:rangeIncludes mobility:VisitorsStatistics;
+  rdfs:label "visitors statistics"^^xsd:string ;
+  rdfs:comment "Visitors statistics for a particular point of interest (POI)."^^xsd:string ;
+.
+
+mobility:visitDurationStatistics
+  rdf:type rdf:Property ;
+  schema:domainIncludes mobility:POI ;
+  schema:rangeIncludes mobility:VisitDurationStatistics;
+  rdfs:label "visit duration statistics"^^xsd:string ;
+  rdfs:comment "Visit duration statistics for a particular point of interest (POI)."^^xsd:string ;
+.
+
+mobility:visitorsAudience
+  rdf:type rdf:Property ;
+  schema:domainIncludes mobility:POI ;
+  schema:rangeIncludes mobility:VisitorsAudience ;
+  rdfs:label "visitors audience"^^xsd:string ;
+  rdfs:comment "Visitors audience characteristics for a particular point of interest (POI)."^^xsd:string ;
+.
+
+mobility:visitDurationUnder1MinuteCount
+  rdf:type rdf:Property ;
+  rdfs:subPropertyOf mobility:peopleCount ;
+  schema:domainIncludes mobility:VisitDurationStatistics ;
+  schema:rangeIncludes schema:Integer ;
+  rdfs:label "visit duration under 1 minute count"^^xsd:string ;
+  rdfs:comment "The number of visitors who spent at a particular POI less than 1 minute."^^xsd:string ;
+.
+
+mobility:visitDurationFrom1To5MinutesCount
+  rdf:type rdf:Property ;
+  rdfs:subPropertyOf mobility:peopleCount ;
+  schema:domainIncludes mobility:VisitDurationStatistics ;
+  schema:rangeIncludes schema:Integer ;
+  rdfs:label "visit duration from 1 to 5 minutes count"^^xsd:string ;
+  rdfs:comment "The number of visitors who spent at a particular POI from 1 to 5 minutes."^^xsd:string ;
+.
+
+mobility:visitDurationFrom5To10MinutesCount
+  rdf:type rdf:Property ;
+  rdfs:subPropertyOf mobility:peopleCount ;
+  schema:domainIncludes mobility:VisitDurationStatistics ;
+  schema:rangeIncludes schema:Integer ;
+  rdfs:label "visit duration from 5 to 10 minutes count"^^xsd:string ;
+  rdfs:comment "The number of visitors who spent at a particular POI from 5 to 10 minutes."^^xsd:string ;
+.
+
+mobility:visitDurationFrom10To20MinutesCount
+  rdf:type rdf:Property ;
+  rdfs:subPropertyOf mobility:peopleCount ;
+  schema:domainIncludes mobility:VisitDurationStatistics ;
+  schema:rangeIncludes schema:Integer ;
+  rdfs:label "visit duration from 10 to 20 minutes count"^^xsd:string ;
+  rdfs:comment "The number of visitors who spent at a particular POI from 10 to 20 minutes."^^xsd:string ;
+.
+
+mobility:visitDurationFrom20To40MinutesCount
+  rdf:type rdf:Property ;
+  rdfs:subPropertyOf mobility:peopleCount ;
+  schema:domainIncludes mobility:VisitDurationStatistics ;
+  schema:rangeIncludes schema:Integer ;
+  rdfs:label "visit duration from 20 to 40 minutes count"^^xsd:string ;
+  rdfs:comment "The number of visitors who spent at a particular POI from 20 to 40 minutes."^^xsd:string ;
+.
+
+mobility:visitDurationFrom40To60MinutesCount
+  rdf:type rdf:Property ;
+  rdfs:subPropertyOf mobility:peopleCount ;
+  schema:domainIncludes mobility:VisitDurationStatistics ;
+  schema:rangeIncludes schema:Integer ;
+  rdfs:label "visit duration from 40 to 60 minutes count"^^xsd:string ;
+  rdfs:comment "The number of visitors who spent at a particular POI from 40 to 60 minutes."^^xsd:string ;
+.
+
+mobility:visitDurationFrom60To90MinutesCount
+  rdf:type rdf:Property ;
+  rdfs:subPropertyOf mobility:peopleCount ;
+  schema:domainIncludes mobility:VisitDurationStatistics ;
+  schema:rangeIncludes schema:Integer ;
+  rdfs:label "visit duration from 60 to 90 minutes count"^^xsd:string ;
+  rdfs:comment "The number of visitors who spent at a particular POI from 60 to 90 minutes."^^xsd:string ;
+.
+
+mobility:visitDurationFrom90To120MinutesCount
+  rdf:type rdf:Property ;
+  rdfs:subPropertyOf mobility:peopleCount ;
+  schema:domainIncludes mobility:VisitDurationStatistics ;
+  schema:rangeIncludes schema:Integer ;
+  rdfs:label "visit duration from 90 to 120 minutes count"^^xsd:string ;
+  rdfs:comment "The number of visitors who spent at a particular POI from 90 to 120 minutes."^^xsd:string ;
+.
+
+mobility:visitDurationFrom2To3HoursCount
+  rdf:type rdf:Property ;
+  rdfs:subPropertyOf mobility:peopleCount ;
+  schema:domainIncludes mobility:VisitDurationStatistics ;
+  schema:rangeIncludes schema:Integer ;
+  rdfs:label "visit duration from 2 to 3 hours count"^^xsd:string ;
+  rdfs:comment "The number of visitors who spent at a particular POI from 2 to 3 hours."^^xsd:string ;
+.
+
+mobility:visitDurationFrom3To4HoursCount
+  rdf:type rdf:Property ;
+  rdfs:subPropertyOf mobility:peopleCount ;
+  schema:domainIncludes mobility:VisitDurationStatistics ;
+  schema:rangeIncludes schema:Integer ;
+  rdfs:label "visit duration from 3 to 4 hours count"^^xsd:string ;
+  rdfs:comment "The number of visitors who spent at a particular POI from 3 to 4 hours."^^xsd:string ;
+.
+
+mobility:visitDurationFrom4To6HoursCount
+  rdf:type rdf:Property ;
+  rdfs:subPropertyOf mobility:peopleCount ;
+  schema:domainIncludes mobility:VisitDurationStatistics ;
+  schema:rangeIncludes schema:Integer ;
+  rdfs:label "visit duration from 4 to 6 hours count"^^xsd:string ;
+  rdfs:comment "The number of visitors who spent at a particular POI from 4 to 6 hours."^^xsd:string ;
+.
+
+mobility:visitDurationOver6HoursCount
+  rdf:type rdf:Property ;
+  rdfs:subPropertyOf mobility:peopleCount ;
+  schema:domainIncludes mobility:VisitDurationStatistics ;
+  schema:rangeIncludes schema:Integer ;
+  rdfs:label "visit duration over 6 hours count"^^xsd:string ;
+  rdfs:comment "The number of visitors who spent at a particular POI more than 6 hours."^^xsd:string ;
+.
+
+mobility:visitorsInCount
+  rdf:type rdf:Property ;
+  rdfs:subPropertyOf mobility:peopleCount ;
+  schema:domainIncludes mobility:VisitorsStatistics;
+  schema:rangeIncludes schema:Integer ;
+  rdfs:comment "The number visitors that entered a particular point of interest."^^xsd:string ;
+  rdfs:label "visitors-in count" ;
+.
+
+mobility:visitorsOutCount
+  rdf:type rdf:Property ;
+  rdfs:subPropertyOf mobility:peopleCount ;
+  schema:domainIncludes mobility:VisitorsStatistics ;
+  schema:rangeIncludes schema:Integer ;
+  rdfs:comment "The number visitors that exited a particular point of interest."^^xsd:string ;
+  rdfs:label "visitors-out count" ;
+.
+
+mobility:visitorsInPercentage
+  rdf:type rdf:Property ;
+  schema:domainIncludes mobility:VisitorsStatistics;
+  schema:rangeIncludes schema:Number ;
+  rdfs:comment "The percentage of visitors that entered a particular point of interest."^^xsd:string ;
+  rdfs:label "visitors-in percentage" ;
+.
+
+mobility:visitorsOutPercentage
+  rdf:type rdf:Property ;
+  schema:domainIncludes mobility:VisitorsStatistics;
+  schema:rangeIncludes schema:Number ;
+  rdfs:comment "The percentage of visitors that exited a particular point of interest."^^xsd:string ;
+  rdfs:label "visitors-out percentage" ;
+.
+
+mobility:VisitorsAudience rdf:type rdfs:Class ;
+	rdfs:label "Visitors Audience"^^xsd:string ;
+	rdfs:comment "Visitors audience characteristics for a particular point of interest (POI)."^^xsd:string ;
+	rdfs:subClassOf schema:PeopleAudience .
+		
+mobility:averageVisitorAge rdf:type rdf:Property ;
+  schema:domainIncludes mobility:VisitorsAudience ;
+  schema:rangeIncludes schema:Integer ;
+  rdfs:label "average visitor age"^^xsd:string ;
+  rdfs:comment "Average age of the visitors."^^xsd:string .
+
+mobility:visitorCountry rdf:type rdf:Property ;
+  schema:domainIncludes mobility:VisitorsAudience ;
+  schema:rangeIncludes schema:Country ;
+  rdfs:subPropertyOf schema:geographicArea ;
+  rdfs:label "visitor country"^^xsd:string ;
+  rdfs:comment "The name of the country visitors come from."^^xsd:string .
+  
+mobility:visitorGender rdf:type rdf:Property ;
+  schema:domainIncludes mobility:VisitorsAudience ;
+  schema:rangeIncludes schema:Text ;
+  rdfs:subPropertyOf schema:requiredGender ;
+  rdfs:label "visitor gender"^^xsd:string ;
+  rdfs:comment "Visitors' gender."^^xsd:string .
+  
+mobility:visitorStartAge rdf:type rdf:Property ;
+  schema:domainIncludes mobility:VisitorsAudience ;
+  schema:rangeIncludes schema:Integer ;
+  rdfs:subPropertyOf schema:requiredMinAge ;
+  rdfs:label "visitor start age"^^xsd:string ;
+  rdfs:comment "The start age of the analysed visitors' age interval."^^xsd:string .
+  
+mobility:visitorEndAge rdf:type rdf:Property ;
+  schema:domainIncludes mobility:VisitorsAudience ;
+  schema:rangeIncludes schema:Integer ;
+  rdfs:subPropertyOf schema:requiredMaxAge ;
+  rdfs:label "visitor end age"^^xsd:string ;
+  rdfs:comment "The end age of the analysed visitors' age interval."^^xsd:string .
+  
+mobility:outOfAgeGroupVisitorsCount rdf:type rdf:Property ;
+  rdfs:subPropertyOf mobility:peopleCount ;
+  schema:domainIncludes mobility:VisitorsStatistics ;
+  schema:rangeIncludes schema:Integer ;
+  rdfs:comment "The number visitors not included into a separate age group."^^xsd:string ;
+  rdfs:label "out of age group visitors count" .
+
+mobility:distanceFromParkingSpace rdf:type rdf:Property ;
+    rdfs:label "distance from parking space" ;
+    dc:source <http://vocab.datex.org/terms#distanceFromParkingSpace> ;
+    schema:domainIncludes mobility:ParkingSpace ;
+    schema:isPartOf <http://schema.big-iot.org/mobility> ;
+    schema:rangeIncludes schema:Number ;
+    rdfs:comment "property which gives distance from a parking space." .
+
+mobility:from a rdf:Property ;
+    rdfs:label "from" ;
+    schema:domainIncludes mobility:TpegLinearLocation ;
+    schema:domainIncludes mobility:TrafficObstacle ;
+	schema:domainIncludes mobility:TrafficData ;
+    schema:isPartOf <http://schema.big-iot.org/mobility> ;
+    schema:rangeIncludes mobility:FromGeoCoordinates ;
+    rdfs:comment "Geo coordinates of a source or a starting point." .
+	
+mobility:FromGeoCoordinates a rdfs:Class ;
+    rdfs:label "From Geo Coordinates" ;
+    rdfs:comment "The geographic coordinates of a starting point." ;
+    rdfs:subClassOf schema:GeoCoordinates .
+	
+mobility:fromLatitude a rdf:Property ;
+    rdfs:label "from latitude" ;
+    schema:domainIncludes mobility:FromGeoCoordinates, mobility:TravelTime ;
+    schema:rangeIncludes schema:Number,
+        schema:Text ;
+    rdfs:comment "The latitude of a starting point. For example <code>37.42242</code> (<a href=\"https://en.wikipedia.org/wiki/World_Geodetic_System\">WGS 84</a>)." ;
+    rdfs:subPropertyOf schema:latitude .
+	
+mobility:fromLongitude a rdf:Property ;
+    rdfs:label "from longitude" ;
+    schema:domainIncludes mobility:FromGeoCoordinates, mobility:TravelTime ;
+    schema:rangeIncludes schema:Number,
+        schema:Text ;
+    rdfs:comment "The longitude of a starting point. For example <code>-122.08585</code> (<a href=\"https://en.wikipedia.org/wiki/World_Geodetic_System\">WGS 84</a>)." ;
+    rdfs:subPropertyOf schema:longitude .
+	
+mobility:hasGeoShape a rdf:Property ;
+    rdfs:label "has geo shape" ;
+    schema:domainIncludes mobility:TpegGeometricArea ;
+    schema:isPartOf <http://schema.big-iot.org/mobility> ;
+    schema:rangeIncludes schema:GeoCircle ;
+    rdfs:comment "Geoshape of the TpegGeometricArea." .
+
+mobility:parkingSpaceOrGroupIdentifier a rdf:Property ;
+    rdfs:label "parking space or group identifier" ;
+    rdfs:comment "A property that relates parking site or space with parking identifier" ;
+    dc:source <http://vocab.datex.org/terms#parkingSpaceOrGroupIdentifier> ;
+    schema:domainIncludes mobility:ParkingSpace ;
+    schema:domainIncludes mobility:ParkingSite ;
+    schema:isPartOf <http://schema.big-iot.org/mobility> ;
+    schema:rangeIncludes schema:Text ;
+    rdfs:subPropertyOf schema:identifier ;
+    common:propertyType common:StaticProperty.
+
+mobility:occupiedSpaceAppeared a mobility:ParkingSpaceStatus ;
+    rdfs:comment "a status of a parking space referring to occupied space appeared" ;
+    dc:source <http://vocab.datex.org/terms#occupiedSpaceAppeared> ;
+    rdfs:label "occupied space appeared" .
+
+mobility:occupiedSpaceDisappeared a mobility:ParkingSpaceStatus ;
+    rdfs:comment "a status of a parking space referring to occupied space disappeared." ;
+    dc:source <http://vocab.datex.org/terms#occupiedSpaceDisappeared> ;
+    rdfs:label "occupied space disappeared." .
+
+mobility:numberOfOccupiedParkingSpaces a rdf:Property ;
+    rdfs:label "number of occupied parking spaces" ;
+    rdfs:comment "Gives the number of occupied parking space in a parking site." ;
+    dc:source <http://vocab.datex.org/terms#parkingNumberOfOccupiedSpaces> ;
+    schema:domainIncludes mobility:ParkingSite ;
+    schema:rangeIncludes schema:Number ;
+    schema:isPartOf <http://schema.big-iot.org/mobility> ;
+    common:propertyType common:ObservableProperty .
+
+mobility:numberOfVacantParkingSpaces a rdf:Property ;
+    rdfs:label "number of vacant parking spaces" ;
+    rdfs:comment "Gives the number of vacant parking space in a parking site." ;
+    dc:source <http://vocab.datex.org/terms#parkingNumberOfVacantSpaces> ;
+    schema:domainIncludes mobility:ParkingSite ;
+    schema:rangeIncludes schema:Number ;
+    schema:isPartOf <http://schema.big-iot.org/mobility> ;
+    common:propertyType common:ObservableProperty .
+
+mobility:parkingSpaceStatus a rdf:Property ;
+    rdfs:label "parking space status" ;
+    dc:source <http://vocab.datex.org/terms#parkingSpaceStatus> ;
+    schema:domainIncludes mobility:ParkingSpace ;
+    schema:isPartOf <http://schema.big-iot.org/mobility> ;
+    schema:rangeIncludes mobility:ParkingSpaceStatus ;
+    schema:rangeIncludes schema:Text ;
+    rdfs:comment "A property that relates parking space with its current status. When the extension of type String is expected, potential values (e.g. available or occupied) are to be enumerated." .
+
+mobility:parkingSpaceStatusTimeStamp a rdf:Property ;
+	rdfs:subPropertyOf common:measurementTime ;
+    rdfs:label "parking space status timestamp" ;
+    schema:domainIncludes mobility:ParkingSpace ;
+    schema:isPartOf <http://schema.big-iot.org/mobility> ;
+    schema:rangeIncludes schema:DateTime ;
+    rdfs:comment "A timestamp when the status of the parking space has been recorded." .
+
+mobility:parkingSiteStatusTimeStamp a rdf:Property ;
+	rdfs:subPropertyOf common:measurementTime ;
+    rdfs:label "parking site status timestamp" ;
+    schema:domainIncludes mobility:ParkingSite ;
+    schema:rangeIncludes schema:DateTime ;
+    rdfs:comment "A timestamp when the status of the parking site has been recorded." .
+
+mobility:potentialSpaceAppeared a mobility:ParkingSpaceStatus ;
+    rdfs:comment "a status of a parking space referring to potential parking space appeared." ;
+    dc:source <http://vocab.datex.org/terms#potentialSpaceAppeared> ;
+    rdfs:label "potential space appeared" .
+
+mobility:potentialSpaceDisappeared a mobility:ParkingSpaceStatus ;
+    rdfs:comment "a status of a parking space referring to potential parking space disappeared." ;
+    dc:source <http://vocab.datex.org/terms#potentialSpaceDisappeared> ;
+    rdfs:label "potential space disappeared" .
+
+mobility:trafficSpeed a rdf:Property ;
+    rdfs:label "traffic speed" ;
+    schema:domainIncludes mobility:TrafficData ;
+    schema:rangeIncludes schema:Number;
+    schema:isPartOf <http://schema.big-iot.org/mobility> ;
+    rdfs:comment "Traffic speed. Value expressed in kilometres per hour." .
+	
+mobility:trafficStatus a rdf:Property ;
+    rdfs:label "traffic status" ;
+    schema:domainIncludes mobility:TrafficData ;
+    schema:rangeIncludes schema:Text;
+    schema:isPartOf <http://schema.big-iot.org/mobility> ;
+    rdfs:comment "The status of traffic (green / dark green / yellow / dark yellow / red / black) green means low traffic; red means heavy traffic, black means jam." .	
+
+mobility:trafficLocation a rdf:Property ;
+    rdfs:label "traffic location"^^xsd:string ;
+    rdfs:comment "Location of a road where traffic occurred ."^^xsd:string ;
+    rdfs:subPropertyOf common:geoJSONLocation ;
+    schema:domainIncludes mobility:TrafficData ;
+    schema:rangeIncludes common:GeoJSONGeometryObject .
+	
+mobility:to a rdf:Property ;
+    rdfs:label "to" ;
+    schema:domainIncludes mobility:TpegLinearLocation ;
+    schema:domainIncludes mobility:TrafficObstacle ;
+	schema:domainIncludes mobility:TrafficData ;
+    schema:isPartOf <http://schema.big-iot.org/mobility> ;
+    schema:rangeIncludes mobility:ToGeoCoordinates ;
+    rdfs:comment "The location at the down stream end of the section of road which frames the TPEGFramedPoint." .
+
+mobility:ToGeoCoordinates a rdfs:Class ;
+    rdfs:label "To geo coordinates" ;
+    rdfs:comment "The geographic coordinates of a ending point or destination." ;
+    rdfs:subClassOf schema:GeoCoordinates .
+	
+mobility:toLatitude a rdf:Property ;
+    rdfs:label "to latitude" ;
+    schema:domainIncludes mobility:ToGeoCoordinates, mobility:TravelTime ;
+    schema:rangeIncludes schema:Number,
+        schema:Text ;
+    rdfs:comment "The latitude of a location. For example <code>37.42242</code> (<a href=\"https://en.wikipedia.org/wiki/World_Geodetic_System\">WGS 84</a>)." ;
+    rdfs:subPropertyOf schema:latitude .
+	
+mobility:toLongitude a rdf:Property ;
+    rdfs:label "to longitude" ;
+    schema:domainIncludes mobility:ToGeoCoordinates, mobility:TravelTime ;
+    schema:rangeIncludes schema:Number,
+        schema:Text ;
+    rdfs:comment "The longitude of a location. For example <code>-122.08585</code> (<a href=\"https://en.wikipedia.org/wiki/World_Geodetic_System\">WGS 84</a>)." ;
+    rdfs:subPropertyOf schema:longitude .
+	
+mobility:totalCapacity a rdf:Property ;
+    rdfs:comment "Total number of car parking spaces in a parking site." ;
+    rdfs:label "total capacity" ;
+    dc:source <http://vocab.datex.org/terms#totalCapacity> ;
+    schema:domainIncludes mobility:ParkingSite ;
+    schema:rangeIncludes schema:Number ;
+    schema:isPartOf <http://schema.big-iot.org/mobility> ;
+    common:propertyType common:StaticProperty .
+
+mobility:tpegAreaDescriptor a rdf:Property ;
+    rdfs:label "TPEG area descriptor" ;
+    schema:domainIncludes mobility:TpegGeometricArea ;
+    schema:isPartOf <http://schema.big-iot.org/mobility> ;
+    schema:rangeIncludes schema:Text ;
+    rdfs:comment "Name of the TPEG area." .
+
+mobility:travelTime a rdf:Property ;
+    rdfs:label "travel time" ;
+    schema:domainIncludes mobility:TravelTime ;
+    schema:isPartOf <http://schema.big-iot.org/mobility> ;
+    schema:rangeIncludes schema:Number ;
+    rdfs:subPropertyOf common:numericValue ;
+    rdfs:comment "Derived/computed travel time information relating to a specific group of locations." .
+
+mobility:travelMode a rdf:Property ;
+    rdfs:label "travel mode" ;
+    schema:domainIncludes mobility:TravelTime ;
+    schema:rangeIncludes schema:Text ;
+    rdfs:comment "The transportation mode (car, bike, or walking) used for the calculation of travel time." .
+
+mobility:Charging a rdfs:Class ;
+    rdfs:label "Charging" ;
+    schema:isPartOf <http://schema.big-iot.org/mobility> ;
+    rdfs:comment "A charging-related feature of interest." ;
+    rdfs:subClassOf mobility:MobilityFeature .
+
+mobility:ChargingPoint a rdfs:Class ;
+    rdfs:label "Charging Point" ;
+    schema:isPartOf <http://schema.big-iot.org/mobility> ;
+    rdfs:comment "A charging point." ;
+    rdfs:subClassOf mobility:Charging .
+    
+mobility:ChargingStation a rdfs:Class ;
+    rdfs:label "Charging Station" ;
+    schema:isPartOf <http://schema.big-iot.org/mobility> ;
+    rdfs:comment "A charging station class." ;
+    rdfs:subClassOf mobility:Charging ;    
+    rdfs:subClassOf schema:CivicStructure .
+    
+mobility:hasChargingStation a rdf:Property ;
+	rdfs:label "charging station" ;
+    schema:domainIncludes mobility:ChargingPoint ;
+    schema:rangeIncludes mobility:ChargingStation ;	
+    rdfs:comment "Charging station of a given charging point." .
+    
+mobility:chargingStationStatusTimeStamp a rdf:Property ;
+	rdfs:subPropertyOf common:measurementTime ;
+    rdfs:label "charging station status timestamp" ;
+    schema:domainIncludes mobility:ChargingStation ;
+    schema:isPartOf <http://schema.big-iot.org/mobility> ;
+    schema:rangeIncludes schema:DateTime ;
+    rdfs:comment "Timestamp when the status of the ChargingStation has last changed." .
+    
+mobility:totalNumberOfChargingPoints a rdf:Property ;
+	rdfs:label "total number of charging points";	
+    schema:domainIncludes mobility:ChargingStation ;	
+    schema:rangeIncludes schema:Number ;
+    dc:source <http://vocab.datex.org/terms#numberOfChargingPoints> ;
+    rdfs:comment "Number of charging points in a charging station (dispenser count)." .
+    
+mobility:numberOfFreeChargingPoints a rdf:Property ;
+	rdfs:label "number of free charging points";	
+    schema:domainIncludes mobility:ChargingStation ;	
+        schema:rangeIncludes schema:Number ;
+    dc:source <http://vocab.datex.org/terms#numberOfChargingPoints> ;
+    rdfs:comment "Number of free charging points in a charging station." .    
+    
+mobility:maximumCurrent a rdf:Property ;
+	rdfs:label "maximum current";
+    schema:domainIncludes mobility:ChargingPoint, mobility:ChargingStation;
+    schema:rangeIncludes common:ElectricCurrent ;
+    rdfs:comment "Maximum current delivered by the charging point." .
+    
+mobility:maximumPower a rdf:Property ;
+	rdfs:label "maximum power";
+    schema:domainIncludes mobility:ChargingPoint ;
+    schema:rangeIncludes common:Power ;
+    rdfs:comment "Maximum power delivered by the charging point." .
+    
+mobility:voltage a rdf:Property ;
+	rdfs:label "voltage";
+    schema:domainIncludes mobility:ChargingPoint ;
+    schema:rangeIncludes common:VoltageOrPotentialDifference ;
+    rdfs:comment "Voltage provided by the charging point." .
+    
+mobility:numberOfChargingStations a rdf:Property ;
+	rdfs:label "number of charging stations";	
+    schema:domainIncludes mobility:ChargingStation ;
+           schema:rangeIncludes schema:Number ;
+    rdfs:comment "Number of charging stations." .
+    
+mobility:chargingStationConnectorType a rdf:Property;
+    rdfs:label "charging station connector type";
+    schema:domainIncludes mobility:ChargingStation ;
+       schema:rangeIncludes schema:Text ;
+    schema:isPartOf <http://schema.big-iot.org/mobility> ;
+    dc:source <http://vocab.datex.org/terms#chargingStationConnectorType>;
+    rdfs:comment "Type of connector for the charging station." .
+
+
+mobility:chargingStationModelType a rdf:Property;
+    rdfs:label "charging station model type";
+    schema:domainIncludes mobility:ChargingStation ;
+    schema:rangeIncludes schema:Text ;
+    schema:isPartOf <http://schema.big-iot.org/mobility> ;
+    dc:source <http://vocab.datex.org/terms#chargingStationModelType>;
+    rdfs:comment "Model of the charging station." .
+
+mobility:BikeSharingStation a rdfs:Class ;
+    rdfs:label "Bike Sharing Station" ;
+    rdfs:comment "A bike sharing station (fixed location where bikes can be rented via a renting machine)" ;
+    rdfs:subClassOf schema:CivicStructure ;
+    rdfs:subClassOf mobility:Transportation .
+
+mobility:bikeSharingStationIdentifier a rdf:Property;
+    rdfs:label "bike sharing station identifier";
+    schema:domainIncludes mobility:BikeSharingStation ;
+    schema:rangeIncludes schema:Text ;
+    rdfs:comment "Arbitrary identifier of a bike sharing station (assumed to be unique for a given operator)." ;
+    rdfs:subPropertyOf schema:identifier .
+    
+mobility:bikeSharingStationName a rdf:Property;
+    rdfs:label "bike sharing station name";
+    schema:domainIncludes mobility:BikeSharingStation ;
+    schema:rangeIncludes schema:Text ;
+    rdfs:comment "Name of a bike sharing station." ;
+    rdfs:subPropertyOf schema:name .
+    
+mobility:bikeSharingStationId a rdf:Property ;
+    rdfs:label "bike sharing station id"^^xsd:string ;
+    rdfs:comment "Identifier of a bike sharing station."^^xsd:string ;
+    rdfs:subPropertyOf schema:identifier;
+    schema:domainIncludes mobility:BikeSharingStation ;
+    schema:rangeIncludes schema:Text .
+    
+mobility:bikeSharingStationAddress a rdf:Property ;
+    rdfs:label "bike sharing station address"^^xsd:string ;
+    rdfs:comment "Address of the bike sharing station."^^xsd:string ;
+    rdfs:subPropertyOf schema:address ;
+    schema:domainIncludes mobility:BikeSharingStation;
+    schema:rangeIncludes schema:PostalAddress .
+    
+mobility:bikeSharingStationLocation a rdf:Property ;
+    rdfs:label "bike sharing station location"^^xsd:string ;
+    rdfs:comment "Location of the bike sharing station."^^xsd:string ;
+    rdfs:subPropertyOf common:geoJSONLocation ;
+    schema:domainIncludes mobility:BikeSharingStation ;
+    schema:rangeIncludes common:GeoJSONGeometryObject .
+    
+mobility:bikeSharingStationOperatorId a rdf:Property ;
+    rdfs:label "bike sharing station operator id"^^xsd:string ;
+    rdfs:comment "Identifier of the bike sharing station operator."^^xsd:string ;
+    rdfs:subPropertyOf schema:identifier;
+    schema:domainIncludes mobility:BikeSharingStation ;
+    schema:rangeIncludes schema:Text .
+
+mobility:numberOfAvailableBikes a rdf:Property;
+    rdfs:label "number of available bikes";
+    schema:domainIncludes mobility:BikeSharingStation ;
+    schema:rangeIncludes schema:Number ;
+    schema:isPartOf <http://schema.big-iot.org/mobility> ;
+    rdfs:comment "Number of available bikes at a certain bike sharing station.".
+
+mobility:bikeTypes a rdf:Property;
+    rdfs:label "bike types" ;
+    schema:domainIncludes mobility:BikeSharingStation ;
+    schema:rangeIncludes schema:Text ;
+    schema:isPartOf <http://schema.big-iot.org/mobility> ;
+    rdfs:comment "Type(s) of available bikes at a certain bike sharing station.".
+
+mobility:BikeSpot a rdfs:Class ;
+    rdfs:label "Bike Spot" ;
+    rdfs:comment "A bike spot." ;
+    rdfs:subClassOf mobility:Transportation .
+    
+mobility:bikeSpotId a rdf:Property ;
+    rdfs:label "bike spot id"^^xsd:string ;
+    rdfs:comment "Identifier of a bike spot."^^xsd:string ;
+    rdfs:subPropertyOf schema:identifier;
+    schema:domainIncludes mobility:BikeSpot ;
+    schema:rangeIncludes schema:Text .
+    
+mobility:bikeSpotStatus a rdf:Property ;
+    rdfs:label "bike spot status"^^xsd:string ;
+    rdfs:comment "Status of a bike spot in a bike sharing station (available or occupied)."^^xsd:string ;
+    schema:domainIncludes mobility:BikeSpot ;
+    schema:rangeIncludes schema:Text .
+    
+mobility:bikeSpotStatusTimeStamp a rdf:Property ;
+	rdfs:subPropertyOf common:measurementTime ;
+    rdfs:label "bike spot status timestamp" ;
+    schema:domainIncludes mobility:BikeSpot ;
+    schema:rangeIncludes schema:DateTime ;
+    rdfs:comment "Timestamp when the status of a bike spot was checked." .
+
+mobility:numberOfAvailableBikeParkingSlots a rdf:Property;
+    rdfs:label "number of available bike parking slots";
+    schema:domainIncludes mobility:BikeSharingStation ;
+    schema:rangeIncludes schema:Number ;
+    schema:isPartOf <http://schema.big-iot.org/mobility> ;
+    rdfs:comment "Total number of slots to park bikes at a certain bike sharing station." .
+
+mobility:bikeSharingStationStatus a rdf:Property;
+    rdfs:label "bike sharing station status" ;
+    schema:domainIncludes mobility:BikeSharingStation ;
+    schema:rangeIncludes schema:Text ;
+    schema:isPartOf <http://schema.big-iot.org/mobility> ;
+    rdfs:comment "The status of a bike sharing station (open / closed) ." .
+    
+mobility:bikeSharingStationInformationTimeStamp a rdf:Property ;
+	rdfs:subPropertyOf common:measurementTime ;
+    rdfs:label "bike sharing station information timestamp" ;
+    schema:domainIncludes mobility:BikeSharingStation ;
+    schema:rangeIncludes schema:DateTime ;
+    rdfs:comment "Timestamp when the status of the bike sharing station is recorded." .
+
+mobility:hasBikes a rdf:Property;
+    rdfs:label "bikes";
+    schema:domainIncludes mobility:BikeSharingStation ;
+    schema:rangeIncludes mobility:Bike ;
+    rdfs:comment "List of bikes at a bike sharing station." .
+    
+mobility:Bike a rdfs:Class ;
+    rdfs:label "Bike" ;
+    rdfs:comment "A bike." .
+  
+mobility:bikeId a rdf:Property ;
+    rdfs:label "bike id"^^xsd:string ;
+    rdfs:comment "Identifier of the bike."^^xsd:string ;
+    rdfs:subPropertyOf schema:identifier;
+    schema:domainIncludes mobility:Bike ;
+    schema:rangeIncludes schema:Text .
+
+mobility:bikeName a rdf:Property ;
+    rdfs:label "bike name"^^xsd:string ;
+    rdfs:comment "Name of the bike."^^xsd:string ;
+    rdfs:subPropertyOf schema:name ;
+    schema:domainIncludes mobility:Bike ;
+    schema:rangeIncludes schema:Text .
+
+mobility:bikeOperatorId a rdf:Property ;
+    rdfs:label "bike operator id"^^xsd:string ;
+    rdfs:comment "Identifier of the bike operator."^^xsd:string ;
+    rdfs:subPropertyOf schema:identifier;
+    schema:domainIncludes mobility:Bike ;
+    schema:rangeIncludes schema:Text .
+
+mobility:bikeLocation a rdf:Property ;
+    rdfs:label "bike location"^^xsd:string ;
+    rdfs:comment "Location of the bike."^^xsd:string ;
+    rdfs:subPropertyOf common:geoJSONLocation ;
+    schema:domainIncludes mobility:Bike;
+    schema:rangeIncludes common:GeoJSONGeometryObject .
+
+mobility:bikeAddress a rdf:Property ;
+    rdfs:label "bike address"^^xsd:string ;
+    rdfs:comment "Address of the bike."^^xsd:string ;
+    rdfs:subPropertyOf schema:address ;
+    schema:domainIncludes mobility:Bike;
+    schema:rangeIncludes schema:PostalAddress .
+    
+mobility:hasParkingFacility a rdf:Property ;
+	rdfs:comment "Indicates whether Filling Station has Parking Facility or not." ;
+	rdfs:label "has parking facility" ;
+	schema:domainIncludes mobility:ChargingPoint ;
+	schema:rangeIncludes schema:ParkingFacility .
+	
+mobility:chargingPointIdentifier a rdf:Property ;
+    rdfs:label "charging point identifier" ;
+    schema:domainIncludes mobility:ChargingPoint ;
+    schema:isPartOf <http://schema.big-iot.org/mobility> ;
+    schema:rangeIncludes schema:Text, schema:Number ;
+    rdfs:subPropertyOf schema:identifier ;
+    rdfs:comment "A property that relates ChargingPoint with ChargingPoint identifier." .
+    
+mobility:chargingStationIdentifier a rdf:Property ;
+    rdfs:label "charging station identifier" ;
+    schema:domainIncludes mobility:ChargingStation ;
+    schema:isPartOf <http://schema.big-iot.org/mobility> ;
+    schema:rangeIncludes schema:Text;
+    rdfs:subPropertyOf schema:identifier ;
+    rdfs:comment "A property that relates ChargingStation with ChargingStation identifier." .
+
+mobility:numberOfOccupiedChargingStations a rdf:Property ;
+    rdfs:label "number of occupied charging stations" ;
+    schema:domainIncludes mobility:ChargingStationStatus ;
+    schema:isPartOf <http://schema.big-iot.org/mobility> ;
+    schema:rangeIncludes schema:Number ;
+    rdfs:comment " number of occupied ChargingStation" .
+    
+mobility:numberOfVacantChargingStations a rdf:Property ;
+    rdfs:label "number of vacant charging stations" ;
+    schema:domainIncludes mobility:ChargingStationStatus ;
+    schema:isPartOf <http://schema.big-iot.org/mobility> ;
+    schema:rangeIncludes schema:Number ;
+    rdfs:comment " number of vacant ChargingStation." .
+
+mobility:numberOfOccupiedChargingPoints a rdf:Property ;
+    rdfs:label "number of occupied charging points" ;
+    schema:domainIncludes mobility:ChargingPointStatus ;
+    schema:isPartOf <http://schema.big-iot.org/mobility> ;
+    schema:rangeIncludes schema:Number ;
+    rdfs:comment " number of occupied ChargingPoints" .
+    
+mobility:numberOfVacantChargingPoints a rdf:Property ;
+    rdfs:label "number of vacant charging points" ;
+    schema:domainIncludes mobility:ChargingPointStatus ;
+    schema:isPartOf <http://schema.big-iot.org/mobility> ;
+    schema:rangeIncludes schema:Number ;
+    rdfs:comment " number of vacant ChargingPoints." .
+    
+mobility:chargingStationStatus a rdf:Property ;
+    rdfs:label "charging station status" ;
+    dc:source <http://vocab.datex.org/terms#chargingStationStatus> ;
+    schema:domainIncludes mobility:ChargingStation ;
+    schema:isPartOf <http://schema.big-iot.org/mobility> ;
+    schema:rangeIncludes mobility:ChargingStationStatus ;
+    rdfs:comment "A property that relates ChargingStation with its current status." .
+
+mobility:ChargingStationStatus a rdfs:Class ;
+    rdfs:label "Charging Station Status" ;
+    schema:isPartOf <http://schema.big-iot.org/mobility> ;
+    rdfs:comment "Status of a ChargingStation." ;
+    rdfs:subClassOf common:Measurement .
+    
+mobility:chargingPointStatus a rdf:Property ;
+    rdfs:label "charging point status" ;
+    schema:domainIncludes mobility:ChargingPoint ;
+    schema:isPartOf <http://schema.big-iot.org/mobility> ;
+    schema:rangeIncludes mobility:ChargingPointStatus, schema:Text ;
+    rdfs:comment "Current status of the charging point. When the extension of type String is expected, potential values (e.g. free, occupied, defective, inService, outOfService, unknown, other, inUse, closed, reserved) are to be enumerated." .
+
+mobility:ChargingPointStatus a rdfs:Class ;
+    rdfs:label "Charging Point Status" ;
+    schema:isPartOf <http://schema.big-iot.org/mobility> ;
+    rdfs:comment "Status of a ChargingPoint." ;
+    rdfs:subClassOf common:Measurement .
+
+# Traffic obstacle modelling
+
+mobility:TrafficObstacle a rdfs:Class ;
+    rdfs:label "Traffic Obstacle" ;
+    schema:isPartOf <http://schema.big-iot.org/mobility> ;
+    rdfs:comment "A traffic obstacle." ;
+	rdfs:subClassOf	mobility:Traffic .
+
+mobility:TrafficObstacleKind a rdfs:Class ;
+    rdfs:label "Traffic Obstacle Kind" ;
+    schema:isPartOf <http://schema.big-iot.org/mobility> ;
+    rdfs:comment "A traffic obstacle category class." ;
+    rdfs:subClassOf schema:Enumeration .
+	
+mobility:accident a mobility:TrafficObstacleKind ;
+    rdfs:label "accident" ;
+    schema:isPartOf <http://schema.big-iot.org/mobility> ;
+    rdfs:comment "Accidents are events where one or more vehicles are involved in collisions or in leaving the roadway. These include collisions between vehicles or with other road users or obstacles." .
+
+mobility:trafficCongestion a mobility:TrafficObstacleKind ;
+    rdfs:label "traffic congestion" ;
+    schema:isPartOf <http://schema.big-iot.org/mobility> ;
+    rdfs:comment "Traffic congestion and possible queues." .
+
+mobility:constructionWork a mobility:TrafficObstacleKind ;
+    rdfs:label "construction work" ;
+    schema:isPartOf <http://schema.big-iot.org/mobility> ;
+    rdfs:comment "Roadworks involving the construction of infrastructure." .	
+
+mobility:brokenDownVehicle a mobility:TrafficObstacleKind ;
+    rdfs:label "broken down vehicle" ;
+    schema:isPartOf <http://schema.big-iot.org/mobility> ;
+    rdfs:comment "Broken down vehicle(s) on the carriageway which may cause traffic disruption." .	
+
+mobility:abnormalLoad a mobility:TrafficObstacleKind ;
+    rdfs:label "abnormal load" ;
+    schema:isPartOf <http://schema.big-iot.org/mobility> ;
+    rdfs:comment "Vehicle(s) carrying exceptional load(s) which may cause traffic disruption." .	
+	
+mobility:other a mobility:TrafficObstacleKind ;
+    rdfs:label "other" ;
+    schema:isPartOf <http://schema.big-iot.org/mobility> ;
+    rdfs:comment "Other traffic obstacles than as defined in this enumeration." .	
+
+mobility:roadsideEvent a mobility:TrafficObstacleKind ;
+    rdfs:label "roadside event" ;
+    schema:isPartOf <http://schema.big-iot.org/mobility> ;
+    rdfs:comment "A roadside event (of unspecified nature) whether planned or not." .		
+	
+mobility:hazardsOnTheRoad a mobility:TrafficObstacleKind ;
+    rdfs:label "hazards on the road" ;
+    schema:isPartOf <http://schema.big-iot.org/mobility> ;
+    rdfs:comment "Unspecified hazard(s) on the road which may cause traffic disruption." .		
+	
+mobility:environmentalObstruction a mobility:TrafficObstacleKind ;
+    rdfs:label "environmental obstruction" ;
+    schema:isPartOf <http://schema.big-iot.org/mobility> ;
+    rdfs:comment "An obstruction on the road resulting from an environmental cause." .	
+
+mobility:trafficObstacleKind a rdf:Property ;
+    rdfs:label "traffic obstacle kind" ;
+    rdfs:comment "A kind of the reported traffic obstacle:  accident, traffic congestion, construction work, abnormal load, roadside event, hazards on the road, environmental obstruction or other." ;
+    schema:isPartOf <http://schema.big-iot.org/mobility> ;
+    schema:domainIncludes mobility:TrafficObstacle ;
+    schema:rangeIncludes mobility:TrafficObstacleKind .
+    
+mobility:SeverityOfTrafficObstacle a rdfs:Class ;
+    rdfs:label "Severity Of Traffic Obstacle" ;
+    schema:isPartOf <http://schema.big-iot.org/mobility> ;
+    rdfs:comment "Levels of severity of a situation as whole assessed by the impact that the situation may have on traffic flow as perceived by the supplier." ;
+    rdfs:subClassOf schema:Enumeration .
+	
+mobility:highest a mobility:SeverityOfTrafficObstacle ;
+    rdfs:label "highest" ;
+    schema:isPartOf <http://schema.big-iot.org/mobility> ;
+    rdfs:comment "Perceived by supplier as being of the highest level." .
+	
+mobility:high a mobility:SeverityOfTrafficObstacle ;
+    rdfs:label "high" ;
+    schema:isPartOf <http://schema.big-iot.org/mobility> ;
+    rdfs:comment "Perceived by supplier as being of a high level." .	
+	
+mobility:medium a mobility:SeverityOfTrafficObstacle ;
+    rdfs:label "medium" ;
+    schema:isPartOf <http://schema.big-iot.org/mobility> ;
+    rdfs:comment "Perceived by supplier as being of a medium level." .
+	
+mobility:low a mobility:SeverityOfTrafficObstacle ;
+    rdfs:label "low" ;
+    schema:isPartOf <http://schema.big-iot.org/mobility> ;
+    rdfs:comment "Perceived by supplier as being of a low level." .		
+	
+mobility:lowest a mobility:SeverityOfTrafficObstacle ;
+    rdfs:label "lowest" ;
+    schema:isPartOf <http://schema.big-iot.org/mobility> ;
+    rdfs:comment "Perceived by supplier as being of the lowest discernible level." .
+	
+mobility:none a mobility:SeverityOfTrafficObstacle ;
+    rdfs:label "none" ;
+    schema:isPartOf <http://schema.big-iot.org/mobility> ;
+    rdfs:comment "Perceived by supplier as having a severity rating of none." .	
+	
+mobility:unknown a mobility:SeverityOfTrafficObstacle ;
+    rdfs:label "unknown" ;
+    schema:isPartOf <http://schema.big-iot.org/mobility> ;
+    rdfs:comment "Perceived by supplier as being of an unknown level." .	
+	
+mobility:trafficObstacleSeverity a rdf:Property ;
+    rdfs:label "traffic obstacle severity" ;
+    schema:isPartOf <http://schema.big-iot.org/mobility> ;
+    schema:domainIncludes mobility:TrafficObstacle ;
+    schema:rangeIncludes mobility:SeverityOfTrafficObstacle ;
+    rdfs:comment "The severity level of a traffic obstacle: highest. high, medium, low, lowest, none, unknown." .	
+	
+mobility:trafficObstacleStatus a rdf:Property ;
+    rdfs:label "traffic obstacle status" ;
+    schema:isPartOf <http://schema.big-iot.org/mobility> ;
+    schema:domainIncludes mobility:TrafficObstacle ;
+    schema:rangeIncludes mobility:TrafficObstacleStatus ;
+    rdfs:comment "The status of a traffic obstacle report: active / inactive." .		
+
+mobility:TrafficObstacleStatus a rdfs:Class ;
+    rdfs:label "Traffic Obstacle Status" ;
+    schema:isPartOf <http://schema.big-iot.org/mobility> ;
+    rdfs:comment "Status of a traffic obstacle." ;
+    rdfs:subClassOf schema:Enumeration .
+	
+mobility:active a mobility:TrafficObstacleStatus ;
+    rdfs:label "active" ;
+    schema:isPartOf <http://schema.big-iot.org/mobility> ;
+    rdfs:comment "active traffic obstacle." .	
+	
+mobility:inactive a mobility:TrafficObstacleStatus ;
+    rdfs:label "inactive" ;
+    schema:isPartOf <http://schema.big-iot.org/mobility> ;
+    rdfs:comment "Inactive traffic obstacle." .		
+  
+mobility:trafficObstacleVerified
+  rdf:type rdf:Property ;
+  schema:domainIncludes mobility:TrafficObstacle ;
+  schema:rangeIncludes schema:Boolean ;
+  rdfs:label "traffic obstacle verified" ;
+  rdfs:comment "check if the traffic obstacle is verified." .
+
+mobility:directionCompass rdf:type rdf:Property ;
+  dc:source <http://vocab.datex.org/terms#directionCompass> ;
+  rdfs:label "direction compass" ;
+  schema:domainIncludes mobility:TrafficObstacle ;
+  schema:rangeIncludes schema:Text ;
+  rdfs:comment "A value of direction expressed in terms of points of the compass" .
+
+mobility:sectionName rdf:type rdf:Property ;
+	rdfs:label	"section name" ;
+	schema:domainIncludes mobility:TrafficObstacle ;
+    schema:rangeIncludes schema:Text ;
+    rdfs:comment "section name" .
+
+mobility:Accident rdf:type rdfs:Class;
+  rdfs:label	"Accident" ;
+  rdfs:comment	"Accidents are events where one or more vehicles are involved in collisions or in leaving the roadway. These include collisions between vehicles or with other road users or obstacles." ;
+  rdfs:subClassOf	mobility:Traffic ;
+  dc:source <http://vocab.datex.org/terms#Accident> .
+
+mobility:accidentCause rdf:type rdf:Property ;
+	rdfs:label	"accident cause" ;
+	rdfs:comment	"A descriptor indicating the most significant factor causing an accident." ;
+	schema:domainIncludes mobility:Accident ;
+	schema:rangeIncludes schema:Text ;
+	dc:source <http://vocab.datex.org/terms#accidentCause> .
+	
+	
+mobility:accidentType rdf:type rdf:Property ;
+	rdfs:label	"accident type" ;
+	rdfs:comment	"A characterization of the nature of the accident." ;
+	schema:domainIncludes mobility:Accident ;
+	schema:rangeIncludes schema:Text ;
+	dc:source <http://vocab.datex.org/terms#accidentCause> .
+	
+mobility:accidentTypeDetails rdf:type rdf:Property ;
+	rdfs:label	"accident type details" ;
+	rdfs:comment	"A descriptor on details of the nature of the accident." ;
+	schema:domainIncludes mobility:Accident ;
+	schema:rangeIncludes schema:Text ;
+	dc:source <http://vocab.datex.org/terms#accidentCause> .
+	
+mobility:accidentDescription rdf:type rdf:Property ;
+	rdfs:label	"accident description" ;
+	rdfs:comment	"A descriptor indicating the description of an accident." ;
+	schema:domainIncludes mobility:Accident ;
+	schema:rangeIncludes schema:Text ;
+    rdfs:subPropertyOf schema:description ;
+	dc:source <http://vocab.datex.org/terms#accidentCause> .
+
+# Traffic flow modeling
+
+mobility:TrafficDetector a rdfs:Class ;
+    rdfs:label "Traffic Detector" ;
+    schema:isPartOf <http://schema.big-iot.org/mobility> ;
+    rdfs:comment "A traffic detector class." ;
+    rdfs:subClassOf mobility:Traffic  .
+
+mobility:trafficDetectorImageId a rdf:Property ;
+    rdfs:label "traffic detector image id"^^xsd:string ;
+    rdfs:comment "Image identifier of a traffic detector."^^xsd:string ;
+    rdfs:subPropertyOf schema:image ;
+    schema:domainIncludes mobility:TrafficDetector ;
+    schema:rangeIncludes schema:Text .
+
+mobility:trafficDetectorId a rdf:Property ;
+    rdfs:label "traffic detector id"^^xsd:string ;
+    rdfs:comment "Identifier of a traffic detector."^^xsd:string ;
+    rdfs:subPropertyOf schema:identifier ;
+    schema:domainIncludes mobility:TrafficDetector ;
+    schema:rangeIncludes schema:Text .	
+	
+mobility:trafficDetectorName a rdf:Property ;
+    rdfs:label "traffic detector name"^^xsd:string ;
+    rdfs:comment "Name of a traffic detector."^^xsd:string ;
+    rdfs:subPropertyOf schema:name ;
+    schema:domainIncludes mobility:TrafficDetector ;
+    schema:rangeIncludes schema:Text .
+
+mobility:trafficDetectorUri a rdf:Property ;
+    rdfs:label "traffic detector URI"^^xsd:string ;
+    rdfs:comment "URI of a traffic detector."^^xsd:string ;
+    rdfs:subPropertyOf schema:url;
+    schema:domainIncludes mobility:TrafficDetector ;
+    schema:rangeIncludes schema:URL .
+    
+mobility:trafficDetectorOperator a rdf:Property ;
+    rdfs:label "traffic detector operator"^^xsd:string ;
+    rdfs:comment "Operator of a traffic detector."^^xsd:string ;
+    schema:domainIncludes mobility:TrafficDetector ;
+    schema:rangeIncludes schema:Text .
+# if a more fine-grained modeling is needed, can be subclassed from schema:provider
+
+mobility:trafficDetectorAddress a rdf:Property ;
+    rdfs:label "traffic detector address"^^xsd:string ;
+    rdfs:comment "Address of a traffic detector."^^xsd:string ;
+    schema:domainIncludes mobility:TrafficDetector ;
+    schema:rangeIncludes schema:PostalAddress .
+
+mobility:trafficDetectionTimeStamp a rdf:Property ;
+	rdfs:subPropertyOf common:measurementTime ;
+    rdfs:label "traffic detection timestamp" ;
+    schema:domainIncludes mobility:TrafficDetector ;
+	schema:domainIncludes mobility:TrafficData ;
+    schema:rangeIncludes schema:DateTime ;
+    rdfs:comment "Timestamp when the traffic status was last detected." .
+    
+mobility:trafficDetectorLocation a rdf:Property ;
+  rdfs:subPropertyOf common:geoJSONLocation;
+  rdfs:label "traffic detector location midpoint"^^xsd:string ;
+  rdfs:comment "The coordinates of a traffic detector location: the GeoJSON geometry object of type Point with an array of coordinates will be returned."^^xsd:string ;
+  schema:domainIncludes mobility:TrafficDetector ;
+  schema:rangeIncludes common:GeoJSONGeometryObject .
+
+  mobility:jamFactorId rdf:type rdf:Property ;
+  rdfs:label	"jam factor identifier" ;
+  rdfs:comment	"an identifier of a jam factor " ;
+  rdfs:subPropertyOf schema:identifier ;
+  schema:domainIncludes mobility:TrafficData ;
+  schema:domainIncludes mobility:TrafficDetector ;
+  schema:rangeIncludes schema:Integer .  
+
+mobility:alertCDirection rdf:type rdf:Property ;
+   rdfs:label	"alert C direction" ;
+   rdfs:comment	"The direction of traffic flow along the road to which the information relates." ;
+   schema:domainIncludes mobility:TrafficData ;
+   schema:rangeIncludes schema:Text ;
+   rdfs:subPropertyOf common:numericValue ;
+   dc:source <http://vocab.datex.org/terms#AlertCDirection> .	
+	
+mobility:lengthAffected rdf:type rdf:Property ;
+   rdfs:label	"length affected" ;
+   rdfs:comment	"This indicates the length of road measured in metres affected by the associated traffic element." ;
+   schema:domainIncludes mobility:TrafficData ;
+   schema:rangeIncludes schema:Float ;
+   rdfs:subPropertyOf common:numericValue ;
+   dc:source <http://vocab.datex.org/terms#lengthAffected> .		
+
+mobility:freeFlowSpeed rdf:type rdf:Property ;
+   rdfs:label	"free flow speed" ;
+   rdfs:comment	"The free flow speed expected under ideal conditions, corresponding to the freeFlowTravelTime." ;
+   schema:domainIncludes mobility:TrafficData ;
+   schema:rangeIncludes schema:Float ;
+   rdfs:subPropertyOf common:numericValue ;
+   dc:source <http://vocab.datex.org/terms#freeFlowSpeed> .	
+
+mobility:maximumSpeedLimit rdf:type rdf:Property ;
+  rdfs:label	"maximum speed limit" ;
+  rdfs:comment	"Maximum speed limit." ;
+  schema:domainIncludes mobility:TrafficData ;
+  schema:rangeIncludes schema:Float ;
+  rdfs:subPropertyOf common:numericValue ;
+  dc:source <http://vocab.datex.org/terms#maximumSpeedLimit> .
+
+mobility:pointTMCLocationCode rdf:type rdf:Property ;
+  rdfs:label	"point TMC location code" ;
+  rdfs:comment	"The geographic information used for TMC (Traffic Messaging Channel) is distributed in the form of location code lists. Their format is defined in the standard ISO 14819-3." ;
+  rdfs:subPropertyOf common:numericValue ;
+  schema:domainIncludes mobility:TrafficData ;
+  schema:rangeIncludes schema:Number .
+
+mobility:speedConfidence rdf:type rdf:Property ;
+  rdfs:label	"speed confidence" ;
+  rdfs:comment	"An indication how the speed was determined.  1.0 - 100%. -1 means road closed." ;
+  rdfs:subPropertyOf common:numericValue ;
+  schema:domainIncludes mobility:TrafficData ;
+  schema:rangeIncludes schema:Number .
+
+mobility:jamFactor rdf:type rdf:Property ;
+  rdfs:label	"jam factor" ;
+  rdfs:comment	"Describes characteristics of traffic flow. When the extension of type String is expected, potential values such as erraticFlow, smoothFlow, stopAndGo, trafficBlocked are to be enumerated " ;
+  schema:domainIncludes mobility:TrafficData ;
+  schema:domainIncludes mobility:TrafficDetector ;
+  schema:rangeIncludes mobility:TrafficFlowCharacteristics ;
+  schema:rangeIncludes schema:Text .
+
+mobility:TrafficFlowCharacteristics rdf:type rdfs:Class;
+  rdfs:label	"Traffic Flow Characteristics" ;
+  rdfs:comment	"A collection of terms for describing the characteristics of traffic flow." ;
+  rdfs:subClassOf	schema:Enumeration ;
+  dc:source <http://vocab.datex.org/terms#TrafficFlowCharacteristicsEnum> .
+
+mobility:erraticFlow a mobility:TrafficFlowCharacteristics ;
+  rdfs:comment "Traffic flow is of an irregular nature, subject to sudden changes in rates." ;
+  dc:source <http://vocab.datex.org/terms#erraticFlow> ;
+  rdfs:label "erratic flow" .
+	
+mobility:smoothFlow a mobility:TrafficFlowCharacteristics ;
+  rdfs:comment "Traffic flow is smooth." ;
+  dc:source <http://vocab.datex.org/terms#smoothFlow> ;
+  rdfs:label "smooth flow" .	
+	
+mobility:stopAndGo a mobility:TrafficFlowCharacteristics ;
+  rdfs:comment "Traffic flow is of a stop and go nature with queues forming and ending continuously on the specified section of road." ;
+  dc:source <http://vocab.datex.org/terms#stopAndGo> ;
+  rdfs:label "stop and go" .
+	
+mobility:trafficBlocked a mobility:TrafficFlowCharacteristics ;
+  rdfs:comment "Traffic is blocked at the specified location and in the specified direction due to an unplanned event." ;
+  dc:source <http://vocab.datex.org/terms#trafficBlocked> ;
+  rdfs:label "traffic blocked" .
+
+
+# Parking spaces prediction modeling
+
+#mobility:predictionTimeStamp
+#  rdf:type rdf:Property ;
+#  schema:domainIncludes mobility:ParkingSiteStatus ;
+#  schema:rangeIncludes schema:DateTime ;
+#  rdfs:label "prediction time stamp" ;
+#  rdfs:comment "Parking site status prediction time stamp"^^xsd:string ;
+#.	
+
+# Car tracking and on-board diagnostics modeling
+
+mobility:CarDiagnostics a rdfs:Class ;
+    rdfs:label "Car Diagnostics"^^xsd:string ;
+    rdfs:comment "Car parameters related to on-board diagnostics: data gathered, for instance, by the device plugged into the OBD II port."^^xsd:string ;
+    schema:isPartOf <http://schema.big-iot.org/mobility> ;
+    rdfs:seeAlso schema:Car ;
+    rdfs:subClassOf mobility:Transportation .
+  	
+mobility:LocationTracking a rdfs:Class ;
+    rdfs:label "Location Tracking"^^xsd:string ;
+    rdfs:comment "Car parameters related to location tracking: data collected by location tracking devices (either installed in the vehicle or received via receiver-equipped mobile devices) using GPS, GLONASS or other technology."^^xsd:string ;
+    schema:isPartOf <http://schema.big-iot.org/mobility> ;
+    rdfs:subClassOf mobility:Transportation .
+
+mobility:measuredSpeed a rdf:Property ;
+    rdfs:label "measured speed"^^xsd:string ;
+    rdfs:comment "The vehicle speed, measured in kilometer per hour; different from schema.org/Car.speed property which indicates speed range of a vehicle."^^xsd:string ;
+    dc:source <http://schema.org/speed> ;
+    dc:source <http://vocab.datex.org/terms#individualVehicleSpeed> ;
+    schema:isPartOf <http://schema.big-iot.org/mobility> ;
+    rdfs:subPropertyOf mobility:carParameter;
+    schema:domainIncludes mobility:CarDiagnostics ;
+    schema:rangeIncludes schema:Number;
+    rdfs:seeAlso mobility:gpsSpeed .
+    
+mobility:emissionsCO2 a rdf:Property ;
+    rdfs:label "emissions CO2"^^xsd:string ;
+    rdfs:comment "The carbon dioxide (CO2) emissions, measured in kilogram per hour; the identically titled schema.org/Car property declares measurements in g/km."^^xsd:string ;
+    dc:source <http://schema.org/emissionsCO2> ;
+    schema:isPartOf <http://schema.big-iot.org/mobility> ;
+    rdfs:subPropertyOf mobility:carParameter;
+    schema:domainIncludes mobility:CarDiagnostics ;
+    schema:rangeIncludes schema:Number;
+    rdfs:seeAlso environment:CO2 .
+
+mobility:fuelConsumption a rdf:Property ;
+    rdfs:label "fuel consumption"^^xsd:string ;
+    rdfs:comment "The amount of the consumed fuel, measured in liter per hour. The corresponding schema.org property declares example measurements in L/100 km."^^xsd:string ;
+    dc:source <http://schema.org/fuelConsumption> ;
+    schema:isPartOf <http://schema.big-iot.org/mobility> ;
+    rdfs:subPropertyOf mobility:carParameter;
+    schema:domainIncludes mobility:CarDiagnostics ;
+    schema:rangeIncludes schema:Number .
+
+mobility:massAirFlow a rdf:Property ;
+    rdfs:label "mass air flow (MAF)"^^xsd:string ;
+    rdfs:comment "The mass flow rate of air entering a fuel-injected internal combustion engine, measured in gram per second; used by the the engine control unit to balance and deliver the correct fuel mass to the engine.^^xsd:string" ;
+    schema:isPartOf <http://schema.big-iot.org/mobility> ;
+    rdfs:subPropertyOf mobility:carParameter;
+    schema:domainIncludes mobility:CarDiagnostics ;
+    schema:rangeIncludes schema:Number .
+    
+mobility:calculatedMassAirFlow a rdf:Property ;
+    rdfs:label "calculated mass air flow (MAF)"^^xsd:string ;
+    rdfs:comment "The mass air flow calculated using various parameters (intake air temperature, intake manifold absolute pressure, engine revolutions per minute and other) when the OBD adapter delivers no result for MAF; measured in gram per second."^^xsd:string ;
+    schema:isPartOf <http://schema.big-iot.org/mobility> ;
+    rdfs:subPropertyOf mobility:carParameter;
+    schema:domainIncludes mobility:CarDiagnostics ;
+    schema:rangeIncludes schema:Number .
+
+mobility:intakeAirTemperature a rdf:Property ;
+    rdfs:label "intake air temperature"^^xsd:string ;
+    rdfs:comment "The temperature of the air entering the engine, measured in degrees Celsius; used by the engine control unit to assist in determining the correct engine fuel requirement to suit the operating air temperature."^^xsd:string ;
+    schema:isPartOf <http://schema.big-iot.org/mobility> ;
+    rdfs:subPropertyOf mobility:carParameter;
+    schema:domainIncludes mobility:CarDiagnostics ;
+    schema:rangeIncludes schema:Number .
+   
+mobility:intakeManifoldAbsolutePressure a rdf:Property ;
+    rdfs:label "intake manifold absolute pressure (MAP)"^^xsd:string ;
+    rdfs:comment "The air pressure in the intake manifold, measured in kilopascal (kPa) absolute; used to calculate air density and determine the engine's air mass flow rate."^^xsd:string ;
+    schema:isPartOf <http://schema.big-iot.org/mobility> ;
+    rdfs:subPropertyOf mobility:carParameter;
+    schema:domainIncludes mobility:CarDiagnostics ;
+    schema:rangeIncludes schema:Number .
+
+mobility:engineRevolutionsPerMinute a rdf:Property ;
+    rdfs:label "engine revolutions per minute (RPM)"^^xsd:string ;
+    rdfs:comment "The engine's crankshaft revolutions per minute, the number of rotations around a fixed axis in one minute."^^xsd:string ;
+    schema:isPartOf <http://schema.big-iot.org/mobility> ;
+    rdfs:subPropertyOf mobility:carParameter;
+    schema:domainIncludes mobility:CarDiagnostics ;
+    schema:rangeIncludes schema:Number .
+
+mobility:calculatedEngineLoad a rdf:Property ;
+    rdfs:label "calculated engine load"^^xsd:string ;
+    rdfs:comment "Calculated engine load indicates a percentage of peak available torque."^^xsd:string ;
+    schema:isPartOf <http://schema.big-iot.org/mobility> ;
+    rdfs:subPropertyOf mobility:carParameter;
+    schema:domainIncludes mobility:CarDiagnostics ;
+    schema:rangeIncludes schema:Number .
+
+mobility:fuelSystemStatusCode a rdf:Property ;
+    rdfs:label "fuel system status code"^^xsd:string ;
+    rdfs:comment "The code returned as a response to PID-supported command 01 03 indicating the fuel system loop status (e.g. 1: open loop due to insufficient engine temperature)."^^xsd:string ;
+    schema:isPartOf <http://schema.big-iot.org/mobility> ;
+    rdfs:subPropertyOf mobility:carParameter;
+    schema:domainIncludes mobility:CarDiagnostics ;
+    schema:rangeIncludes schema:Number .
+
+mobility:longTermFuelTrim1 a rdf:Property ;
+    rdfs:label "long term fuel trim-bank1"^^xsd:string ;
+    rdfs:comment "Averaged over time adjustment to the fuel injector pulse width (and thus amount of fuel); measured as percentage."^^xsd:string ;
+    schema:isPartOf <http://schema.big-iot.org/mobility> ;
+    rdfs:subPropertyOf mobility:carParameter;
+    schema:domainIncludes mobility:CarDiagnostics ;
+    schema:rangeIncludes schema:Number .
+    
+mobility:shortTermFuelTrim1 a rdf:Property ;
+    rdfs:label "short term fuel trim-Bank1"^^xsd:string ;
+    rdfs:comment "Immediate adjustment to the fuel injector pulse width (and thus amount of fuel); measured several times per second as percentage."^^xsd:string ;
+    schema:isPartOf <http://schema.big-iot.org/mobility> ;
+    rdfs:subPropertyOf mobility:carParameter;
+    schema:domainIncludes mobility:CarDiagnostics ;
+    schema:rangeIncludes schema:Number .
+
+mobility:throttlePosition a rdf:Property ;
+    rdfs:label "throttle position"^^xsd:string ;
+    rdfs:comment "The position of the vehicle throttle valve, plate, butterfly or spindle, measured in %; required for fuel and air delivery, ignition timing and other important functions."^^xsd:string ;
+    schema:isPartOf <http://schema.big-iot.org/mobility> ;
+    rdfs:subPropertyOf mobility:carParameter;
+    schema:domainIncludes mobility:CarDiagnostics ;
+    schema:rangeIncludes schema:Number .
+
+mobility:o2LambdaCurrent a rdf:Property ;
+    rdfs:label "O2 lambda current"^^xsd:string ;
+    rdfs:comment "The current of a signal generated by the oxygen sensor, measured in milliampere (mA)."^^xsd:string ;
+    schema:isPartOf <http://schema.big-iot.org/mobility> ;
+    rdfs:subPropertyOf mobility:carParameter;
+    schema:domainIncludes mobility:CarDiagnostics ;
+    schema:rangeIncludes schema:Number .
+    
+mobility:o2LambdaCurrentER a rdf:Property ;
+    rdfs:label "O2 lambda current equivalence ratio"^^xsd:string ;
+    rdfs:comment "O2 lambda current equivalence ratio."^^xsd:string ;
+    schema:isPartOf <http://schema.big-iot.org/mobility> ;
+    rdfs:subPropertyOf mobility:carParameter;
+    schema:domainIncludes mobility:CarDiagnostics ;
+    schema:rangeIncludes schema:Number . 
+
+
+mobility:o2LambdaVoltage a rdf:Property ;
+    rdfs:label "O2 lambda voltage"^^xsd:string ;
+    rdfs:comment "The voltage of a signal generated by the oxygen sensor measured in volt (V)."^^xsd:string ;
+    schema:isPartOf <http://schema.big-iot.org/mobility> ;
+    rdfs:subPropertyOf mobility:carParameter;
+    schema:domainIncludes mobility:CarDiagnostics ;
+    schema:rangeIncludes schema:Number .
+
+mobility:o2LambdaVoltageER a rdf:Property ;
+    rdfs:label "O2 lambda voltage equivalence ratio"^^xsd:string ;
+    rdfs:comment "O2 lambda voltage equivalence ratio."^^xsd:string ;
+    schema:isPartOf <http://schema.big-iot.org/mobility> ;
+    rdfs:subPropertyOf mobility:carParameter;
+    schema:domainIncludes mobility:CarDiagnostics ;
+    schema:rangeIncludes schema:Number .
+
+mobility:gpsData a rdf:Property ;
+    rdfs:label "GPS data"^^xsd:string ;
+    rdfs:comment "Location tracking data obtained via GPS."^^xsd:string ;
+    schema:isPartOf <http://schema.big-iot.org/mobility> ;
+    schema:domainIncludes mobility:LocationTracking ;
+    schema:rangeIncludes mobility:GPSData .
+    
+mobility:track a rdf:Property ;
+    rdfs:label "track"^^xsd:string ;
+    rdfs:comment "Information about the track."^^xsd:string ;
+    schema:isPartOf <http://schema.big-iot.org/mobility> ;
+    schema:domainIncludes mobility:LocationTracking ;
+    schema:rangeIncludes mobility:Track .
+
+mobility:GPSData a rdfs:Class ;
+    rdfs:label "GPS Data"^^xsd:string ;
+    rdfs:comment "Location data obtained via GPS." ;
+    schema:isPartOf <http://schema.big-iot.org/mobility> .
+    
+mobility:gpsSpeed a rdf:Property ;
+    rdfs:label "GPS speed"^^xsd:string ;
+    rdfs:comment "Car speed provided by the GPS receiver."^^xsd:string ;
+    schema:isPartOf <http://schema.big-iot.org/mobility> ;
+    rdfs:subPropertyOf mobility:carParameter;
+    schema:domainIncludes mobility:GPSData ;
+    schema:rangeIncludes schema:Number ;
+    rdfs:seeAlso mobility:measuredSpeed .
+
+mobility:gpsAltitude a rdf:Property ;
+    rdfs:label "GPS altitude"^^xsd:string ;
+    rdfs:comment "Altitude above mean sea level provided by the GPS receiver measured in meters."^^xsd:string ;
+    schema:isPartOf <http://schema.big-iot.org/mobility> ;
+    rdfs:subPropertyOf mobility:carParameter;
+    schema:domainIncludes mobility:GPSData ;
+    schema:rangeIncludes schema:Number .
+    
+mobility:gpsAccuracy a rdf:Property ;
+    rdfs:label "GPS accuracy"^^xsd:string ;
+    rdfs:comment "Accuracy of GPS data measured in %."^^xsd:string ;
+    schema:isPartOf <http://schema.big-iot.org/mobility> ;
+    rdfs:subPropertyOf mobility:carParameter;
+    schema:domainIncludes mobility:GPSData ;
+    schema:rangeIncludes schema:Number .
+
+mobility:gpsBearing a rdf:Property ;
+    rdfs:label "GPS bearing"^^xsd:string ;
+    rdfs:comment "Bearing provided by the GPS receiver measured in degrees."^^xsd:string ;
+    schema:isPartOf <http://schema.big-iot.org/mobility> ;
+    rdfs:subPropertyOf mobility:carParameter;
+    schema:domainIncludes mobility:GPSData ;
+    schema:rangeIncludes schema:Number .
+
+mobility:gpsHDOP a rdf:Property ;
+    rdfs:label "GPS HDOP"^^xsd:string ;
+    rdfs:comment "GPS horizontal dilution of precision (HDOP) - multiplicative effect of navigation satellite geometry on positional measurement precision related to horizontal dimension."^^xsd:string ;
+    schema:isPartOf <http://schema.big-iot.org/mobility> ;
+    rdfs:subPropertyOf mobility:carParameter;
+    schema:domainIncludes mobility:GPSData ;
+    schema:rangeIncludes schema:Number .
+
+mobility:gpsVDOP a rdf:Property ;
+    rdfs:label "GPS VDOP"^^xsd:string ;
+    rdfs:comment "GPS vertical dilution of precision (VDOP) - multiplicative effect of navigation satellite geometry on positional measurement precision related to vertical dimension." ;
+    schema:isPartOf <http://schema.big-iot.org/mobility> ;
+    rdfs:subPropertyOf mobility:carParameter;
+    schema:domainIncludes mobility:GPSData ;
+    schema:rangeIncludes schema:Number .
+
+mobility:gpsPDOP a rdf:Property ;
+    rdfs:label "GPS PDOP"^^xsd:string ;
+    rdfs:comment "GPS position (3D) dilution of precision (PDOP) - multiplicative effect of navigation satellite geometry on positional measurement precision related to position."^^xsd:string ;
+    schema:isPartOf <http://schema.big-iot.org/mobility> ;
+    rdfs:subPropertyOf mobility:carParameter;
+    schema:domainIncludes mobility:GPSData ;
+    schema:rangeIncludes schema:Number .
+
+mobility:Track a rdfs:Class ;
+    rdfs:label "Track"^^xsd:string ;
+    rdfs:comment "The space-time trajectory on the Earth's surface with attached measurements of the object's consecutive positions."^^xsd:string ;
+    rdfs:subClassOf mobility:LocationTracking .
+
+mobility:trackID a rdf:Property ;
+    rdfs:label "track ID"^^xsd:string ;
+    rdfs:comment "An identifier of a track."^^xsd:string ;
+    dc:source <http://schema.org/identifier> ;
+	rdfs:subPropertyOf schema:identifier ;
+    schema:isPartOf <http://schema.big-iot.org/mobility> ;
+    schema:domainIncludes mobility:Track ;
+    schema:rangeIncludes schema:Text .
+
+mobility:trackURL a rdf:Property ;
+    rdfs:label "track URL"^^xsd:string ;
+    rdfs:comment "A URL of a track."^^xsd:string ;
+    dc:source <http://schema.org/identifier> ;
+    schema:isPartOf <http://schema.big-iot.org/mobility> ;
+    schema:domainIncludes mobility:Track ;
+    schema:rangeIncludes schema:URL .
+    
+mobility:trackLength a rdf:Property ;
+    rdfs:label "track length"^^xsd:string ;
+    rdfs:comment "Length of a track."^^xsd:string ;
+    schema:isPartOf <http://schema.big-iot.org/mobility> ;
+    schema:domainIncludes mobility:Track ;
+    schema:rangeIncludes schema:Number .
+    
+mobility:hasTrackPoints a rdf:Property ;
+    rdfs:label "track points" ;
+    rdfs:comment "Points that constitute a track." ;
+    schema:domainIncludes mobility:Track ;
+    schema:rangeIncludes mobility:TrackPoint .
+    
+mobility:TrackPoint a rdfs:Class ;
+	rdfs:subClassOf mobility:Track ;
+    rdfs:label "TrackPoint"^^xsd:string ;
+    rdfs:comment "One point on a track (its coordinates recorded at a certain timestamp.)" .
+    
+mobility:trackPointLongitude a rdf:Property ;
+    rdfs:label "track point longitude" ;
+    rdfs:comment "The longitude of one track point." ;
+    rdfs:subPropertyOf schema:longitude ;
+    schema:domainIncludes mobility:TrackPoint ;
+    schema:rangeIncludes schema:Number .
+    
+mobility:trackPointLatitude a rdf:Property ;
+    rdfs:label "track point latitude" ;
+    rdfs:comment "The latitude of one track point." ;
+    rdfs:subPropertyOf schema:latitude ;
+    schema:domainIncludes mobility:TrackPoint ;
+    schema:rangeIncludes schema:Number .
+    
+mobility:trackPointRecordTimeStamp a rdf:Property ;
+    rdfs:label "track point record timestamp" ;
+    rdfs:comment "The timestamp when the track point coordinates were recorded." ;
+    rdfs:subPropertyOf common:measurementTime ;
+    schema:domainIncludes mobility:TrackPoint ;
+    schema:rangeIncludes schema:DateTime .
+    
+mobility:trackLogId a rdf:Property ;
+    rdfs:label "track log id" ;
+    rdfs:comment "The log identifier of a track to which the track point belongs." ;
+    rdfs:subPropertyOf schema:identifier ;
+    schema:domainIncludes mobility:TrackPoint ;
+    schema:rangeIncludes schema:Number .
+
+mobility:SpecialTrackPoint a rdfs:Class ;
+	rdfs:subClassOf mobility:TrackPoint ;
+	rdfs:seeAlso mobility:TrafficObstacle ;
+    rdfs:label "SpecialTrackPoint"^^xsd:string ;
+    rdfs:comment "One point on a track with a special category (dangerous intersection, accident, blind spotted curve, etc.) assigned by a traveler" .
+    
+mobility:trackPointCategory a rdf:Property ;
+    rdfs:label "track point category" ;
+    rdfs:comment "Category assigned to a special point on track by a traveler (dangerous intersection, accident, blind spotted curve, etc.)" ;    
+    schema:domainIncludes mobility:SpecialTrackPoint ;
+    schema:rangeIncludes schema:Text .
+    
+mobility:SpecialTrackSection a rdfs:Class ;
+	rdfs:subClassOf mobility:Track ;
+    rdfs:label "SpecialTrackSection"^^xsd:string ;
+    rdfs:comment "Several points on a track with a special category (for example, roadwork section) assigned by a traveler" .
+
+mobility:trackSectionRecordTimeStamp a rdf:Property ;
+    rdfs:label "track section record timestamp" ;
+    rdfs:comment "The timestamp when the special track section location and status were recorded." ;
+    rdfs:subPropertyOf common:measurementTime ;
+    schema:domainIncludes mobility:SpecialTrackSection ;
+    schema:rangeIncludes schema:DateTime .
+    
+mobility:trackSectionId a rdf:Property ;
+    rdfs:label "track section id" ;
+    rdfs:comment "The identifier of a special track section." ;
+    rdfs:subPropertyOf schema:identifier ;
+    schema:domainIncludes mobility:SpecialTrackSection ;
+    schema:rangeIncludes schema:Number .
+
+mobility:trackSectionCategory a rdf:Property ;
+    rdfs:label "track section category" ;
+    rdfs:comment "Category assigned to a special section track by a traveler (for example, roadwork section)." ;    
+    schema:domainIncludes mobility:SpecialTrackSection ;
+    schema:rangeIncludes schema:Text .
+
+mobility:trackSectionLocation a rdf:Property ;
+    rdfs:label "track section location"^^xsd:string ;
+    rdfs:comment "GeoJSON geometry object representing points, curves, and surfaces in coordinate space." ;
+    schema:domainIncludes mobility:SpecialTrackSection ;
+	schema:rangeIncludes common:GeoJSONGeometryObject .
+    
+mobility:sensor a rdf:Property ;
+    rdfs:label "sensor"^^xsd:string ;
+    rdfs:comment "A sensor of a car."^^xsd:string ;
+    schema:isPartOf <http://schema.big-iot.org/mobility> ;
+    schema:domainIncludes schema:Car ;
+    schema:domainIncludes mobility:CarDiagnostics ;
+    schema:rangeIncludes sosa:Sensor .
+    
+mobility:carParameter a rdf:Property ;
+    rdfs:label "car parameter"^^xsd:string ;
+    rdfs:comment "An observed parameter of a Car (used in Car Diagnostics and Location Tracking feature of interest)."^^xsd:string ;
+	schema:domainIncludes schema:Car;
+	schema:domainIncludes mobility:CarDiagnostics ;
+    schema:rangeIncludes schema:Number .
+    
+mobility:InformationPanel rdf:type rdfs:Class;
+	rdfs:subClassOf mobility:Traffic;
+	rdfs:label "Information Panel" ;
+	rdfs:comment "Information panel." .
+
+mobility:infoPanelImageId a rdf:Property ;
+    rdfs:label "information panel image id"^^xsd:string ;
+    rdfs:comment "Image identifier of the information panel."^^xsd:string ;
+    rdfs:subPropertyOf schema:image ;
+    schema:domainIncludes mobility:InformationPanel ;
+    schema:rangeIncludes schema:Text .
+
+mobility:infoPanelName a rdf:Property ;
+    rdfs:label "information panel name"^^xsd:string ;
+    rdfs:comment "Name of the information panel."^^xsd:string ;
+    rdfs:subPropertyOf schema:name ;
+    schema:domainIncludes mobility:InformationPanel ;
+    schema:rangeIncludes schema:Text .
+
+mobility:infoPanelLocation a rdf:Property ;
+    rdfs:label "information panel location"^^xsd:string ;
+    rdfs:comment "Location of the information panel."^^xsd:string ;
+    rdfs:subPropertyOf common:geoJSONLocation ;
+    schema:domainIncludes mobility:InformationPanel ;
+    schema:rangeIncludes common:GeoJSONGeometryObject .
+
+mobility:infoPanelId a rdf:Property ;
+    rdfs:label "information panel id"^^xsd:string ;
+    rdfs:comment "Identifier of the information panel."^^xsd:string ;
+    rdfs:subPropertyOf schema:identifier;
+    schema:domainIncludes mobility:InformationPanel ;
+    schema:rangeIncludes schema:Text .
+
+mobility:infoPanelUri a rdf:Property ;
+    rdfs:label "information panel URI"^^xsd:string ;
+    rdfs:comment "URI of the information panel."^^xsd:string ;
+    rdfs:subPropertyOf schema:url;
+    schema:domainIncludes mobility:InformationPanel ;
+    schema:rangeIncludes schema:URL .
+    
+mobility:infoPanelMessage a rdf:Property ;
+    rdfs:label "information panel message"^^xsd:string ;
+    rdfs:comment "Message on the information panel."^^xsd:string ;
+    schema:domainIncludes mobility:InformationPanel ;
+    schema:rangeIncludes schema:Text .
+    
+mobility:parkingSpaceImageId a rdf:Property ;
+    rdfs:label "sparking space image id"^^xsd:string ;
+    rdfs:comment "Image identifier of the parking space."^^xsd:string ;
+    rdfs:subPropertyOf schema:image ;
+    schema:domainIncludes mobility:ParkingSpace ;
+    schema:rangeIncludes schema:Text .
+
+mobility:parkingSpaceName a rdf:Property ;
+    rdfs:label "parking space name"^^xsd:string ;
+    rdfs:comment "Name of the parking space."^^xsd:string ;
+    rdfs:subPropertyOf schema:name ;
+    schema:domainIncludes mobility:ParkingSpace ;
+    schema:rangeIncludes schema:Text .
+    
+mobility:parkingSpaceDescription a rdf:Property ;
+    rdfs:label "parking space description"^^xsd:string ;
+    rdfs:comment "Description of the parking space."^^xsd:string ;
+    rdfs:subPropertyOf schema:description ;
+    schema:domainIncludes mobility:ParkingSpace ;
+    schema:rangeIncludes schema:Text .
+
+mobility:parkingSpaceUri a rdf:Property ;
+    rdfs:label "parking space URI"^^xsd:string ;
+    rdfs:comment "URI of the parking space."^^xsd:string ;
+    rdfs:subPropertyOf schema:url;
+    schema:domainIncludes mobility:ParkingSpace ;
+    schema:rangeIncludes schema:URL .
+    
+mobility:parkingSpaceOperator a rdf:Property ;
+    rdfs:label "parking space operator"^^xsd:string ;
+    rdfs:comment "Operator of the parking space."^^xsd:string ;
+    schema:domainIncludes mobility:ParkingSpace ;
+    schema:rangeIncludes schema:Text .
+# if a more fine-grained modeling is needed, can be subclassed from schema:provider
+
+mobility:chargingStationImageId a rdf:Property ;
+    rdfs:label "charging station image id"^^xsd:string ;
+    rdfs:comment "Image identifier of the charging station."^^xsd:string ;
+    rdfs:subPropertyOf schema:image ;
+    schema:domainIncludes mobility:ChargingStation ;
+    schema:rangeIncludes schema:Text .
+
+mobility:chargingStationName a rdf:Property ;
+    rdfs:label "charging station name"^^xsd:string ;
+    rdfs:comment "Name of the charging station."^^xsd:string ;
+    rdfs:subPropertyOf schema:name ;
+    schema:domainIncludes mobility:ChargingStation ;
+    schema:rangeIncludes schema:Text .
+
+mobility:chargingStationUri a rdf:Property ;
+    rdfs:label "charging station URI"^^xsd:string ;
+    rdfs:comment "URI of the charging station."^^xsd:string ;
+    rdfs:subPropertyOf schema:url;
+    schema:domainIncludes mobility:ChargingStation ;
+    schema:rangeIncludes schema:URL .
+    
+mobility:chargingStationOperator a rdf:Property ;
+    rdfs:label "charging station operator"^^xsd:string ;
+    rdfs:comment "Operator of the charging station."^^xsd:string ;
+    schema:domainIncludes mobility:ChargingStation ;
+    schema:rangeIncludes schema:Text .
+# if a more fine-grained modeling is needed, can be subclassed from schema:provider
+
+mobility:chargingStationAddress a rdf:Property ;
+    rdfs:label "charging station address"^^xsd:string ;
+    rdfs:comment "Address of the charging station."^^xsd:string ;
+    schema:domainIncludes mobility:ChargingStation ;
+    schema:rangeIncludes schema:PostalAddress .
+    
+mobility:chargingStationLocationMidpoint a rdf:Property ;
+  rdfs:subPropertyOf common:geoJSONLocation;
+  rdfs:label "charging station location midpoint"^^xsd:string ;
+  rdfs:comment "The midpoint of a charging station location: the GeoJSON geometry object of type Point with an array of coordinates will be returned."^^xsd:string ;
+  schema:domainIncludes mobility:ChargingStation ;
+  schema:rangeIncludes common:GeoJSONGeometryObject .
+  
+mobility:chargingStationAccessibility a rdf:Property ;
+    rdfs:label "charging station accessibility"^^xsd:string ;
+    rdfs:comment "Accessibility of the charging station. The range of this property can take the following values: privateSpace, publicSpace, semiPublicSpace, and unknown."^^xsd:string ;
+    # must be turned into the string Enum if supported
+    schema:domainIncludes mobility:ChargingStation ;
+    schema:rangeIncludes schema:Text .
+    
+mobility:chargingStationAccessibility a rdf:Property ;
+    rdfs:label "charging station accessibility"^^xsd:string ;
+    rdfs:comment "Accessibility of the charging station. The range of this property can take the following values: privateSpace, publicSpace, semiPublicSpace, and unknown."^^xsd:string ;
+    # must be turned into the string Enum if supported
+    schema:domainIncludes mobility:ChargingStation ;
+    schema:rangeIncludes schema:Text .
+    
+mobility:chargingStationDispenserType a rdf:Property;
+    rdfs:label "charging station dispenser type";
+    rdfs:comment "Type of dispensers in the charging station. The range of this property can take the following values: chargingPillar, lamppost, wallbox, and unknown."^^xsd:string ;
+    # must be turned into the string Enum if supported    
+    schema:domainIncludes mobility:ChargingStation ;
+    schema:rangeIncludes schema:Text .
+    
+mobility:chargingStationPlaceCategory a rdf:Property;
+    rdfs:label "charging station place category";
+    rdfs:comment "The range of this property can take the following values: standard, hotspot, and unknown."^^xsd:string ;
+    # must be turned into the string Enum if supported    
+    schema:domainIncludes mobility:ChargingStation ;
+    schema:rangeIncludes schema:Text .
+    
+mobility:hasChargingPoints a rdf:Property;
+    rdfs:label "charging points";
+    rdfs:comment "Array of charging points located at the charging station." ; 
+    schema:domainIncludes mobility:ChargingStation ;
+    schema:rangeIncludes mobility:ChargingPoint .
+    
+mobility:chargingPointImageId a rdf:Property ;
+    rdfs:label "charging point image id"^^xsd:string ;
+    rdfs:comment "Image identifier of the charging point."^^xsd:string ;
+    rdfs:subPropertyOf schema:image ;
+    schema:domainIncludes mobility:ChargingPoint ;
+    schema:rangeIncludes schema:Text .
+
+mobility:chargingPointName a rdf:Property ;
+    rdfs:label "charging point name"^^xsd:string ;
+    rdfs:comment "Name of the charging point."^^xsd:string ;
+    rdfs:subPropertyOf schema:name ;
+    schema:domainIncludes mobility:ChargingPoint ;
+    schema:rangeIncludes schema:Text .
+
+mobility:chargingPointUri a rdf:Property ;
+    rdfs:label "charging point URI"^^xsd:string ;
+    rdfs:comment "URI of the charging point."^^xsd:string ;
+    rdfs:subPropertyOf schema:url;
+    schema:domainIncludes mobility:ChargingPoint ;
+    schema:rangeIncludes schema:URL .
+    
+mobility:chargingPointOperator a rdf:Property ;
+    rdfs:label "charging point operator"^^xsd:string ;
+    rdfs:comment "Operator of the charging point."^^xsd:string ;
+    schema:domainIncludes mobility:ChargingPoint ;
+    schema:rangeIncludes schema:Text .
+# if a more fine-grained modeling is needed, can be subclassed from schema:provider
+
+mobility:chargingPointAddress a rdf:Property ;
+    rdfs:label "charging point address"^^xsd:string ;
+    rdfs:comment "Address of the charging point."^^xsd:string ;
+    schema:domainIncludes mobility:ChargingPoint ;
+    schema:rangeIncludes schema:PostalAddress .
+    
+mobility:chargingPointLocationMidpoint a rdf:Property ;
+  rdfs:subPropertyOf common:geoJSONLocation;
+  rdfs:label "charging point location midpoint"^^xsd:string ;
+  rdfs:comment "The midpoint of a charging point location: the GeoJSON geometry object of type Point with an array of coordinates will be returned."^^xsd:string ;
+  schema:domainIncludes mobility:ChargingPoint ;
+  schema:rangeIncludes common:GeoJSONGeometryObject .
+  # add rules mapping longitude and latitude in offering descriptions of some categories to other ways to express this information
+  # related: properties like schema:address and schema:telephone should be also related to an offering's feature of interest
+  
+mobility:chargingPointStatusTimeStamp a rdf:Property ;
+	rdfs:subPropertyOf common:measurementTime ;
+    rdfs:label "charging point status timestamp" ;
+    schema:domainIncludes mobility:ChargingPoint ;
+    schema:rangeIncludes schema:DateTime ;
+    rdfs:comment "Timestamp when the status of the ChargingPoint has last changed." .
+
+mobility:hasPlugs a rdf:Property;
+    rdfs:label "plugs";
+    rdfs:comment "Array of plugs available at the charging point." ; 
+    schema:domainIncludes mobility:ChargingPoint ;
+    schema:rangeIncludes mobility:Plug .
+    
+mobility:Plug a rdfs:Class ;
+    rdfs:label "Plug" ;
+    rdfs:comment "The plug enables data exchange between the vehicle and the charging device." .
+    
+mobility:hasQuickChargeSupport a rdf:Property;
+    rdfs:label "quick charge support";
+    rdfs:comment "A plug supports quick charge." ; 
+    schema:domainIncludes mobility:Plug ;
+    schema:rangeIncludes schema:Boolean .
+    
+mobility:cableRequired a rdf:Property;
+    rdfs:label "cable required";
+    rdfs:comment "A cable is required to use the plug." ; 
+    schema:domainIncludes mobility:Plug ;
+    schema:rangeIncludes schema:Boolean .   
+    
+mobility:plugType a rdf:Property;
+    rdfs:label "plug type";
+    rdfs:comment "Type of the plug and/or the connector" ; 
+    schema:domainIncludes mobility:Plug ;
+    schema:rangeIncludes schema:Text .
+    
+mobility:chargingPointConnectorType a rdf:Property ;
+    rdfs:label "charging point connector type" ;
+    schema:domainIncludes mobility:ChargingPoint ;
+    schema:rangeIncludes schema:Text ;
+    rdfs:comment "Connector type of a given charging station." .
+    
+mobility:chargingDurationType a rdf:Property ;
+    rdfs:label "charging duration type" ;
+    schema:domainIncludes mobility:Charging ;
+    schema:rangeIncludes schema:Text ;
+    rdfs:comment "Type by charging duration (fast, semi-fast, slow) can be defined on both charging point and charging station levels." .    
+
+mobility:chargingProvider a rdf:Property ;
+    rdfs:label "charging provider" ;
+    schema:domainIncludes mobility:Charging ;
+    schema:rangeIncludes schema:Text ;
+    rdfs:seeAlso schema:provider ;
+    rdfs:comment "The provider of charging services." .    
+    
+mobility:currentType a rdf:Property;
+    rdfs:label "current type";
+    rdfs:comment "Arrays of the the current types available. The current may be AC (alternating current) or DC (direct current) or unknown" ; 
+    schema:domainIncludes mobility:Plug ;
+    schema:rangeIncludes schema:Text .
+    
+mobility:hourlyParkingRate a rdf:Property;
+    rdfs:label "hourly parking rate";
+    rdfs:comment "Hourly price for parking in Euro." ;
+    rdfs:subPropertyOf schema:price;
+    schema:domainIncludes mobility:Parking ;
+    schema:rangeIncludes schema:Number .
+   
+mobility:chargingPrice a rdf:Property;
+    rdfs:label "charging price";
+    rdfs:comment "Price for charging." ;
+    rdfs:subPropertyOf schema:price;
+    schema:domainIncludes mobility:Charging ;
+    schema:rangeIncludes schema:Number, schema:Text .
+    
+mobility:parkingAreaType a rdf:Property;
+    rdfs:label "parking area type";
+    rdfs:comment "Type of a parking area with respect to payment." ;
+    schema:domainIncludes mobility:ParkingSpace ;
+    schema:rangeIncludes mobility:ParkingAreaType .
+    
+mobility:ParkingAreaType a rdfs:Class ;
+    rdfs:label "Parking Area Type" ;
+    rdfs:comment "Type of a parking area (in Barcelona: free, green area or blue area)." .
+
+mobility:parkingAreaColorCode a rdf:Property;
+    rdfs:label "parking area color code";
+    rdfs:comment "Hex color code indicating the type of the parking area." ;
+    schema:domainIncludes mobility:ParkingAreaType ;
+    schema:rangeIncludes schema:Text .
+    
+mobility:parkingAreaName a rdf:Property;
+    rdfs:label "parking area name";
+    rdfs:comment "Name of the type of the parking area." ;
+    schema:domainIncludes mobility:ParkingAreaType ;
+    schema:rangeIncludes schema:Text .
+    
+mobility:parkingSiteSectors a rdf:Property ;
+	rdfs:seeAlso mobility:parkingSpaceLocationMidpoint ;
+    rdfs:label "parking site sectors" ;
+    rdfs:comment "List of coordinates of parking spaces in a parking site: longitude and latitude." ;
+    schema:domainIncludes mobility:ParkingSite ;
+    schema:rangeIncludes schema:GeoCoordinates .
+
+# Incident Modeling
+mobility:Incident a rdfs:Class ;
+    rdfs:label "Incident" ;
+    rdfs:comment "The incident class describes various attributes of an incident happened on a street or traffic." .
+
+mobility:Consequence a rdfs:Class ;
+    rdfs:label "Consequence" ;
+    rdfs:comment "consequence of an incident happened on a street or traffic." .
+
+mobility:incidentConsequence a rdf:Property ;
+    rdfs:label "consequence of an incident"^^xsd:string ;
+    rdfs:comment "consequence of an incident happened on a street or traffic."^^xsd:string ;
+    schema:domainIncludes mobility:Incident ;
+    schema:rangeIncludes mobility:Consequence .
+
+mobility:consequenceSummary a rdf:Property ;
+    rdfs:label "consequence summary"^^xsd:string ;
+    rdfs:comment "Summary of a consequence of an incident happened on a street or traffic."^^xsd:string ;
+    schema:domainIncludes mobility:Consequence ;
+    schema:rangeIncludes schema:Text .   
+
+mobility:consequenceDescription a rdf:Property ;
+    rdfs:label "consequence description"^^xsd:string ;
+    rdfs:comment "Description of a consequence of an incident happened on a street or traffic."^^xsd:string ;
+    schema:domainIncludes mobility:Consequence ;
+    schema:rangeIncludes schema:Text . 	
+
+mobility:incidentAddress a rdf:Property ;
+    rdfs:label "Address of an incident"^^xsd:string ;
+    rdfs:comment "Address where a street or traffic incident occured."^^xsd:string ;
+    schema:domainIncludes mobility:Incident ;
+    schema:rangeIncludes schema:PostalAddress . 	
+
+mobility:incidentAddress a rdf:Property ;
+    rdfs:label "Address of an incident"^^xsd:string ;
+    rdfs:comment "Address where a street or traffic incident occured."^^xsd:string ;
+    schema:domainIncludes mobility:Incident ;
+    schema:rangeIncludes schema:PostalAddress . 	
+	
+mobility:incidentDescription a rdf:Property ;
+    rdfs:label "incident description"^^xsd:string ;
+    rdfs:comment "Description of an incident happened on a street or traffic."^^xsd:string ;
+    schema:domainIncludes mobility:Incident ;
+    schema:rangeIncludes schema:Text . 	
+
+mobility:incidentProperty a rdf:Property ;
+    rdfs:label "incident property"^^xsd:string ;
+    rdfs:comment "Property of an incident happened on a street or traffic."^^xsd:string ;
+    schema:domainIncludes mobility:Incident ;
+    schema:rangeIncludes schema:Text . 		
+	
+mobility:incidentLocation a rdf:Property ;
+    rdfs:label "incident location"^^xsd:string ;
+    rdfs:comment "Location of an incident happened on a street or traffic."^^xsd:string ;
+    schema:domainIncludes mobility:Incident ;
+    schema:rangeIncludes schema:GeoCoordinates . 	
+	
+mobility:incidentGeometry a rdf:Property ;
+    rdfs:subPropertyOf common:geoJSONLocation;
+    rdfs:label "incident geometry"^^xsd:string ;
+    rdfs:comment "Geometry of an incident happened on a street or traffic."^^xsd:string ;
+    schema:domainIncludes mobility:Incident ;
+    schema:rangeIncludes common:GeoJSONGeometryObject . 
+
+mobility:incidentTimeStamp a rdf:Property ;
+	rdfs:subPropertyOf common:measurementTime ;
+    rdfs:label "incident time stamp" ;
+    schema:domainIncludes mobility:Incident ;
+    schema:isPartOf <http://schema.big-iot.org/mobility> ;
+    schema:rangeIncludes schema:DateTime ;
+    rdfs:comment "A timestamp when an incident occured." .	
+
+# Public transport incident modeling
+
+mobility:incidentImageId a rdf:Property ;
+    rdfs:label "incident image id"^^xsd:string ;
+    rdfs:comment "Image identifier of a public transport incident."^^xsd:string ;
+    rdfs:subPropertyOf schema:image ;
+    schema:domainIncludes mobility:Incident ;
+    schema:rangeIncludes schema:Text .
+
+mobility:publicTransportLineId a rdf:Property ;
+    rdfs:label "public transport line id"^^xsd:string ;
+    rdfs:comment "Line id of a public transport bus or train where an incident occured."^^xsd:string ;
+    schema:domainIncludes mobility:Incident ;
+    schema:rangeIncludes schema:Text .	
+
+mobility:incidentName a rdf:Property ;
+    rdfs:label "incident name"^^xsd:string ;
+    rdfs:comment "Name of an incident."^^xsd:string ;
+    schema:domainIncludes mobility:Incident ;
+    schema:rangeIncludes schema:Text .	
+
+mobility:incidentSection a rdf:Property ;
+    rdfs:label "incident section"^^xsd:string ;
+    rdfs:comment "Section of a place where an incident occurred."^^xsd:string ;
+    schema:domainIncludes mobility:Incident ;
+    schema:rangeIncludes schema:Text .	
+
+mobility:incidentSource a rdf:Property ;
+    rdfs:label "incident source"^^xsd:string ;
+    rdfs:comment "Source of information about an incident."^^xsd:string ;
+    schema:domainIncludes mobility:Incident ;
+    schema:rangeIncludes schema:Text .	
+
+mobility:incidentStation a rdf:Property ;
+    rdfs:label "incident station"^^xsd:string ;
+    rdfs:comment "Public transport station where an incident occurred."^^xsd:string ;
+    schema:domainIncludes mobility:Incident ;
+    schema:rangeIncludes mobility:Station .	
+
+mobility:Station a rdfs:Class ;
+    rdfs:label "Station" ;
+    rdfs:comment "The Station class describes the attributes of a station where an incident occurred." .
+
+mobility:stationId a rdf:Property ;
+    rdfs:label "incident station id"^^xsd:string ;
+    rdfs:comment "Public transport station id where an incident occurred."^^xsd:string ;
+    rdfs:subPropertyOf schema:identifier;
+	schema:domainIncludes mobility:Station ;
+    schema:rangeIncludes schema:Text .	
+
+mobility:stationName a rdf:Property ;
+    rdfs:label "incident station name"^^xsd:string ;
+    rdfs:comment "Public transport station name where an incident occurred."^^xsd:string ;
+    schema:domainIncludes mobility:Station ;
+    schema:rangeIncludes schema:Text .	
+
+mobility:incidentNetworkId a rdf:Property ;
+    rdfs:label "incident network id"^^xsd:string ;
+    rdfs:comment "Network id of an incident."^^xsd:string ;
+    rdfs:subPropertyOf schema:identifier;
+	schema:domainIncludes mobility:Incident ;
+    schema:rangeIncludes schema:Text .	
+
+mobility:incidentId a rdf:Property ;
+    rdfs:label "incident identifier"^^xsd:string ;
+    rdfs:comment "Identifier of an incident."^^xsd:string ;
+	rdfs:subPropertyOf schema:identifier;
+    schema:domainIncludes mobility:Incident ;
+    schema:rangeIncludes schema:Text .		
+
+mobility:incidentOperatorId a rdf:Property ;
+    rdfs:label "Incident operator id"^^xsd:string ;
+    rdfs:comment "Incident operator identifier."^^xsd:string ;
+    rdfs:subPropertyOf schema:identifier;
+    schema:domainIncludes mobility:Incident ;
+    schema:rangeIncludes schema:Text .
+	
+mobility:incidentDirection a rdf:Property ;
+    rdfs:label "Incident direction"^^xsd:string ;
+    rdfs:comment "Incident direction."^^xsd:string ;
+    schema:domainIncludes mobility:Incident ;
+    schema:rangeIncludes schema:Text .	
+
+mobility:incidentTrafficType a rdf:Property ;
+    rdfs:label "Incident traffic type"^^xsd:string ;
+    rdfs:comment "Type of traffic involved in an Incident."^^xsd:string ;
+    schema:domainIncludes mobility:Incident ;
+    schema:rangeIncludes schema:Text .	
+
+mobility:incidentURI a rdf:Property ;
+    rdfs:label "Incident URI"^^xsd:string ;
+    rdfs:comment "URI of an Incident."^^xsd:string ;
+    schema:domainIncludes mobility:Incident ;
+    schema:rangeIncludes schema:URL .
+	
+mobility:incidentRemoved a rdf:Property ;
+    rdfs:label "Incident removed"^^xsd:string ;
+    rdfs:comment "Removal status of an Incident."^^xsd:string ;
+    schema:domainIncludes mobility:Incident ;
+    schema:rangeIncludes schema:Boolean .

@@ -1,0 +1,460 @@
+@prefix rdf:	<http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix core:	<http://schema.big-iot.org/core/> .
+@prefix rdfs:	<http://www.w3.org/2000/01/rdf-schema#> .
+@prefix common: <http://schema.big-iot.org/common/> .
+@prefix schema:	<http://schema.org/> .
+@prefix skos:	<http://www.w3.org/2004/02/skos/core#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#>.
+@prefix ns: <http://creativecommons.org/ns#>.
+@prefix ssn: <http://purl.oclc.org/NET/ssnx/ssn#>.
+@prefix geo: <http://www.w3.org/2003/01/geo/wgs84_pos#>.
+@prefix qudt: <http://data.qudt.org/qudt/owl/1.0.0/unit.owl#>.
+@prefix dul: <http://www.loa.istc.cnr.it/ontologies/DUL.owl#>.
+@prefix time: <http://www.w3.org/2006/time#>.
+@prefix vann: <http://purl.org/vocab/vann/>.
+@prefix dcterms: <http://purl.org/dc/terms/>.
+@prefix dc: <http://purl.org/dc/elements/1.1/>.
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+
+
+core: dc:contributor "Achille Zappa, NUIG, Galway"@en,
+                           "Hoan Quoc, NUIG, Galway"@en,
+                           "Victor Charpenay, Siemens AG, Munich"@en,
+                           "Aparna Saisree, Siemens AG, Munich"@en,
+                           "Darko Anicic, Siemens AG, Munich"@en,
+                           "Yulia Svetashova, Bosch CR, Stutgard"@en;
+                           
+            dc:description " We further acknowledge, Pilot providers and other open call projects for their valuable comments. Please report any errors to achille.zappa@insight-centre.org. "@en;
+            dc:rights "Copyright (c) 2016-2018 by NUIGalway  (Insight Centre), Siemens, Bosch;
+            dc:title "BIG IoT Core Model"@en;
+            dcterms:issued "2016-09-28"^^xsd:date;
+            dcterms:modified "2018-10-27"^^xsd:date;
+            vann:preferredNamespacePrefix "core";
+            vann:preferredNamespaceUri "http://schema.big-iot.org/core/#";
+            a owl:Ontology;
+            rdfs:comment "   We further acknowledge, Pilot providers and other open call projects for their valuable comments. Please report any errors to achille.zappa@insight-centre.org. "@en;
+            rdfs:label "BIG IoT"^^xsd:string;
+            owl:versionInfo "3.0".
+
+
+##Classes
+core:AccessInterfaceType	rdf:type	rdfs:Class ;
+	rdfs:label	"AccessInterfaceType" ;
+	rdfs:comment	"Access can be either through the BIG-IoT API or via an external endpoint." .
+core:AccessInterfaceType	rdfs:subClassOf	schema:Enumeration .
+
+core:DataSchema	rdf:type	rdfs:Class ;
+	rdfs:label	"DataSchema" ;
+	rdfs:comment	"Gives a detail description of the transported payload data between consumer and provider based on this offering" ;
+	rdfs:subClassOf	schema:Thing .
+
+core:Categorization	rdf:type	rdfs:Class ;
+	rdfs:subClassOf	schema:Thing ;
+	rdf:comment	"An Hierarchy of offering categories" ;
+	rdf:label	"Categorization" .
+
+core:Consumer	rdf:type	rdfs:Class ;
+	rdfs:label	"Consumer" ;
+	rdfs:comment	"Consumers discover and subscribe to offerings of interest via a marketplace in order to access the resources. A consumer can be either an application or service instance that requires access to IoT resources in order to implement an intended service or function (e.g., a smart parking service provided by the city)" ;
+	rdfs:subClassOf	schema:Thing .
+
+core:DataTypeAnnotation	rdf:type	rdfs:Class ;
+	rdfs:label	"DataTypeAnnotation" ;
+	rdfs:comment	"Anything about which information is provided via an offering." ;
+	rdfs:subClassOf	schema:Thing .
+
+core:Endpoint	rdf:type	rdfs:Class ;
+	rdfs:label	"Endpoint" ;
+	rdfs:comment	"The endpoint includes all relevant information which is required to setup right communication to the provider's offering." ;
+	rdfs:subClassOf	schema:Thing .
+
+core:EndpointType	rdf:type	rdfs:Class ;
+	rdfs:label	"EndpointType" ;
+	rdfs:comment	"Method/protocol to use to access the endpoint." ;
+	rdfs:subClassOf	schema:Enumeration .
+
+core:ExternalEndpoint	rdf:type	rdfs:Class ;
+	rdfs:label	"External endpoint" ;
+	rdfs:comment	"See Endpoint class." ;
+	rdfs:subClassOf	core:Endpoint .
+
+core:LibEndpoint	rdf:type	rdfs:Class ;
+	rdfs:label	"Lib endpoint" ;
+	rdfs:comment	"See Endpoint class." ;
+	rdfs:subClassOf	core:Endpoint .
+
+core:License	rdf:type	rdfs:Class ;
+	rdfs:label	"License" ;
+	rdfs:comment	"License under which the the offering is provided." ;
+	rdfs:subClassOf	schema:Thing .
+core:LicenseType	rdf:type	rdfs:Class ;
+	rdfs:label	"LicenseType" ;
+	rdfs:comment	"License type." ;
+	rdfs:subClassOf	schema:Enumeration .
+core:Offering	rdf:type	rdfs:Class ;
+	rdfs:label	"Offering" ;
+	rdfs:comment	"An offering encompasses a set of IoT resources, typically a set of related information (e.g. low-level sensor data like temperature or aggregate information across a region) or functions (e.g. actuation tasks like open a gate or computational functions like computing route), that are offered on a marketplace." ;
+	rdfs:subClassOf	schema:Offer .
+core:OfferingCategory	rdf:type	rdfs:Class ;
+	rdfs:label	"OfferingCategory" ;
+	rdfs:comment	"Category of an offering." ;
+	rdfs:subClassOf	schema:Thing .
+core:OfferingQuery	rdf:type	rdfs:Class ;
+	rdfs:label	"OfferingQuery" ;
+	rdfs:comment	"Consumers discover offerings they're interesting through the marketplace by providing an (offering) query. The query entails a specification of the type of offerings the consumer is interested in" ;
+	rdfs:subClassOf	schema:Demand .
+core:OfferingSubscription	rdf:type	rdfs:Class ;
+	rdfs:label	"OfferingSubscription" ;
+	rdfs:comment	"Subscription of a consumer to a specific offering registered by a provider." ;
+	rdfs:subClassOf	schema:Thing .
+core:PricingModel	rdf:type	rdfs:Class ;
+	rdfs:label	"PricingModel" ;
+	rdfs:comment	"Pricing models include per byte, per access or per month pricing. Offerings can also be free." ;
+	rdfs:subClassOf	schema:Enumeration .
+core:Provider	rdf:type	rdfs:Class ;
+	rdfs:label	"Provider" ;
+	rdfs:comment	"Providers register their offerings on a marketplace and provides access to the offered resources via a common API. A provider can be either a platform or a service instance that offers available resources, i.e., some information or access to functions that it wants to share or trade on the marketplace (e.g. an IoT platform of a parking lot provider)" ;
+	rdfs:subClassOf	schema:Thing .
+core:ProxyEndpoint	rdf:type	rdfs:Class ;
+	rdfs:label	"Proxy endpoint" ;
+	rdfs:comment	"See Endpoint class." ;
+	rdfs:subClassOf	core:Endpoint .
+core:StringSchema	rdf:type	rdfs:Class ;
+	rdfs:label	"String Schema" ;
+	rdfs:comment	"Schema for data of type string." ;
+	rdfs:subClassOf	core:DataSchema .	
+core:BooleanSchema	rdf:type	rdfs:Class ;
+	rdfs:label	"Boolean Schema" ;
+	rdfs:comment	"Schema for data of type boolean." ;
+	rdfs:subClassOf	core:DataSchema .	
+core:NumberSchema	rdf:type	rdfs:Class ;
+	rdfs:label	"Number Schema" ;
+	rdfs:comment	"Schema for data of type number." ;
+	rdfs:subClassOf	core:DataSchema .
+core:DateTimeSchema	rdf:type	rdfs:Class ;
+	rdfs:label	"DateTime Schema" ;
+	rdfs:comment	"Schema for data of type DateTime." ;
+	rdfs:subClassOf	core:DataSchema .		
+core:ArraySchema	rdf:type	rdfs:Class ;
+	rdfs:label	"Array Schema" ;
+	rdfs:comment	"Schema for data of type array." ;
+	rdfs:subClassOf	core:DataSchema .	
+core:ObjectSchema	rdf:type	rdfs:Class ;
+	rdfs:label	"Object Schema" ;
+	rdfs:comment	"Schema for data of type object." ;
+	rdfs:subClassOf	core:DataSchema .	
+core:ObjectMember	rdf:type	rdfs:Class ;
+	rdfs:label	"Object Member" ;
+	rdfs:comment	"Data members of an object data." ;
+	rdfs:subClassOf	core:DataSchema .	
+	
+core:Object a schema:DataType,
+        rdfs:Class ;
+    rdfs:label "Object" ;
+    rdfs:comment "Data type: Object for complex type." .	
+	
+core:TextSchema	core:isRelatedTo 	schema:Text .
+core:DateTimeSchema	core:isRelatedTo 	schema:DateTime .
+core:DateTimeSchema	core:isRelatedTo 	schema:Time .
+core:DateTimeSchema	core:isRelatedTo 	schema:Date .
+core:BooleanSchema	core:isRelatedTo	schema:Boolean .
+core:NumberSchema	core:isRelatedTo	schema:Number .
+core:ArraySchema	core:isRelatedTo	core:Array .
+core:ObjectSchema	core:isRelatedTo	core:Object .
+core:GeoJsonSchema	core:isRelatedTo	core:GeoJson .	
+
+core:Object a schema:DataType,
+        rdfs:Class ;
+    rdfs:label "Object" ;
+    rdfs:comment "Data type: Object for Complex Types." .
+    
+core:GeoJson a schema:DataType,
+        rdfs:Class ;
+    rdfs:label "GeoJson" ;
+    rdfs:comment "Data type: GeoJson for GeoJson data parameterization." .
+	
+core:DataValue	rdf:type	rdfs:Class ;
+	rdfs:label	"DataValue" ;
+	rdfs:comment	"Gives a detail description of the value type of data on this offering I/Os" ;
+	rdfs:subClassOf	schema:Thing .
+core:ac_bigiot_lib	rdf:type	core:AccessInterfaceType ;
+	rdfs:label	"BIGIOT_LIB" ;
+	rdfs:comment	"BigIoT lib access interface type" .
+
+core:ac_bigiot_lib	skos:prefLabel	"ac bigiot lib" .
+core:ac_external_lib	rdf:type	core:AccessInterfaceType ;
+	rdfs:label	"EXTERNAL" ;
+	rdfs:comment	"External lib access interface type" ;
+	skos:prefLabel	"ac external lib" .
+	
+##Properties
+core:items	rdf:type	rdf:Property ;
+	rdfs:label	"items" ;
+	rdfs:comment	"Data array items." ;
+	schema:domainIncludes	core:ArraySchema ;
+	schema:rangeIncludes	schema:DataSchema .	
+core:hasMember	rdf:type	rdf:Property ;
+	rdfs:label	"has member" ;
+	rdfs:comment	"Object schema members." ;
+	schema:domainIncludes	core:ObjectSchema ;
+	schema:rangeIncludes	schema:ObjectMember .	
+core:unit	rdf:type	rdf:Property ;
+	rdfs:label	"unit" ;
+	rdfs:comment	"Unit of measurement." ;
+	schema:domainIncludes	core:DataValue ;
+	schema:rangeIncludes	common:UnitOfMeasurement .		
+core:accessInterfaceType	rdf:type	rdf:Property ;
+	rdfs:label	"accessInterfaceType" ;
+	rdfs:comment	"Access interface type." ;
+	schema:domainIncludes	core:Endpoint ;
+	schema:rangeIncludes	core:AccessInterfaceType .
+core:consumerId	rdf:type	rdf:Property ;
+	rdfs:label	"consumerId" ;
+	rdfs:comment	"Identifier on a BIG-IoT marketplace of a consumer." ;
+	schema:domainIncludes	core:Consumer ;
+	schema:rangeIncludes	schema:Text .
+core:creative_commons	rdf:type	core:LicenseType ;
+	rdfs:label	"CREATIVE_COMMONS" ;
+	rdfs:comment	"Creative Commons type" ;
+	skos:prefLabel	"Creative Commons" .
+core:endpoint	rdf:type	rdf:Property ;
+	schema:domainIncludes	core:Offering ;
+	schema:rangeIncludes	core:Endpoint .
+core:endpointType	rdf:type	rdf:Property ;
+	rdfs:label	"endpointType" ;
+	rdfs:comment	"endpoint type." ;
+	schema:domainIncludes	core:Endpoint ;
+	schema:rangeIncludes	core:EndpointType .
+core:mediaType	rdf:type	rdf:Property ;
+	rdfs:label	"mediaType" ;
+	rdfs:comment	"media type." ;
+	schema:domainIncludes	core:Endpoint ;
+	schema:rangeIncludes	schema:Text .	
+core:endpoint_socket	rdf:type	core:EndpointType ;
+	rdfs:label	"WEBSOCKET" ;
+	rdfs:comment	"WebSocket endpoint type" ;
+	skos:prefLabel	"endpoint socket" .
+core:expectedAnnotation	rdf:type	rdf:Property ;
+	rdfs:label	"expectedAnnotation" ;
+	rdfs:comment	"Annotation expected for a certain offering category." ;
+	schema:domainIncludes	core:OfferingCategory ;
+	schema:rangeIncludes	core:DataTypeAnnotation .
+core:free_price	rdf:type	core:PricingModel ;
+	rdfs:label	"FREE" ;
+	rdfs:comment	"FREE pricing model" ;
+	skos:prefLabel	"FREE" .
+core:hasInput	rdf:type	rdf:Property ;
+	rdfs:label	"hasInput" ;
+	rdfs:comment	"Data required by the provider to fulfill an offering." ;
+	schema:domainIncludes	core:Offering ;
+	schema:rangeIncludes	core:DataSchema .
+core:hasOutput	rdf:type	rdf:Property ;
+	rdfs:label	"hasOutput" ;
+	rdfs:comment	"Data provided by the provider via an offering." ;
+	schema:domainIncludes	core:Offering ;
+	schema:rangeIncludes	core:DataSchema .
+core:http_get	rdf:type	core:EndpointType ;
+	rdfs:label	"HTTP_GET" ;
+	rdfs:comment	"HTTP GET endpoint type" ;
+	skos:prefLabel	"http get" .
+core:http_post	rdf:type	core:EndpointType ;
+	rdfs:label	"HTTP_POST" ;
+	rdfs:comment	"HTTP POST endpoint type" ;
+	skos:prefLabel	"http post" .
+core:isActivated	rdf:type	rdf:Property ;
+	rdfs:label	"isActivated" ;
+	rdfs:comment	"An offering has to be activated manually on the marketplace where it is registered." ;
+	schema:domainIncludes	core:Offering ;
+	schema:rangeIncludes	schema:Boolean .
+core:isProvidedBy	rdf:type	rdf:Property ;
+	rdfs:label	"isProvidedBy" ;
+	rdfs:comment	"Relation between an offering and the provider who registered it." ;
+	schema:domainIncludes	core:Offering ;
+	schema:rangeIncludes	core:Provider .
+core:isRegisteredBy	rdf:type	rdf:Property ;
+	rdfs:label	"isRegisteredBy" ;
+	rdfs:comment	"Relation between an offering and the consumer who registered it." ;
+	schema:domainIncludes	core:OfferingQuery ;
+	schema:rangeIncludes	core:Consumer .
+core:licenseType	rdf:type	rdf:Property ;
+	schema:domainIncludes	core:License ;
+	schema:rangeIncludes	core:LicenseType .
+core:non_commercial_data_lc	rdf:type	core:LicenseType ;
+	rdfs:label	"NON_COMMERCIAL_DATA_LICENSE" ;
+	rdfs:comment	"Non commercial data license" ;
+	skos:prefLabel	"Non Commercial Data License" .
+core:offering	rdf:type	rdf:Property ;
+	rdfs:label	"offering" ;
+	rdfs:comment	"Relation between an offering and the consumer who registered it." ;
+	schema:inverseOf	core:isProvidedBy ;
+	schema:domainIncludes	core:Provider ;
+	schema:rangeIncludes	core:Offering .
+core:offeringExpirationTime	rdf:type	rdf:Property ;
+	rdfs:label	"offeringExpirationTime" ;
+	rdfs:comment	"Expiration time." ;
+	schema:domainIncludes	core:Offering ;
+	schema:rangeIncludes	schema:DateTime .
+core:offeringId	rdf:type	rdf:Property ;
+	rdfs:label	"offeringId" ;
+	rdfs:comment	"Offering identifier." ;
+	schema:domainIncludes	core:Offering ;
+	schema:rangeIncludes	schema:Text .
+core:offeringQuery	rdf:type	rdf:Property ;
+	rdfs:label	"offeringQuery" ;
+	rdfs:comment	"Concepts likely to be involved in offerings of a certain category." ;
+	schema:inverseOf	core:isRegisteredBy ;
+	schema:domainIncludes	core:Consumer ;
+	schema:rangeIncludes	core:OfferingQuery .
+core:open_data_license	rdf:type	core:LicenseType ;
+	rdfs:label	"OPEN_DATA_LICENSE" ;
+	rdfs:comment	"Open Data License type" ;
+	skos:prefLabel	"open data license" .
+core:project_internal_use_only	rdf:type	core:LicenseType ;
+	rdfs:label	"PROJECT INTERNAL USE ONLY" ;
+	rdfs:comment	"Project internal use License type" ;
+	skos:prefLabel	"project internal use only" .
+core:organizationId	rdf:type	rdf:Property ;
+	rdfs:label	"organizationId" ;
+	rdfs:comment	"Organization identifier." ;
+	schema:domainIncludes	schema:Organization ;
+	schema:rangeIncludes	schema:Text .
+core:per_access_price	rdf:type	core:PricingModel ;
+	rdfs:label	"PER_ACCESS" ;
+	rdfs:comment	"Per access pricing model" ;
+	skos:prefLabel	"Per Month" .
+core:per_byte_price	rdf:type	core:PricingModel ;
+	rdfs:label	"PER_BYTE" ;
+	rdfs:comment	"Per byte pricing model" ;
+	skos:prefLabel	"Per Byte" .
+core:per_month_price	rdf:type	core:PricingModel ;
+	rdfs:label	"PER_MONTH" ;
+	rdfs:comment	"Per month pricing model" ;
+	skos:prefLabel	"Per Month" .
+core:pricingModel	rdf:type	rdf:Property ;
+	rdfs:label	"pricingModel" ;
+	rdfs:comment	"Pricing model applicable to an offering." ;
+	schema:domainIncludes	schema:PriceSpecification ;
+	schema:rangeIncludes	core:PricingModel .
+core:providerId	rdf:type	rdf:Property ;
+	rdfs:label	"providerId" ;
+	rdfs:comment	"Provider identifier." ;
+	schema:domainIncludes	core:Provider ;
+	schema:rangeIncludes	schema:Text .
+core:queryId	rdf:type	rdf:Property ;
+	rdfs:label	"queryId" ;
+	rdfs:comment	"Offering query identifier." ;
+	schema:domainIncludes	core:Query ;
+	schema:rangeIncludes	schema:Text .
+core:refersTo	rdf:type	rdf:Property ;
+	rdfs:label	"refersTo" ;
+	rdfs:comment	"Concepts likely to be involved in offerings of a certain category." ;
+	schema:domainIncludes	core:OfferingCategory ;
+	schema:rangeIncludes	rdfs:Class .
+core:subscribedQuery	rdf:type	rdf:Property ;
+	rdfs:label	"subscribedQuery" ;
+	rdfs:comment	"Relation between an offering subscription and the offering query that matched the offering." ;
+	schema:domainIncludes	core:OfferingSubscription ;
+	schema:rangeIncludes	core:OfferingQuery .
+core:subscribesTo	rdf:type	rdf:Property ;
+	rdfs:label	"subscribesTo" ;
+	rdfs:comment	"Relation between a subscription and the offering it subscribes to." ;
+	schema:domainIncludes	core:OfferingSubscription ;
+	schema:rangeIncludes	core:Offering .
+core:subscriptionId	rdf:type	rdf:Property ;
+	rdfs:label	"subscriptionId" ;
+	rdfs:comment	"Subscription identifier." ;
+	schema:domainIncludes	core:OfferingSubscription ;
+	schema:rangeIncludes	schema:Text .
+core:hasValue	rdf:type	rdf:Property ;
+	rdfs:label	"value" ;
+	rdfs:comment	"value specification of data." ;
+	schema:domainIncludes	core:ObjectSchema,
+						core:ObjectMember,
+						core:NumberSchema,
+						core:BooleanSchema,
+						core:StringSchema;
+	schema:rangeIncludes	core:DataValue .
+core:valueType	rdf:type	rdf:Property ;
+	rdfs:label	"valuetype" ;
+	rdfs:comment	"value type of data." ;
+	schema:domainIncludes	core:DataValue;
+	schema:rangeIncludes	schema:DataType .
+	
+core:hasSimpleValueType rdf:type rdf:Property ;
+	rdfs:label	"hasSimpleValueType" ;
+	rdfs:comment	"Data type of a given property value is a simple type (schema:Boolean, schema:Date, schema:DateTime, schema:Time, schema:Number, schema:Integer, schema:Float, schema:Text, schema:URL)." ;
+	schema:domainIncludes	core:BasicData ;
+	schema:rangeIncludes	schema:Boolean .
+	
+	
+core:min	rdf:type	rdf:Property ;
+	rdfs:label	"min" ;
+	rdfs:comment	"the minimum quantity of value of data." ;
+	schema:domainIncludes	core:DataValue;
+	schema:rangeIncludes	schema:Text .
+core:max	rdf:type	rdf:Property ;
+	rdfs:label	"max" ;
+	rdfs:comment	"the maximum quantity of value of data." ;
+	schema:domainIncludes	core:DataValue;
+	schema:rangeIncludes	schema:Text .
+core:name	rdf:type	rdf:Property ;
+	rdfs:label	"name" ;
+	rdfs:comment	"Name of a given property value given by a user." ;
+	schema:domainIncludes	core:ObjectSchema,
+						core:ObjectMember,
+						core:NumberSchema,
+						core:BooleanSchema,
+						core:StringSchema;
+	schema:rangeIncludes	schema:Text .	
+core:isArray	rdf:type	rdf:Property ;
+	rdfs:label	"is array" ;
+	rdfs:comment	"Determines if data is an array." ;
+	schema:domainIncludes	core:ObjectSchema,
+						core:ObjectMember,
+						core:NumberSchema,
+						core:BooleanSchema,
+						core:StringSchema;
+	schema:rangeIncludes	schema:Boolean .	
+core:isRequired	rdf:type	rdf:Property ;
+	rdfs:label	"is required" ;
+	rdfs:comment	"Determines if data is mandatory." ;
+	schema:domainIncludes	core:ObjectSchema,
+						core:ObjectMember,
+						core:NumberSchema,
+						core:BooleanSchema,
+						core:StringSchema;
+	schema:rangeIncludes	schema:Boolean .	
+core:rdfAnnotation	rdf:type	rdf:Property ;
+	rdfs:label	"rdfAnnotation" ;
+	rdfs:comment	"Annotation of a data type with an RDF term." ;
+	schema:domainIncludes	core:ObjectSchema,
+						core:ObjectMember,
+						core:NumberSchema,
+						core:BooleanSchema,
+						core:StringSchema;
+	schema:rangeIncludes	core:DataTypeAnnotation .	
+core:rdfReference	rdf:type	rdf:Property ;
+	rdfs:label	"rdfReference" ;
+	rdfs:comment	"Annotation of a data type with an rdf reference to a RDF term." ;
+	schema:domainIncludes	core:ObjectSchema,
+						core:ObjectMember,
+						core:NumberSchema,
+						core:BooleanSchema,
+						core:StringSchema;
+	schema:rangeIncludes	core:DataTypeAnnotation .	
+core:encodingType	rdf:type	rdf:Property ;
+	rdfs:label	"encodingType" ;
+	rdfs:comment	"Encoding type of data." ;
+	schema:domainIncludes	core:ObjectSchema,
+						core:ObjectMember,
+						core:NumberSchema,
+						core:BooleanSchema,
+						core:StringSchema;
+	schema:rangeIncludes	schema:Text .		
+
+	
+	
+
+
+	
