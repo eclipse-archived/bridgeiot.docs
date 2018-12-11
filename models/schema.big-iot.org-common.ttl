@@ -1,0 +1,499 @@
+@prefix dc: <http://purl.org/dc/terms/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix schema: <http://schema.org/> .
+@prefix sosa: <http://www.w3.org/ns/sosa/> .
+@prefix ssn-sys: <http://www.w3.org/ns/ssn/systems/> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix core: <http://schema.big-iot.org/core/> .
+@prefix common: <http://schema.big-iot.org/common/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#>.
+@prefix ns: <http://creativecommons.org/ns#>.
+@prefix ssn: <http://purl.oclc.org/NET/ssnx/ssn#>.
+@prefix geo: <http://www.w3.org/2003/01/geo/wgs84_pos#>.
+@prefix qudt: <http://data.qudt.org/qudt/owl/1.0.0/unit.owl#>.
+@prefix dul: <http://www.loa.istc.cnr.it/ontologies/DUL.owl#>.
+@prefix time: <http://www.w3.org/2006/time#>.
+@prefix vann: <http://purl.org/vocab/vann/>.
+
+
+
+common: dc:contributor "Achille Zappa, NUIG, Galway"@en,
+                           "Hoan Quoc, NUIG, Galway"@en,
+                           "Victor Charpenay, Siemens AG, Munich"@en,
+                           "Aparna Saisree, Siemens AG, Munich"@en,
+                           "Darko Anicic, Siemens AG, Munich"@en,
+                           "Yulia Svetashova, Bosch CR, Stutgard"@en;
+                           
+            dc:description " Common Model for Domain-Independent terminology annotations. We further acknowledge, Pilot providers and other open call projects for their valuable comments. Please report any errors to achille.zappa@insight-centre.org. "@en;
+            dc:rights "Copyright NUIGalway, Siemens, Bosch";
+            dc:title "BIG IoT Common Model"@en;
+            dcterms:issued "2016-09-28"^^xsd:date;
+            dcterms:modified "2018-10-27"^^xsd:date;
+            vann:preferredNamespacePrefix "common";
+            vann:preferredNamespaceUri "http://schema.big-iot.org/common/#";
+            a owl:Ontology;
+            rdfs:comment " Common Model for Domain-Independent terminology annotations.  We further acknowledge, Pilot providers and other open call projects for their valuable comments. Please report any errors to achille.zappa@insight-centre.org. "@en;
+            rdfs:label "BIG IoT"^^xsd:string;
+            owl:versionInfo "3.0".
+            
+            
+            
+            
+
+common:Measurement rdf:type rdfs:Class ;
+  rdfs:label "Measurement" ;
+  rdfs:comment "Single measurement of a physical quantity. A measurement relates to a physical quantity via the class sosa:Observation." ;
+  dcterms:source <https://w3id.org/saref#Measurement> ;
+  dcterms:source <http://www.wurvoc.org/vocabularies/om-1.8/Measure> ;
+  dcterms:source <http://qudt.org/1.1/schema/qudt#QuantityValue> ;
+  rdfs:subClassOf sosa:Result ;
+.
+
+common:BooleanMeasurement rdf:type rdfs:Class ;
+  rdfs:label "Count" ;
+  rdfs:comment "Measurement whose value is either 'yes' or 'no' (e.g. presence detection, status update, etc.)." ;
+  rdfs:subClassOf common:Measurement ;
+.
+
+common:UnitOfMeasurement rdf:type rdfs:Class ;
+  rdfs:label "UnitOfMeasurement" ;
+  rdfs:comment "Unit of measurement" ;
+  dcterms:source <https://w3id.org/saref#UnitOfMeasure> ;
+  dcterms:source <http://www.wurvoc.org/vocabularies/om-1.8/Unit_of_measure> ;
+  rdfs:subClassOf schema:Enumeration ;
+.
+
+common:degreeCelsius rdf:type common:UnitOfMeasurement ;
+  rdfs:label "degreeCelsius" ;
+  rdfs:comment "Degree Celsius temperature unit (symbol: °C)" ;
+  dcterms:source <http://www.wurvoc.org/vocabularies/om-1.8/degree_Celsius> ;
+.
+
+common:kelvin rdf:type common:UnitOfMeasurement ;
+  rdfs:label "kelvin" ;
+  rdfs:comment "Kelvin temperature unit (symbol: K)" ;
+  dcterms:source <http://www.wurvoc.org/vocabularies/om-1.8/kelvin> ;
+.
+
+common:watt rdf:type common:UnitOfMeasurement ;
+  rdfs:label "watt" ;
+  rdfs:comment "Watt power unit (symbol: W)" ;
+  dcterms:source <http://www.wurvoc.org/vocabularies/om-1.8/watt> ;
+.
+
+common:ampere rdf:type common:UnitOfMeasurement ;
+  rdfs:label "ampere" ;
+  rdfs:comment "Ampere electric current unit (symbol: A)" ;
+  dcterms:source <http://www.wurvoc.org/vocabularies/om-1.8/ampere> ;
+.
+
+common:volt rdf:type common:UnitOfMeasurement ;
+  rdfs:label "volt" ;
+  rdfs:comment "Volt electric potential difference unit (symbol: V)" ;
+  dcterms:source <http://www.wurvoc.org/vocabularies/om-1.8/volt> ;
+.
+
+common:ppm rdf:type common:UnitOfMeasurement ;
+  rdfs:label "ppm" ;
+  rdfs:comment "parts per million unit" ;
+  dcterms:source <http://www.wurvoc.org/vocabularies/om-1.8/parts_per_million> ;
+.
+
+common:gm3 rdf:type common:UnitOfMeasurement ;
+  rdfs:label "gm3" ;
+  rdfs:comment "concentration unit (symbol: g.m^-3)" ;
+  dcterms:source <http://www.wurvoc.org/vocabularies/om-1.8/gram_per_cubic_metre> ;
+.
+
+common:percent rdf:type common:UnitOfMeasurement ;
+  rdfs:label "percent" ;
+  rdfs:comment "Percentage unit (symbol: %)" ;
+  dcterms:source <http://www.wurvoc.org/vocabularies/om-1.8/percent> ;
+.
+
+common:decibel rdf:type common:UnitOfMeasurement ;
+  rdfs:label "decibel" ;
+  rdfs:comment "Arbitrary ratio unit, mostly used for sound pressure level (symbol: dB)" ;
+  dcterms:source <http://www.wurvoc.org/vocabularies/om-1.8/ratio> ;
+.
+
+common:PhysicalQuantity rdf:type rdfs:Class ;
+  rdfs:label "PhysicalQuantity" ;
+  rdfs:comment "Measurable physical quantity (e.g. temperature, electric current, etc.)" ;
+  dcterms:source <http://www.wurvoc.org/vocabularies/om-1.8/Quantity> ;
+  rdfs:subClassOf sosa:Property ;
+.
+
+common:quantityUnit rdf:type rdf:Property ;
+  rdfs:label "quantity unit" ;
+  rdfs:comment "Unit to specify immanent characteristics (maximum current available at the charging station) as opposed to measurements." ;
+  schema:domainIncludes common:PhysicalQuantity ;
+  schema:rangeIncludes common:UnitOfMeasurement, schema:Text .
+  
+common:quantityValue rdf:type rdf:Property ;
+  rdfs:label "quantity value" ;
+   rdfs:comment "Value to specify immanent characteristics (maximum current available at the charging station) as opposed to measurements." ;
+  schema:domainIncludes common:PhysicalQuantity ;
+  schema:rangeIncludes schema:Number .
+
+common:Temperature rdf:type rdfs:Class ;
+  rdfs:label "Temperature" ;
+  rdfs:comment "Temperature of a physical body" ;
+  dcterms:source <http://www.wurvoc.org/vocabularies/om-1.8/Temperature> ;
+  dcterms:source <https://w3id.org/saref#Temperature> ;
+  rdfs:subClassOf common:PhysicalQuantity ;
+.
+
+common:Concentration rdf:type rdfs:Class ;
+  rdfs:label "Concentration" ;
+  rdfs:comment "Amount of substance in a given volume of some physical body" ;
+  dcterms:source <http://www.wurvoc.org/vocabularies/om-1.8/Amount_of_substance_concentration> ;
+  rdfs:subClassOf common:PhysicalQuantity ;
+.
+
+common:Speed rdf:type rdfs:Class ;
+  rdfs:label "Speed" ;
+  rdfs:comment "Speed (distance divided by time) of a physical body." ;
+  dcterms:source <http://www.wurvoc.org/vocabularies/om-1.8/Speed> ;
+  rdfs:subClassOf common:PhysicalQuantity ;
+.
+
+common:Percentage rdf:type rdfs:Class ;
+  rdfs:label "Percentage" ;
+  rdfs:comment "Ratio of a quantity value divided by hundred." ;
+  dcterms:source <http://www.wurvoc.org/vocabularies/om-1.8/Percentage> ;
+  rdfs:subClassOf common:PhysicalQuantity ;
+.
+
+common:Count rdf:type rdfs:Class ;
+  rdfs:label "Count" ;
+  rdfs:comment "Count of all individuals of a countable concept." ;
+  dcterms:source <http://www.wurvoc.org/vocabularies/om-1.8/Number> ;
+  rdfs:subClassOf common:PhysicalQuantity ;
+.
+
+common:Power rdf:type rdfs:Class ;
+  rdfs:label "Power" ;
+  rdfs:comment "Power is energy divided by time (often expressed in Watt)" ;
+  dcterms:source <http://www.wurvoc.org/vocabularies/om-1.8/Power> ;
+  dcterms:source <https://w3id.org/saref#Power> ;
+  rdfs:subClassOf common:PhysicalQuantity ;
+.
+
+common:ElectricCurrent rdf:type rdfs:Class ;
+  rdfs:label "ElectricCurrent" ;
+  rdfs:comment "Electric current is the flow of electric charge (often expressed in Ampere)" ;
+  dcterms:source <http://www.wurvoc.org/vocabularies/om-1.8/Electric_current> ;
+  rdfs:subClassOf common:PhysicalQuantity ;
+.
+
+common:VoltageOrPotentialDifference rdf:type rdfs:Class ;
+  rdfs:label "VoltageOrPotentialDifference" ;
+  rdfs:comment "Voltage is the electric potential difference between two points of a circuit (often expressed in Volt)" ;
+  dcterms:source <http://www.wurvoc.org/vocabularies/om-1.8/Potential_difference> ;
+  rdfs:subClassOf common:PhysicalQuantity ;
+.
+
+common:unit rdf:type rdf:Property ;
+  rdfs:label "unit" ;
+  rdfs:comment "A measurement consists of a pair (value, unit)." ;
+  dcterms:source <http://www.wurvoc.org/vocabularies/om-1.8/unit_of_measure_or_measurement_scale> ;
+  dcterms:source <http://qudt.org/1.1/schema/qudt#unit> ;
+  schema:domainIncludes common:Measurement ;
+  schema:rangeIncludes common:UnitOfMeasurement ;
+.
+
+common:numericValue rdf:type rdf:Property ;
+  rdfs:label "numericValue" ;
+  rdfs:comment "A measurement consists of a pair (value, unit)." ;
+  dcterms:source <http://www.wurvoc.org/vocabularies/om-1.8/numerical_value> ;
+  dcterms:source <http://qudt.org/1.1/schema/qudt#numericValue> ;
+  schema:domainIncludes common:Measurement ;
+  schema:rangeIncludes schema:Number ;
+.
+    
+common:Accuracy
+  rdf:type rdfs:Class ;
+  dcterms:source <http://www.w3.org/ns/ssn/systems/Accuracy> ;
+  rdfs:label "Accuracy"^^xsd:string ;
+  rdfs:comment "See https://www.w3.org/TR/vocab-ssn/#SSNSYSTEMAccuracy."^^xsd:string ;
+  rdfs:subClassOf common:SystemProperty ;
+.
+common:SystemProperty
+  rdf:type rdfs:Class ;
+  dcterms:source <http://www.w3.org/ns/ssn/systems/SystemProperty> ;
+  rdfs:label "SystemProperty"^^xsd:string ;
+  rdfs:comment "See https://www.w3.org/TR/vocab-ssn/#SSNSYSTEMSystemProperty."^^xsd:string ;
+  rdfs:subClassOf core:BasicData ;
+.
+
+# TODO 'accuracy' should be better aligned with SSN
+
+common:accuracy rdf:type rdf:Property ;
+  rdfs:label "accuracy" ;
+  rdfs:comment "Accuracy of a measurement" ;
+  schema:domainIncludes common:Measurement ;
+  schema:rangeIncludes common:Accuracy ;
+  dcterms:source <http://www.w3.org/ns/ssn/systems/hasSystemProperty> ;
+.
+
+common:Box
+  rdf:type rdfs:Class ;
+  common:hasCorners common:Corners ;
+  rdfs:label "Bounding Box"^^xsd:string ;
+  rdfs:subClassOf core:BasicData ;
+  rdfs:subClassOf schema:Geoshape ;
+.
+
+common:Corners
+  rdf:type rdfs:Class ;
+  common:hasNorthEastCornor schema:GeoCoordinates ;
+  common:hasSouthWestCornor schema:GeoCoordinates ;
+  rdfs:label "Corners"^^xsd:string ;
+  rdfs:subClassOf core:BasicData ;
+.
+  
+common:Polygon
+  rdf:type rdfs:Class ;
+  rdfs:label "Polygon"^^xsd:string ;
+  rdfs:comment "A polygon."^^xsd:string ;
+  rdfs:subClassOf schema:Geoshape ;
+  rdfs:subClassOf core:BasicData ;
+.
+
+common:mile rdf:type common:UnitOfMeasurement ;
+  rdfs:label "mile" ;
+  rdfs:comment "A unit of visibility defined as mile (mi)."  .
+  
+common:kilometre rdf:type common:UnitOfMeasurement ;
+  rdfs:label "kilometre" ;
+  rdfs:comment "A unit of visibility defined as kilometre (km)."  . 
+
+common:centimetre rdf:type common:UnitOfMeasurement ;
+  rdfs:label "centimetre" ;
+  rdfs:comment "A unit defined as centimetre (cm)."  .    
+
+common:millimetre rdf:type common:UnitOfMeasurement ;
+  rdfs:label "millimetre" ;
+  rdfs:comment "A unit of rainfall defined as millimetre (mm)."  .  
+  
+common:okta rdf:type common:UnitOfMeasurement ;
+  rdfs:label "okta" ;
+  rdfs:comment "An okta is a unit of measurement used to describe the amount of cloud cover at any given location such as a weather station."  .    
+  
+common:kilometrePerHour rdf:type common:UnitOfMeasurement ;
+  rdfs:label "kilometrePerHour" ;
+  rdfs:comment "A unit of speed defined as kilometre divided by hour." ;
+  dcterms:source <http://www.wurvoc.org/vocabularies/om-1.8/kilometre_per_hour> .
+
+common:litrePerHour rdf:type common:UnitOfMeasurement ;
+  rdfs:label "litrePerHour" ;
+  rdfs:comment "A unit of volume flow rate defined as liters divided by hour." ;
+  dcterms:source <http://www.wurvoc.org/vocabularies/om-1.8/litre_per_hour> .
+
+common:kilogramPerHour rdf:type common:UnitOfMeasurement ;
+  rdfs:label "kilogramPerHour" ;
+  rdfs:comment "A unit of mass flow rate defined as kilogram divided by hour." ;
+  dcterms:source <http://www.qudt.org/qudt/owl/1.0.0/unit/Instances.html#KilogramPerHour> .
+
+common:gramPerSecond rdf:type common:UnitOfMeasurement ;
+  rdfs:label "gramPerSecond" ;
+  rdfs:comment "A unit of mass flow rate defined as gram divided by second." .
+
+common:kiloPascal rdf:type common:UnitOfMeasurement ;
+  rdfs:label "kiloPascal" ;
+  rdfs:comment "A unit of pressure or stress (1 kPa = 1000 Pa)." ;
+  dcterms:source <http://www.qudt.org/qudt/owl/1.0.0/unit/Instances.html#KiloPascal> .
+
+common:kiloPascalAbsolute rdf:type common:UnitOfMeasurement ;
+  rdfs:label "kiloPascalAbsolute" ;
+  rdfs:comment "A unit of pressure or stress (1 kPa = 1000 Pa) measured from absolute zero." ;
+  dcterms:source <http://www.qudt.org/qudt/owl/1.0.0/unit/Instances.html#KiloPascalAbsolute> .
+
+common:revolutionPerMinute rdf:type common:UnitOfMeasurement ;
+  rdfs:label "revolutionPerMinute (rpm)" ;
+  rdfs:comment "A unit of frequency of rotation, specifically the number of rotations around a fixed axis in one minute." ;
+  dcterms:source <http://www.qudt.org/qudt/owl/1.0.0/unit/Instances.html#RevolutionPerMinute> .
+
+common:milliampere rdf:type common:UnitOfMeasurement ;
+  rdfs:label "milliampere" ;
+  rdfs:comment "A unit of electric current defined as 1.0e-3 ampere (symbol: mA)" ;
+  dcterms:source <http://www.wurvoc.org/vocabularies/om-1.8/milliampere> .
+
+common:metre rdf:type common:UnitOfMeasurement ;
+  rdfs:label "metre" ;
+  rdfs:comment "A unit of length (symbol: m)" ;
+  dcterms:source <http://www.wurvoc.org/vocabularies/om-1.8/metre> .
+
+common:degree rdf:type common:UnitOfMeasurement ;
+  rdfs:label "degree" ;
+  rdfs:comment "A unit of plane angle defined as 1.745329e-2 radian." ;
+  dcterms:source <http://www.wurvoc.org/vocabularies/om-1.8/degree> .
+
+common:sensorID a rdf:Property ;
+    rdfs:label "sensorID"^^xsd:string ;
+    rdfs:comment "The identifier of a sensor." ;
+    dc:source <http://schema.org/identifier> ;
+    schema:domainIncludes sosa:Sensor ;
+    schema:rangeIncludes schema:Text .
+
+common:sensorURL a rdf:Property ;
+    rdfs:label "sensorURL"^^xsd:string ;
+    rdfs:comment "The URL of a sensor." ;
+    dc:source <http://schema.org/identifier> ;
+    schema:domainIncludes sosa:Sensor ;
+    schema:rangeIncludes schema:URL .
+
+common:measurementID a rdf:Property ;
+    rdfs:label "measurementID"^^xsd:string ;
+    rdfs:comment "The identifier of a measurement." ;
+    dc:source <http://schema.org/identifier> ;
+    schema:domainIncludes sosa:Observation ;
+    schema:rangeIncludes schema:Text .
+
+common:measurementURL a rdf:Property ;
+    rdfs:label "measurementURL"^^xsd:string ;
+    rdfs:comment "The URL of a measurement." ;
+    dc:source <http://schema.org/identifier> ;
+    schema:domainIncludes sosa:Observation ;
+    schema:rangeIncludes schema:URL .
+    
+common:measurementTime a rdf:Property ;
+  rdfs:label "measurement time"^^xsd:string ;
+  rdfs:comment "Measurement time stamp: date and time."^^xsd:string ;
+  dc:source <http://www.w3.org/ns/sosa/resultTime> ;
+  schema:domainIncludes common:Measurement ;
+  schema:rangeIncludes schema:DateTime .
+  
+common:measurementDate a rdf:Property ;
+  rdfs:label "measurement date"^^xsd:string ;
+  rdfs:comment "Measurement date."^^xsd:string ;
+  schema:domainIncludes common:Measurement ;
+  schema:rangeIncludes schema:DateTime .
+    
+common:pageNumber a rdf:Property ;
+    rdfs:label "page number"^^xsd:string ;
+    rdfs:comment "Page number indicates the position in the set of all entities returned as the response to a request." ;
+    schema:domainIncludes core:BasicData ;
+    schema:rangeIncludes schema:Number .
+    
+# Proposed: SOSA alignment-related modeling
+common:PropertyType rdf:type rdfs:Class ;
+  rdfs:label "Annotation type" ;
+  rdfs:comment "Type of a property annotation." .
+
+common:TemporalProperty rdf:type rdfs:Class ;
+	rdfs:label	"Temporal property" ;
+	rdfs:comment	"Time-related properties." ;
+	rdfs:subClassOf common:PropertyType .
+
+common:SpatialProperty rdf:type rdfs:Class ;
+	rdfs:label	"Spatial property" ;
+	rdfs:comment	"Location-related properties." ;
+	rdfs:subClassOf common:PropertyType .
+	
+common:ObservableProperty rdf:type rdfs:Class ;
+	rdfs:label	"Observable property" ;
+	rdfs:comment	"Dynamic (changing) properties." ;
+	rdfs:subClassOf common:PropertyType .
+	
+common:StaticProperty rdf:type rdfs:Class ;
+	rdfs:label	"Static property" ;
+	rdfs:comment	"Static (non-changing) properties." ;
+	rdfs:subClassOf common:PropertyType .
+ 
+common:propertyType a rdf:Property ;
+    rdfs:label "property type"^^xsd:string ;
+    rdfs:comment "Used to annotate properties in the domain models as representing temporal, spatial, dynamic or static properties of classes." ;
+    schema:domainIncludes rdf:Property ;
+    schema:rangeIncludes common:PropertyType .
+    
+common:geoJSONLocation  a rdf:Property ;
+    rdfs:label "GeoJSON location"^^xsd:string ;
+    rdfs:comment "GeoJSON geometry object representing points, curves, and surfaces in coordinate space." ;
+    schema:domainIncludes schema:Place ;
+	schema:rangeIncludes common:GeoJSONGeometryObject .
+
+common:GeoJSONGeometryObject rdf:type rdfs:Class ;
+	rdfs:label	"GeoJSON Geometry Object" ;
+	rdfs:comment	"A GeoJSON object that represents points, curves, and surfaces in coordinate space." ;
+	rdfs:isDefinedBy <https://tools.ietf.org/html/rfc7946#section-3.1> .
+	
+common:geoJSONLocationType a rdf:Property ;
+	rdfs:label "GeoJSON location type" ;
+	rdfs:comment "GeoJSON geometry object type: Point, LineString, Polygon, MultiPoint, MultiLineString, MultiPolygon, and GeometryCollection" ;
+    schema:domainIncludes common:GeoJSONGeometryObject ;
+	schema:rangeIncludes schema:Text .
+
+common:geoJSONLocationCoordinates a rdf:Property ;
+	rdfs:label "GeoJSON location coordinates" ;
+	rdfs:comment "An array of coordinates. The structure of the elements in this array is determined by the type of geometry." ;
+	schema:domainIncludes common:GeoJSONGeometryObject ;
+	schema:rangeIncludes schema:Text, schema:Number .
+	
+common:street a rdf:Property ;
+	rdfs:label "street" ;
+	rdfs:comment "Street without a house number." ;
+    schema:domainIncludes schema:PostalAddress;
+	schema:rangeIncludes schema:Text .
+
+common:houseNumber a rdf:Property ;
+	rdfs:label "house number" ;
+	rdfs:comment "A house number." ;
+    schema:domainIncludes schema:PostalAddress;
+	schema:rangeIncludes schema:Text .
+
+common:district a rdf:Property ;
+	rdfs:label "district" ;
+	rdfs:comment "District in a city." ;
+    schema:domainIncludes schema:PostalAddress;
+	schema:rangeIncludes schema:Text .
+
+common:featureType a rdf:Property ;
+	# find a more precise definition and a domain for that property
+	rdfs:label "feature type" ;
+	rdfs:comment "Property that helps to define the scope of the hierarchically organized JSON objects, e.g. [Charging Station has [ChargingPoint [has Plug]]]" ;
+	schema:rangeIncludes schema:Text .
+
+schema:telephone schema:rangeIncludes schema:Number .
+
+common:CrowdsourcingData a rdfs:Class ;
+	rdfs:subClassOf sosa:FeatureOfInterest ;
+	rdfs:label "CrowdsourcingData" ;
+	rdfs:comment "Class to manage survey responses collected via crowdsourcing." .
+	
+common:Survey a rdfs:Class ;
+	rdfs:subClassOf common:CrowdsourcingData ;
+	rdfs:label "Survey" ;
+	rdfs:comment "Survey conducted by using crowdsourcing techniques." .
+	
+common:hasSurveyResponse a rdf:Property ;
+    rdfs:label "survey response" ;
+    rdfs:comment "One response to a survey." ;
+    schema:domainIncludes common:Survey ;
+    schema:rangeIncludes common:SurveyResponse .
+	
+common:SurveyResponse a rdfs:Class ;
+	rdfs:label "SurveyResponse" ;
+	rdfs:comment "One response to a survey." .
+
+common:question a rdf:Property ;
+	rdfs:label "question" ;
+	rdfs:comment "Question in a survey to which a response is acquired." ;
+	schema:domainIncludes common:SurveyResponse ;
+	schema:rangeIncludes schema:Text .
+	
+common:answerOptions a rdf:Property ;
+	rdfs:label "answer options" ;
+	rdfs:comment "Answer options (array of text strings) for a question in a survey to which a response is acquired." ;
+	schema:domainIncludes common:SurveyResponse ;
+	schema:rangeIncludes schema:Text .
+	
+common:selectedAnswerOption a rdf:Property ;
+	rdfs:label "selected answer option" ;
+	rdfs:comment "The number of the option selected by a respondent among the available answer options." ;
+	schema:domainIncludes common:SurveyResponse ;
+	schema:rangeIncludes schema:Text .
